@@ -1,0 +1,62 @@
+{
+  "name": "codi-api",
+  "version": "1.0.0",
+  "description": "API to Generate Codi Payments via QR codes and Push notifications",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "jest",
+    "license-check": "license-checker --summary",
+    "license-report": "mkdir -p licenses && license-checker --json > licenses/licenses.json && license-checker --production --markdown > licenses/THIRD-PARTY-LICENSES.md",
+    "license-compliance": "license-checker --onlyAllow 'MIT;Apache-2.0;ISC;BSD-2-Clause;BSD-3-Clause;0BSD;CC0-1.0;Unlicense;WTFPL;Python-2.0;BlueOak-1.0.0;CC-BY-3.0;CC-BY-4.0;(BSD-3-Clause OR GPL-2.0);(MIT AND CC-BY-3.0);(MIT OR CC0-1.0)' --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/portfedh/codi-api.git"
+  },
+  "author": "Pablo Cruz Lemini",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/portfedh/codi-api/issues"
+  },
+  "homepage": "https://github.com/portfedh/codi-api#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.76.0",
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "glob": "^11.0.3",
+    "helmet": "^8.1.0",
+    "jest": "^30.2.0",
+    "lru-cache": "^11.2.2",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.6.0",
+    "morgan": "^1.10.1",
+    "node-cache": "^5.1.2",
+    "node-forge": "^1.3.1",
+    "qrcode": "^1.5.4",
+    "rotating-file-stream": "^3.2.7",
+    "sanitize-html": "^2.17.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "license-checker": "^25.0.1",
+    "nodemon": "^3.1.10"
+  },
+  "jest": {
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "coverageDirectory": "coverage"
+  }
+}
