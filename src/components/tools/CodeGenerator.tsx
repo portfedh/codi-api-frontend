@@ -36,7 +36,7 @@ export default function CodeGenerator() {
   const getLanguageLabel = (lang: Language): string => {
     const labels = {
       curl: 'cURL',
-      javascript: 'JavaScript (Axios)',
+      javascript: 'JavaScript (Fetch)',
       python: 'Python (requests)',
     };
     return labels[lang];

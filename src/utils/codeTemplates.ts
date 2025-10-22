@@ -39,57 +39,72 @@ export const curlTemplates = {
   }'`,
 };
 
-// JavaScript (Axios) Templates
+// JavaScript (Fetch) Templates
 export const javascriptTemplates = {
-  qr: (apiKey: string) => `import axios from 'axios';
-
-const response = await axios.post('${API_URL}/v2/codi/qr', {
-  monto: 99.99,
-  referenciaNumerica: '1234567',
-  concepto: 'Pago de ejemplo',
-  vigencia: '0'
-}, {
+  qr: (apiKey: string) => `const response = await fetch('${API_URL}/v2/codi/qr', {
+  method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     'x-api-key': '${apiKey}'
-  }
+  },
+  body: JSON.stringify({
+    monto: 99.99,
+    referenciaNumerica: '1234567',
+    concepto: 'Pago de ejemplo',
+    vigencia: '0'
+  })
 });
 
-console.log(response.data);`,
+if (!response.ok) {
+  throw new Error(\`HTTP error! status: \${response.status}\`);
+}
 
-  push: (apiKey: string) => `import axios from 'axios';
+const data = await response.json();
+console.log(data);`,
 
-const response = await axios.post('${API_URL}/v2/codi/push', {
-  monto: 99.99,
-  referenciaNumerica: '1234567',
-  concepto: 'Pago de ejemplo',
-  vigencia: '0',
-  celularCliente: '5512345678'
-}, {
+  push: (apiKey: string) => `const response = await fetch('${API_URL}/v2/codi/push', {
+  method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     'x-api-key': '${apiKey}'
-  }
+  },
+  body: JSON.stringify({
+    monto: 99.99,
+    referenciaNumerica: '1234567',
+    concepto: 'Pago de ejemplo',
+    vigencia: '0',
+    celularCliente: '5512345678'
+  })
 });
 
-console.log(response.data);`,
+if (!response.ok) {
+  throw new Error(\`HTTP error! status: \${response.status}\`);
+}
 
-  consulta: (apiKey: string) => `import axios from 'axios';
+const data = await response.json();
+console.log(data);`,
 
-const response = await axios.post('${API_URL}/v2/codi/consulta', {
-  folioCodi: '321e210838321e210838',
-  tpg: 10,
-  npg: 1,
-  fechaInicial: '0',
-  fechaFinal: '0'
-}, {
+  consulta: (apiKey: string) => `const response = await fetch('${API_URL}/v2/codi/consulta', {
+  method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     'x-api-key': '${apiKey}'
-  }
+  },
+  body: JSON.stringify({
+    folioCodi: '321e210838321e210838',
+    tpg: 10,
+    npg: 1,
+    fechaInicial: '0',
+    fechaFinal: '0'
+  })
 });
 
-console.log(response.data);`,
+if (!response.ok) {
+  throw new Error(\`HTTP error! status: \${response.status}\`);
+}
+
+const data = await response.json();
+console.log(data);`,
 };
 
 // Python (requests) Templates

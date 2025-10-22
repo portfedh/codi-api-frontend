@@ -30,7 +30,7 @@ export default function ApiReference() {
     },
     {
       name: "vigencia",
-      type: "string",
+      type: "number",
       required: true,
       description:
         'Timestamp Unix (epoch) para la fecha de expiración del QR. "0" significa sin límite de tiempo.',
@@ -65,9 +65,10 @@ export default function ApiReference() {
     },
     {
       name: "vigencia",
-      type: "string",
+      type: "number",
       required: true,
-      description: 'Timestamp Unix (epoch) para la fecha de expiración. "0" significa sin límite de tiempo.',
+      description:
+        'Timestamp Unix (epoch) para la fecha de expiración. "0" significa sin límite de tiempo.',
       example: "0",
     },
     {
@@ -134,6 +135,21 @@ export default function ApiReference() {
           <p className="text-sm text-gray-700 mt-2">
             <strong>Autenticación:</strong> Todas las solicitudes requieren el
             header <code className="bg-white px-2 py-1 rounded">x-api-key</code>
+          </p>
+        </div>
+
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+          <p className="text-sm text-gray-700">
+            <strong>📖 Documentación OpenAPI:</strong> La especificación
+            completa de la API en formato Swagger está disponible en:{" "}
+            <a
+              href="https://api.bite-size.mx/api-docs/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 underline font-medium"
+            >
+              https://api.bite-size.mx/api-docs/
+            </a>
           </p>
         </div>
       </DocSection>
