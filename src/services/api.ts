@@ -9,6 +9,8 @@ import type {
   ConsultaRequest,
   ConsultaResponse,
   ErrorResponse,
+  EnrollmentSubmission,
+  EnrollmentResponse,
 } from '../types/api';
 
 // Get API base URL from environment variable
@@ -166,6 +168,56 @@ export const codiApi = {
   checkStatus: async (data: ConsultaRequest, apiKey?: string): Promise<ConsultaResponse> => {
     const headers = apiKey ? { 'x-api-key': apiKey } : {};
     const response = await apiClient.post<ConsultaResponse>('/v2/codi/consulta', data, { headers });
+    return response.data;
+  },
+
+  /**
+   * Submit enrollment application with documents
+   * @param data - Enrollment form data with files
+   * @returns Enrollment confirmation response
+   */
+  submitEnrollment: async (data: EnrollmentSubmission): Promise<EnrollmentResponse> => {
+    const formData = new FormData();
+
+    // Add user type
+    formData.append('userType', data.userType);
+
+    // Add common fields
+    formData.append('email', data.email);
+    formData.append('celular', data.celular);
+
+    // Add type-specific fields
+    if (data.userType === 'fisica') {
+      formData.append('nombre', data.nombre || '');
+    } else {
+      formData.append('razonSocial', data.razonSocial || '');
+      formData.append('rfc', data.rfc || '');
+      formData.append('representanteLegal', data.representanteLegal || '');
+    }
+
+    // Add document files
+    if (data.documents.ine) {
+      formData.append('ine', data.documents.ine);
+    }
+    if (data.documents.constanciaFiscal) {
+      formData.append('constanciaFiscal', data.documents.constanciaFiscal);
+    }
+    if (data.documents.comprobanteDomicilio) {
+      formData.append('comprobanteDomicilio', data.documents.comprobanteDomicilio);
+    }
+    if (data.documents.caratulaBancaria) {
+      formData.append('caratulaBancaria', data.documents.caratulaBancaria);
+    }
+
+    const response = await apiClient.post<EnrollmentResponse>(
+      '/v2/enrollment',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
     return response.data;
   },
 };

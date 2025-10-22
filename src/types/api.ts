@@ -140,6 +140,33 @@ export interface ErrorResponse {
 }
 
 // ============================================================================
+// Enrollment Types
+// ============================================================================
+
+export interface EnrollmentSubmission {
+  userType: 'fisica' | 'moral';
+  email: string;
+  celular: string;
+  nombre?: string; // Required for 'fisica'
+  razonSocial?: string; // Required for 'moral'
+  rfc?: string; // Required for 'moral'
+  representanteLegal?: string; // Required for 'moral'
+  documents: {
+    ine: File | null;
+    constanciaFiscal: File | null;
+    comprobanteDomicilio: File | null;
+    caratulaBancaria: File | null;
+  };
+}
+
+export interface EnrollmentResponse {
+  success: boolean;
+  message: string;
+  enrollmentId?: string;
+  estimatedProcessingDays?: number;
+}
+
+// ============================================================================
 // Common Types
 // ============================================================================
 
