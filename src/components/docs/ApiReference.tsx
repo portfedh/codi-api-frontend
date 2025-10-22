@@ -1,112 +1,119 @@
-import DocSection from './DocSection';
-import CodeBlock from './CodeBlock';
-import ParamTable from './ParamTable';
+import DocSection from "./DocSection";
+import CodeBlock from "./CodeBlock";
+import ParamTable from "./ParamTable";
 
 export default function ApiReference() {
   const qrRequestParams = [
     {
-      name: 'monto',
-      type: 'number',
+      name: "monto",
+      type: "number",
       required: true,
-      description: 'Monto a cobrar en MXN (máximo 12 dígitos antes del punto decimal, 2 después)',
-      example: '99.99'
+      description:
+        "Monto a cobrar en MXN (máximo 12 dígitos antes del punto decimal, 2 después)",
+      example: "99.99",
     },
     {
-      name: 'concepto',
-      type: 'string',
+      name: "concepto",
+      type: "string",
       required: true,
-      description: 'Descripción del pago. Solo caracteres ASCII imprimibles (espacio a ~). Máximo 40 caracteres.',
-      example: 'Pago de ejemplo'
+      description:
+        "Descripción del pago. Solo caracteres ASCII imprimibles (espacio a ~). Máximo 40 caracteres.",
+      example: "Pago de ejemplo",
     },
     {
-      name: 'referenciaNumerica',
-      type: 'string',
+      name: "referenciaNumerica",
+      type: "number",
       required: true,
-      description: 'Referencia numérica de 1-7 dígitos. Usa "0" si no requieres referencia.',
-      example: '1234567'
+      description:
+        'Referencia numérica de 1-7 dígitos. Usa "0" si no requieres referencia.',
+      example: "1234567",
     },
     {
-      name: 'vigencia',
-      type: 'string',
+      name: "vigencia",
+      type: "string",
       required: true,
-      description: 'Minutos de validez del QR. "0" significa sin límite de tiempo.',
-      example: '0'
+      description:
+        'Timestamp Unix (epoch) para la fecha de expiración del QR. "0" significa sin límite de tiempo.',
+      example: "0",
     },
   ];
 
   const pushRequestParams = [
     {
-      name: 'monto',
-      type: 'number',
+      name: "monto",
+      type: "number",
       required: true,
-      description: 'Monto a cobrar en MXN (máximo 12 dígitos antes del punto decimal, 2 después)',
-      example: '99.99'
+      description:
+        "Monto a cobrar en MXN (máximo 12 dígitos antes del punto decimal, 2 después)",
+      example: "99.99",
     },
     {
-      name: 'concepto',
-      type: 'string',
+      name: "concepto",
+      type: "string",
       required: true,
-      description: 'Descripción del pago. Solo caracteres ASCII imprimibles (espacio a ~). Máximo 40 caracteres.',
-      example: 'Pago de ejemplo'
+      description:
+        "Descripción del pago. Solo caracteres ASCII imprimibles (espacio a ~). Máximo 40 caracteres.",
+      example: "Pago de ejemplo",
     },
     {
-      name: 'referenciaNumerica',
-      type: 'string',
+      name: "referenciaNumerica",
+      type: "number",
       required: true,
-      description: 'Referencia numérica de 1-7 dígitos. Usa "0" si no requieres referencia.',
-      example: '1234567'
+      description:
+        'Referencia numérica de 1-7 dígitos. Usa "0" si no requieres referencia.',
+      example: "1234567",
     },
     {
-      name: 'vigencia',
-      type: 'string',
+      name: "vigencia",
+      type: "string",
       required: true,
-      description: 'Minutos de validez. "0" significa sin límite de tiempo.',
-      example: '0'
+      description: 'Timestamp Unix (epoch) para la fecha de expiración. "0" significa sin límite de tiempo.',
+      example: "0",
     },
     {
-      name: 'celularCliente',
-      type: 'string',
+      name: "celularCliente",
+      type: "string",
       required: true,
-      description: 'Número celular del cliente a 10 dígitos (sin +52)',
-      example: '5512345678'
+      description: "Número celular del cliente a 10 dígitos (sin +52)",
+      example: "5512345678",
     },
   ];
 
   const consultaRequestParams = [
     {
-      name: 'folioCodi',
-      type: 'string',
+      name: "folioCodi",
+      type: "string",
       required: false,
-      description: 'Folio CoDi de una transacción específica (20 caracteres)',
-      example: '321e210838321e210838'
+      description: "Folio CoDi de una transacción específica (20 caracteres)",
+      example: "321e210838321e210838",
     },
     {
-      name: 'tpg',
-      type: 'number',
+      name: "tpg",
+      type: "number",
       required: true,
-      description: 'Transacciones por página (máximo 10)',
-      example: '10'
+      description: "Transacciones por página (máximo 10)",
+      example: "10",
     },
     {
-      name: 'npg',
-      type: 'number',
+      name: "npg",
+      type: "number",
       required: true,
-      description: 'Número de página (empezando en 1)',
-      example: '1'
+      description: "Número de página (empezando en 1)",
+      example: "1",
     },
     {
-      name: 'fechaInicial',
-      type: 'string',
+      name: "fechaInicial",
+      type: "string",
       required: false,
       description: 'Fecha inicial en formato YYYY-MM-DD. "0" para omitir.',
-      example: '2024-01-01'
+      example: "2024-01-01",
     },
     {
-      name: 'fechaFinal',
-      type: 'string',
+      name: "fechaFinal",
+      type: "string",
       required: false,
       description: 'Fecha final en formato YYYY-MM-DD. "0" para omitir.',
-      example: '2024-01-31'
+      example: "2024-01-31",
     },
   ];
 
@@ -114,15 +121,19 @@ export default function ApiReference() {
     <div>
       <DocSection id="api-reference" title="Referencia de API" level={1}>
         <p className="text-lg text-gray-700 mb-4">
-          La API CoDi proporciona tres endpoints principales para generar pagos, enviar notificaciones push
-          y consultar el estado de transacciones.
+          La API CoDi proporciona tres endpoints principales para generar pagos,
+          enviar notificaciones push y consultar el estado de transacciones.
         </p>
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <p className="text-sm text-gray-700">
-            <strong>Base URL:</strong> <code className="bg-white px-2 py-1 rounded">http://localhost:3000</code>
+            <strong>Base URL:</strong>{" "}
+            <code className="bg-white px-2 py-1 rounded">
+              http://localhost:3000
+            </code>
           </p>
           <p className="text-sm text-gray-700 mt-2">
-            <strong>Autenticación:</strong> Todas las solicitudes requieren el header <code className="bg-white px-2 py-1 rounded">x-api-key</code>
+            <strong>Autenticación:</strong> Todas las solicitudes requieren el
+            header <code className="bg-white px-2 py-1 rounded">x-api-key</code>
           </p>
         </div>
       </DocSection>
@@ -137,12 +148,18 @@ export default function ApiReference() {
         </div>
 
         <p className="text-gray-700 mb-4">
-          Genera un código QR para cobro CoDi. El cliente puede escanear el QR con su app bancaria para realizar el pago.
+          Genera un código QR para cobro CoDi. El cliente puede escanear el QR
+          con su app bancaria para realizar el pago.
         </p>
 
-        <ParamTable parameters={qrRequestParams} title="Parámetros del Request" />
+        <ParamTable
+          parameters={qrRequestParams}
+          title="Parámetros del Request"
+        />
 
-        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Ejemplo de Request</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Ejemplo de Request
+        </h4>
         <CodeBlock
           language="bash"
           title="cURL"
@@ -157,21 +174,21 @@ export default function ApiReference() {
   }'`}
         />
 
-        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Respuesta Exitosa (200)</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Respuesta Exitosa (200)
+        </h4>
         <CodeBlock
           language="json"
           title="Response"
           showLineNumbers={false}
           code={`{
-  "success": true,
-  "message": "QR generado exitosamente",
+  "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSU...",
   "data": {
-    "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANS...",
-    "folioCodi": "321e210838321e210838",
-    "cuentaBeneficiario": "646180157042875817",
-    "nombreBeneficiario": "BANCO AZTECA SA INSTITUCION DE BANCA MULTIPLE",
-    "claveRastreo": "CR1234567890",
-    "fechaOperacion": "2024-01-15T10:30:00Z"
+    "cadenaMC": "{\\"TYP\\":20,\\"v\\":{\\"DEV\\":\\"29442719514356328128/0\\"},...}",
+    "crtBdeM": "00000100000100015974",
+    "selloDigital": "HWjD3bPwJ+rfDnDYc8UJt2fmJvFAl9L...",
+    "epoch": 1743120460060,
+    "edoPet": 0
   }
 }`}
         />
@@ -187,13 +204,19 @@ export default function ApiReference() {
         </div>
 
         <p className="text-gray-700 mb-4">
-          Envía una notificación push al celular del cliente solicitando el pago. El cliente recibirá la notificación
-          en su app bancaria y podrá autorizar el pago directamente.
+          Envía una notificación push al celular del cliente solicitando el
+          pago. El cliente recibirá la notificación en su app bancaria y podrá
+          autorizar el pago directamente.
         </p>
 
-        <ParamTable parameters={pushRequestParams} title="Parámetros del Request" />
+        <ParamTable
+          parameters={pushRequestParams}
+          title="Parámetros del Request"
+        />
 
-        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Ejemplo de Request</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Ejemplo de Request
+        </h4>
         <CodeBlock
           language="bash"
           title="cURL"
@@ -209,7 +232,9 @@ export default function ApiReference() {
   }'`}
         />
 
-        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Respuesta Exitosa (200)</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Respuesta Exitosa (200)
+        </h4>
         <CodeBlock
           language="json"
           title="Response"
@@ -235,17 +260,24 @@ export default function ApiReference() {
           <span className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-green-100 text-green-800 mr-2">
             POST
           </span>
-          <code className="text-sm font-mono text-gray-700">/v2/codi/consulta</code>
+          <code className="text-sm font-mono text-gray-700">
+            /v2/codi/consulta
+          </code>
         </div>
 
         <p className="text-gray-700 mb-4">
-          Consulta el estado de transacciones CoDi. Puedes buscar por folio específico o listar transacciones
-          por rango de fechas con paginación.
+          Consulta el estado de transacciones CoDi. Puedes buscar por folio
+          específico o listar transacciones por rango de fechas con paginación.
         </p>
 
-        <ParamTable parameters={consultaRequestParams} title="Parámetros del Request" />
+        <ParamTable
+          parameters={consultaRequestParams}
+          title="Parámetros del Request"
+        />
 
-        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Ejemplo de Request</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Ejemplo de Request
+        </h4>
         <CodeBlock
           language="bash"
           title="cURL"
@@ -261,7 +293,9 @@ export default function ApiReference() {
   }'`}
         />
 
-        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Respuesta Exitosa (200)</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Respuesta Exitosa (200)
+        </h4>
         <CodeBlock
           language="json"
           title="Response"
@@ -307,17 +341,22 @@ export default function ApiReference() {
         </div>
 
         <p className="text-gray-700 mb-4">
-          Verifica el estado de salud de la API y sus dependencias. No requiere autenticación.
+          Verifica el estado de salud de la API y sus dependencias. No requiere
+          autenticación.
         </p>
 
-        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Ejemplo de Request</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Ejemplo de Request
+        </h4>
         <CodeBlock
           language="bash"
           title="cURL"
           code={`curl http://localhost:3000/v2/health`}
         />
 
-        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">Respuesta Exitosa (200)</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Respuesta Exitosa (200)
+        </h4>
         <CodeBlock
           language="json"
           title="Response"
