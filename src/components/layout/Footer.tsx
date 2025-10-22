@@ -4,6 +4,8 @@ import Container from "./Container";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const githubUrl =
+    import.meta.env.VITE_GITHUB_REPO || "https://github.com/portfedh/codi-api";
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200 mt-auto">
@@ -70,7 +72,7 @@ export default function Footer() {
 
                 <li className="pt-2">
                   <a
-                    href="https://github.com/portfedh/codi-api"
+                    href={githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-gray-600 hover:text-primary-600"

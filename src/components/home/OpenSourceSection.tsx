@@ -1,5 +1,6 @@
 export default function OpenSourceSection() {
-  const githubUrl = "https://github.com/portfedh/codi-api";
+  const githubUrl =
+    import.meta.env.VITE_GITHUB_REPO || "https://github.com/portfedh/codi-api";
 
   return (
     <section className="py-16 bg-gradient-to-br from-primary-50 to-purple-50">
