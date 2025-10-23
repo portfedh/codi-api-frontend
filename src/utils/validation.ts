@@ -25,10 +25,6 @@ export const qrFormSchema = z.object({
     .string()
     .regex(/^\d{1,7}$/, 'Referencia debe ser un número de 1-7 dígitos'),
 
-  institucion: z
-    .string()
-    .min(1, 'Institución es requerida'),
-
   vigencia: z
     .string(),
 });

@@ -16,7 +16,10 @@ export default function Footer() {
             <div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">CoDi API</h3>
               <p className="text-sm text-gray-600">
-                API para pagos digitales CoDi integrado con Banxico.
+                API para pagos digitales CoDi.
+              </p>
+              <p className="text-sm text-gray-600 mt-2">
+                Integrado con Banco de Mexico.
               </p>
               <p className="text-sm text-gray-500 mt-2">100% Código Abierto</p>
             </div>
@@ -51,6 +54,16 @@ export default function Footer() {
                     Herramientas
                   </Link>
                 </li>
+                <li>
+                  <a
+                    href={githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-gray-600 hover:text-primary-600"
+                  >
+                    Código Fuente
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -67,17 +80,6 @@ export default function Footer() {
                   >
                     <Mail className="w-4 h-4 mr-1" />
                     contacto@bite-size.mx
-                  </a>
-                </li>
-
-                <li className="pt-2">
-                  <a
-                    href={githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-gray-600 hover:text-primary-600"
-                  >
-                    Código Fuente
                   </a>
                 </li>
               </ul>

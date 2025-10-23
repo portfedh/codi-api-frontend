@@ -140,8 +140,9 @@ export default function ApiReference() {
 
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
           <p className="text-sm text-gray-700">
-            <strong>📖 Documentación OpenAPI:</strong> La especificación
-            completa de la API en formato Swagger está disponible en:{" "}
+            <strong>📖 Documentación OpenAPI:</strong>
+            <br /> La especificación completa de la API en formato Swagger está
+            disponible en:{" "}
             <a
               href="https://api.bite-size.mx/api-docs/"
               target="_blank"
