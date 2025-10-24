@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 interface CompanyInfoFormProps {
   initialData: {
@@ -7,6 +7,9 @@ interface CompanyInfoFormProps {
     representanteLegal: string;
     email: string;
     celular: string;
+    webhookUrl?: string;
+    websiteUrl?: string;
+    fixedIp?: string;
   };
   onSubmit: (data: {
     razonSocial: string;
@@ -14,6 +17,9 @@ interface CompanyInfoFormProps {
     representanteLegal: string;
     email: string;
     celular: string;
+    webhookUrl?: string;
+    websiteUrl?: string;
+    fixedIp?: string;
   }) => void;
   onBack: () => void;
 }
@@ -29,69 +35,113 @@ export default function CompanyInfoForm({
 
   const validateRazonSocial = (value: string) => {
     if (!value.trim()) {
-      return 'La razón social es requerida';
+      return "La razón social es requerida";
     }
     if (value.trim().length < 3) {
-      return 'La razón social debe tener al menos 3 caracteres';
+      return "La razón social debe tener al menos 3 caracteres";
     }
-    return '';
+    return "";
   };
 
   const validateRFC = (value: string) => {
     if (!value.trim()) {
-      return 'El RFC es requerido';
+      return "El RFC es requerido";
     }
     const rfcPattern = /^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/;
     if (!rfcPattern.test(value.toUpperCase())) {
-      return 'Ingrese un RFC válido (ej: ABC123456XYZ)';
+      return "Ingrese un RFC válido (ej: ABC123456XYZ)";
     }
-    return '';
+    return "";
   };
 
   const validateRepresentante = (value: string) => {
     if (!value.trim()) {
-      return 'El nombre del representante legal es requerido';
+      return "El nombre del representante legal es requerido";
     }
     if (value.trim().length < 3) {
-      return 'El nombre debe tener al menos 3 caracteres';
+      return "El nombre debe tener al menos 3 caracteres";
     }
     if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value)) {
-      return 'El nombre solo puede contener letras';
+      return "El nombre solo puede contener letras";
     }
-    return '';
+    return "";
   };
 
   const validateEmail = (value: string) => {
     if (!value.trim()) {
-      return 'El correo electrónico es requerido';
+      return "El correo electrónico es requerido";
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      return 'Ingrese un correo electrónico válido';
+      return "Ingrese un correo electrónico válido";
     }
-    return '';
+    return "";
   };
 
   const validateCelular = (value: string) => {
     if (!value.trim()) {
-      return 'El número de celular es requerido';
+      return "El número de celular es requerido";
     }
-    const cleaned = value.replace(/\D/g, '');
+    const cleaned = value.replace(/\D/g, "");
     if (cleaned.length !== 10) {
-      return 'El celular debe tener 10 dígitos';
+      return "El celular debe tener 10 dígitos";
     }
-    return '';
+    return "";
+  };
+
+  const validateWebhookUrl = (value: string) => {
+    if (!value.trim()) {
+      return ""; // Optional field
+    }
+    try {
+      const url = new URL(value);
+      if (!url.protocol.startsWith("http")) {
+        return "La URL debe comenzar con http:// o https://";
+      }
+    } catch {
+      return "Ingrese una URL válida (ej: https://ejemplo.com/webhook)";
+    }
+    return "";
+  };
+
+  const validateWebsiteUrl = (value: string) => {
+    if (!value.trim()) {
+      return ""; // Optional field
+    }
+    try {
+      const url = new URL(value);
+      if (!url.protocol.startsWith("http")) {
+        return "La URL debe comenzar con http:// o https://";
+      }
+    } catch {
+      return "Ingrese una URL válida (ej: https://ejemplo.com)";
+    }
+    return "";
+  };
+
+  const validateFixedIp = (value: string) => {
+    if (!value.trim()) {
+      return ""; // Optional field
+    }
+    const ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    if (!ipPattern.test(value)) {
+      return "Ingrese una dirección IP válida (ej: 192.168.1.1)";
+    }
+    return "";
   };
 
   const handleChange = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
 
     if (touched[field]) {
-      let error = '';
-      if (field === 'razonSocial') error = validateRazonSocial(value);
-      if (field === 'rfc') error = validateRFC(value);
-      if (field === 'representanteLegal') error = validateRepresentante(value);
-      if (field === 'email') error = validateEmail(value);
-      if (field === 'celular') error = validateCelular(value);
+      let error = "";
+      if (field === "razonSocial") error = validateRazonSocial(value);
+      if (field === "rfc") error = validateRFC(value);
+      if (field === "representanteLegal") error = validateRepresentante(value);
+      if (field === "email") error = validateEmail(value);
+      if (field === "celular") error = validateCelular(value);
+      if (field === "webhookUrl") error = validateWebhookUrl(value);
+      if (field === "websiteUrl") error = validateWebsiteUrl(value);
+      if (field === "fixedIp") error = validateFixedIp(value);
 
       setErrors({ ...errors, [field]: error });
     }
@@ -100,14 +150,17 @@ export default function CompanyInfoForm({
   const handleBlur = (field: string) => {
     setTouched({ ...touched, [field]: true });
 
-    let error = '';
-    if (field === 'razonSocial')
+    let error = "";
+    if (field === "razonSocial")
       error = validateRazonSocial(formData.razonSocial);
-    if (field === 'rfc') error = validateRFC(formData.rfc);
-    if (field === 'representanteLegal')
+    if (field === "rfc") error = validateRFC(formData.rfc);
+    if (field === "representanteLegal")
       error = validateRepresentante(formData.representanteLegal);
-    if (field === 'email') error = validateEmail(formData.email);
-    if (field === 'celular') error = validateCelular(formData.celular);
+    if (field === "email") error = validateEmail(formData.email);
+    if (field === "celular") error = validateCelular(formData.celular);
+    if (field === "webhookUrl") error = validateWebhookUrl(formData.webhookUrl || "");
+    if (field === "websiteUrl") error = validateWebsiteUrl(formData.websiteUrl || "");
+    if (field === "fixedIp") error = validateFixedIp(formData.fixedIp || "");
 
     setErrors({ ...errors, [field]: error });
   };
@@ -121,6 +174,9 @@ export default function CompanyInfoForm({
       representanteLegal: validateRepresentante(formData.representanteLegal),
       email: validateEmail(formData.email),
       celular: validateCelular(formData.celular),
+      webhookUrl: validateWebhookUrl(formData.webhookUrl || ""),
+      websiteUrl: validateWebsiteUrl(formData.websiteUrl || ""),
+      fixedIp: validateFixedIp(formData.fixedIp || ""),
     };
 
     setErrors(newErrors);
@@ -130,6 +186,9 @@ export default function CompanyInfoForm({
       representanteLegal: true,
       email: true,
       celular: true,
+      webhookUrl: true,
+      websiteUrl: true,
+      fixedIp: true,
     });
 
     if (Object.values(newErrors).every((error) => !error)) {
@@ -152,13 +211,13 @@ export default function CompanyInfoForm({
             id="razonSocial"
             type="text"
             value={formData.razonSocial}
-            onChange={(e) => handleChange('razonSocial', e.target.value)}
-            onBlur={() => handleBlur('razonSocial')}
+            onChange={(e) => handleChange("razonSocial", e.target.value)}
+            onBlur={() => handleBlur("razonSocial")}
             placeholder="Ej: Empresa Ejemplo S.A. de C.V."
             className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
               errors.razonSocial && touched.razonSocial
-                ? 'border-red-500'
-                : 'border-gray-300'
+                ? "border-red-500"
+                : "border-gray-300"
             }`}
           />
           {errors.razonSocial && touched.razonSocial && (
@@ -178,16 +237,12 @@ export default function CompanyInfoForm({
             id="rfc"
             type="text"
             value={formData.rfc}
-            onChange={(e) =>
-              handleChange('rfc', e.target.value.toUpperCase())
-            }
-            onBlur={() => handleBlur('rfc')}
+            onChange={(e) => handleChange("rfc", e.target.value.toUpperCase())}
+            onBlur={() => handleBlur("rfc")}
             placeholder="ABC123456XYZ"
             maxLength={13}
             className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-              errors.rfc && touched.rfc
-                ? 'border-red-500'
-                : 'border-gray-300'
+              errors.rfc && touched.rfc ? "border-red-500" : "border-gray-300"
             }`}
           />
           {errors.rfc && touched.rfc && (
@@ -208,21 +263,17 @@ export default function CompanyInfoForm({
             id="representanteLegal"
             type="text"
             value={formData.representanteLegal}
-            onChange={(e) =>
-              handleChange('representanteLegal', e.target.value)
-            }
-            onBlur={() => handleBlur('representanteLegal')}
+            onChange={(e) => handleChange("representanteLegal", e.target.value)}
+            onBlur={() => handleBlur("representanteLegal")}
             placeholder="Ej: María González López"
             className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
               errors.representanteLegal && touched.representanteLegal
-                ? 'border-red-500'
-                : 'border-gray-300'
+                ? "border-red-500"
+                : "border-gray-300"
             }`}
           />
           {errors.representanteLegal && touched.representanteLegal && (
-            <p className="text-sm text-red-600">
-              {errors.representanteLegal}
-            </p>
+            <p className="text-sm text-red-600">{errors.representanteLegal}</p>
           )}
         </div>
 
@@ -238,13 +289,13 @@ export default function CompanyInfoForm({
             id="email"
             type="email"
             value={formData.email}
-            onChange={(e) => handleChange('email', e.target.value)}
-            onBlur={() => handleBlur('email')}
+            onChange={(e) => handleChange("email", e.target.value)}
+            onBlur={() => handleBlur("email")}
             placeholder="correo@empresa.com"
             className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
               errors.email && touched.email
-                ? 'border-red-500'
-                : 'border-gray-300'
+                ? "border-red-500"
+                : "border-gray-300"
             }`}
           />
           {errors.email && touched.email && (
@@ -264,14 +315,14 @@ export default function CompanyInfoForm({
             id="celular"
             type="tel"
             value={formData.celular}
-            onChange={(e) => handleChange('celular', e.target.value)}
-            onBlur={() => handleBlur('celular')}
+            onChange={(e) => handleChange("celular", e.target.value)}
+            onBlur={() => handleBlur("celular")}
             placeholder="5512345678"
             maxLength={10}
             className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
               errors.celular && touched.celular
-                ? 'border-red-500'
-                : 'border-gray-300'
+                ? "border-red-500"
+                : "border-gray-300"
             }`}
           />
           {errors.celular && touched.celular && (
@@ -279,6 +330,101 @@ export default function CompanyInfoForm({
           )}
           <p className="text-sm text-gray-500">
             Ingrese 10 dígitos sin espacios ni guiones
+          </p>
+        </div>
+
+        {/* Section Divider */}
+        <div className="border-t border-gray-200 pt-4">
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">
+            Configuración Técnica{" "}
+            <span className="text-sm font-normal text-gray-500">(Opcional)</span>
+          </h3>
+        </div>
+
+        {/* Webhook URL */}
+        <div className="space-y-2">
+          <label
+            htmlFor="webhookUrl"
+            className="block text-sm font-medium text-gray-700"
+          >
+            URL de Webhook
+          </label>
+          <input
+            id="webhookUrl"
+            type="url"
+            value={formData.webhookUrl || ""}
+            onChange={(e) => handleChange("webhookUrl", e.target.value)}
+            onBlur={() => handleBlur("webhookUrl")}
+            placeholder="https://ejemplo.com/webhook/codi"
+            className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+              errors.webhookUrl && touched.webhookUrl
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
+          />
+          {errors.webhookUrl && touched.webhookUrl && (
+            <p className="text-sm text-red-600">{errors.webhookUrl}</p>
+          )}
+          <p className="text-sm text-gray-500">
+            URL para recibir notificaciones de transacciones
+          </p>
+        </div>
+
+        {/* Website URL */}
+        <div className="space-y-2">
+          <label
+            htmlFor="websiteUrl"
+            className="block text-sm font-medium text-gray-700"
+          >
+            URL del Sitio Web
+          </label>
+          <input
+            id="websiteUrl"
+            type="url"
+            value={formData.websiteUrl || ""}
+            onChange={(e) => handleChange("websiteUrl", e.target.value)}
+            onBlur={() => handleBlur("websiteUrl")}
+            placeholder="https://ejemplo.com"
+            className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+              errors.websiteUrl && touched.websiteUrl
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
+          />
+          {errors.websiteUrl && touched.websiteUrl && (
+            <p className="text-sm text-red-600">{errors.websiteUrl}</p>
+          )}
+          <p className="text-sm text-gray-500">
+            Sitio web donde se utilizará la API
+          </p>
+        </div>
+
+        {/* Fixed IP */}
+        <div className="space-y-2">
+          <label
+            htmlFor="fixedIp"
+            className="block text-sm font-medium text-gray-700"
+          >
+            IP Fija del Servidor
+          </label>
+          <input
+            id="fixedIp"
+            type="text"
+            value={formData.fixedIp || ""}
+            onChange={(e) => handleChange("fixedIp", e.target.value)}
+            onBlur={() => handleBlur("fixedIp")}
+            placeholder="192.168.1.1"
+            className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+              errors.fixedIp && touched.fixedIp
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
+          />
+          {errors.fixedIp && touched.fixedIp && (
+            <p className="text-sm text-red-600">{errors.fixedIp}</p>
+          )}
+          <p className="text-sm text-gray-500">
+            Dirección IP fija de su servidor
           </p>
         </div>
       </div>

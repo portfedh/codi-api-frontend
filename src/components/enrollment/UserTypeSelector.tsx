@@ -1,4 +1,4 @@
-type UserType = 'fisica' | 'moral';
+type UserType = "fisica" | "moral";
 
 interface UserTypeSelectorProps {
   onSelect: (type: UserType) => void;
@@ -9,7 +9,7 @@ export default function UserTypeSelector({ onSelect }: UserTypeSelectorProps) {
     <div className="grid gap-6 md:grid-cols-2">
       {/* Persona Física */}
       <button
-        onClick={() => onSelect('fisica')}
+        onClick={() => onSelect("fisica")}
         className="group relative overflow-hidden rounded-lg border-2 border-gray-200 bg-white p-6 text-left transition-all hover:border-primary-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
       >
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100 text-primary-600">
@@ -28,12 +28,10 @@ export default function UserTypeSelector({ onSelect }: UserTypeSelectorProps) {
           </svg>
         </div>
 
-        <h3 className="mb-2 text-xl font-bold text-gray-900">
-          Persona Física
-        </h3>
+        <h3 className="mb-2 text-xl font-bold text-gray-900">Persona Física</h3>
 
         <p className="mb-4 text-sm text-gray-600">
-          Registro individual para personas físicas con actividad empresarial
+          Registro individual para personas físicas
         </p>
 
         <ul className="space-y-2 text-sm text-gray-600">
@@ -75,7 +73,7 @@ export default function UserTypeSelector({ onSelect }: UserTypeSelectorProps) {
 
       {/* Persona Moral */}
       <button
-        onClick={() => onSelect('moral')}
+        onClick={() => onSelect("moral")}
         className="group relative overflow-hidden rounded-lg border-2 border-gray-200 bg-white p-6 text-left transition-all hover:border-primary-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
       >
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100 text-primary-600">
@@ -94,9 +92,7 @@ export default function UserTypeSelector({ onSelect }: UserTypeSelectorProps) {
           </svg>
         </div>
 
-        <h3 className="mb-2 text-xl font-bold text-gray-900">
-          Persona Moral
-        </h3>
+        <h3 className="mb-2 text-xl font-bold text-gray-900">Persona Moral</h3>
 
         <p className="mb-4 text-sm text-gray-600">
           Registro para empresas y personas morales con representante legal

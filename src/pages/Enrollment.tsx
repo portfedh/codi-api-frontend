@@ -18,6 +18,9 @@ type FormData = {
   razonSocial?: string;
   rfc?: string;
   representanteLegal?: string;
+  webhookUrl?: string;
+  websiteUrl?: string;
+  fixedIp?: string;
   documents: {
     ine: File | null;
     constanciaFiscal: File | null;
@@ -52,6 +55,9 @@ export default function Enrollment() {
     nombre: string;
     email: string;
     celular: string;
+    webhookUrl?: string;
+    websiteUrl?: string;
+    fixedIp?: string;
   }) => {
     setFormData({ ...formData, ...data });
     setStep(3);
@@ -63,6 +69,9 @@ export default function Enrollment() {
     representanteLegal: string;
     email: string;
     celular: string;
+    webhookUrl?: string;
+    websiteUrl?: string;
+    fixedIp?: string;
   }) => {
     setFormData({ ...formData, ...data });
     setStep(3);
@@ -81,6 +90,9 @@ export default function Enrollment() {
       razonSocial: updatedFormData.razonSocial,
       rfc: updatedFormData.rfc,
       representanteLegal: updatedFormData.representanteLegal,
+      webhookUrl: updatedFormData.webhookUrl,
+      websiteUrl: updatedFormData.websiteUrl,
+      fixedIp: updatedFormData.fixedIp,
       documents,
     };
 
@@ -184,6 +196,9 @@ export default function Enrollment() {
                     nombre: formData.nombre,
                     email: formData.email,
                     celular: formData.celular,
+                    webhookUrl: formData.webhookUrl,
+                    websiteUrl: formData.websiteUrl,
+                    fixedIp: formData.fixedIp,
                   }}
                   onSubmit={handlePersonalInfoSubmit}
                   onBack={handleBack}
@@ -198,6 +213,9 @@ export default function Enrollment() {
                     representanteLegal: formData.representanteLegal || "",
                     email: formData.email,
                     celular: formData.celular,
+                    webhookUrl: formData.webhookUrl,
+                    websiteUrl: formData.websiteUrl,
+                    fixedIp: formData.fixedIp,
                   }}
                   onSubmit={handleCompanyInfoSubmit}
                   onBack={handleBack}
