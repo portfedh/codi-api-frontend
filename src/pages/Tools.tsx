@@ -3,11 +3,12 @@ import InstitutionLookup from '../components/tools/InstitutionLookup';
 import CodeGenerator from '../components/tools/CodeGenerator';
 
 export default function Tools() {
-  const [activeTab, setActiveTab] = useState<'institutions' | 'code-generator'>('institutions');
+  const [activeTab, setActiveTab] = useState<'institutions' | 'code-generator' | 'uptime'>('institutions');
 
   const tabs = [
     { id: 'institutions', name: 'Búsqueda de Instituciones', description: 'Códigos bancarios' },
     { id: 'code-generator', name: 'Generador de Código', description: 'Ejemplos listos para usar' },
+    { id: 'uptime', name: 'Estado del Servicio', description: 'Monitoreo en tiempo real' },
   ] as const;
 
   return (
@@ -50,6 +51,24 @@ export default function Tools() {
       <div className="bg-white rounded-lg border border-gray-200 p-6">
         {activeTab === 'institutions' && <InstitutionLookup />}
         {activeTab === 'code-generator' && <CodeGenerator />}
+        {activeTab === 'uptime' && (
+          <div className="text-center py-12">
+            <p className="text-gray-600 mb-6">
+              Consulta el estado y disponibilidad del servicio
+            </p>
+            <a
+              href="https://stats.uptimerobot.com/4y1Ti1p7BH/801652540"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+            >
+              Ver Estado del Servicio
+              <svg className="ml-2 -mr-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );
