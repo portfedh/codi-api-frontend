@@ -82,6 +82,39 @@ export default function OpenSourceSection() {
           Ver en GitHub
         </a>
 
+        {/* Sponsor and Issues Links */}
+        <div className="flex flex-wrap justify-center items-center gap-4 mt-8">
+          {/* GitHub Sponsor Button */}
+          <iframe
+            src="https://github.com/sponsors/portfedh/button"
+            title="Sponsor portfedh"
+            height="32"
+            width="114"
+            style={{ border: 0, borderRadius: '6px' }}
+          />
+
+          {/* GitHub Issues Link */}
+          <a
+            href="https://github.com/portfedh/codi-api/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white text-gray-700 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors shadow-sm h-8"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Reportar un Problema
+          </a>
+        </div>
+
         <p className="mt-6 text-sm text-gray-600">
           Únete a la comunidad y ayuda a mejorar este proyecto
         </p>

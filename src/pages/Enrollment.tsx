@@ -154,9 +154,13 @@ export default function Enrollment() {
             </h1>
             <p className="text-gray-600">
               Complete el formulario para registrarse en nuestro servicio de API
-              CoDi gratuito
+              CoDi gratuito.
             </p>
-            <p>
+            <p className="text-gray-600 mt-2">
+              Con esto podrá cobrar a sus clientes y todos los pagos se
+              depositarán en la cuenta bancaria que registró.
+            </p>
+            <p className="text-gray-600 mt-2">
               El tiempo de respuesta de Banxico es de aproximadamente 7 días.
             </p>
           </div>
