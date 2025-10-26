@@ -166,6 +166,14 @@ export default function Docs() {
                   → Herramientas
                 </a>
                 <a
+                  href="https://api.bite-size.mx/api-docs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                >
+                  → Especificación Swagger ↗
+                </a>
+                <a
                   href={import.meta.env.VITE_GITHUB_REPO}
                   target="_blank"
                   rel="noopener noreferrer"
