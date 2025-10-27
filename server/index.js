@@ -58,8 +58,14 @@ if (process.env.NODE_ENV === "production") {
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
-  console.log("✅ Health check received");
-  res.json({ status: "ok", service: "codi-api-frontend-server" });
+  console.log("✅ Health check received at /api/health");
+  res.status(200).json({ status: "ok", service: "codi-api-frontend-server" });
+});
+
+// Root health check (some platforms check root path)
+app.get("/health", (req, res) => {
+  console.log("✅ Health check received at /health");
+  res.status(200).json({ status: "ok", service: "codi-api-frontend-server" });
 });
 
 // Enrollment email endpoint
@@ -206,7 +212,7 @@ app.post(
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
     // Skip API routes
-    if (req.path.startsWith("/api")) {
+    if (req.path.startsWith("/api") || req.path === "/health") {
       return next();
     }
 
