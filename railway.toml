@@ -1,0 +1,16 @@
+[build]
+builder = "nixpacks"
+
+[build.command]
+# Build the Vite app
+cmd = "npm run build"
+
+[deploy]
+# Start command - serve the dist folder with a simple HTTP server
+startCommand = "npx serve -s dist -p $PORT"
+
+[deploy.healthcheckPath]
+path = "/"
+
+[deploy.restartPolicyType]
+type = "on-failure"
