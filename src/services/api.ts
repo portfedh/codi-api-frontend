@@ -16,6 +16,9 @@ import type {
 // Get API base URL from environment variable
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
+// Backend server URL for enrollment (Express server)
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+
 // Create Axios instance
 const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -195,6 +198,11 @@ export const codiApi = {
       formData.append('representanteLegal', data.representanteLegal || '');
     }
 
+    // Add optional fields
+    if (data.webhookUrl) {
+      formData.append('webhookUrl', data.webhookUrl);
+    }
+
     // Add document files
     if (data.documents.ine) {
       formData.append('ine', data.documents.ine);
@@ -209,8 +217,9 @@ export const codiApi = {
       formData.append('caratulaBancaria', data.documents.caratulaBancaria);
     }
 
-    const response = await apiClient.post<EnrollmentResponse>(
-      '/v2/enrollment',
+    // Call Express backend API
+    const response = await axios.post<EnrollmentResponse>(
+      `${BACKEND_URL}/api/enrollment`,
       formData,
       {
         headers: {

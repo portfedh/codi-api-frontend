@@ -151,6 +151,7 @@ export interface EnrollmentSubmission {
   razonSocial?: string; // Required for 'moral'
   rfc?: string; // Required for 'moral'
   representanteLegal?: string; // Required for 'moral'
+  webhookUrl?: string; // Optional webhook URL
   documents: {
     ine: File | null;
     constanciaFiscal: File | null;

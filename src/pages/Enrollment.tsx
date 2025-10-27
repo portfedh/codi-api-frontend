@@ -201,8 +201,6 @@ export default function Enrollment() {
                     email: formData.email,
                     celular: formData.celular,
                     webhookUrl: formData.webhookUrl,
-                    websiteUrl: formData.websiteUrl,
-                    fixedIp: formData.fixedIp,
                   }}
                   onSubmit={handlePersonalInfoSubmit}
                   onBack={handleBack}
@@ -218,8 +216,6 @@ export default function Enrollment() {
                     email: formData.email,
                     celular: formData.celular,
                     webhookUrl: formData.webhookUrl,
-                    websiteUrl: formData.websiteUrl,
-                    fixedIp: formData.fixedIp,
                   }}
                   onSubmit={handleCompanyInfoSubmit}
                   onBack={handleBack}

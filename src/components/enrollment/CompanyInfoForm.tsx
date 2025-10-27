@@ -8,8 +8,6 @@ interface CompanyInfoFormProps {
     email: string;
     celular: string;
     webhookUrl?: string;
-    websiteUrl?: string;
-    fixedIp?: string;
   };
   onSubmit: (data: {
     razonSocial: string;
@@ -18,8 +16,6 @@ interface CompanyInfoFormProps {
     email: string;
     celular: string;
     webhookUrl?: string;
-    websiteUrl?: string;
-    fixedIp?: string;
   }) => void;
   onBack: () => void;
 }
@@ -103,32 +99,6 @@ export default function CompanyInfoForm({
     return "";
   };
 
-  const validateWebsiteUrl = (value: string) => {
-    if (!value.trim()) {
-      return ""; // Optional field
-    }
-    try {
-      const url = new URL(value);
-      if (!url.protocol.startsWith("http")) {
-        return "La URL debe comenzar con http:// o https://";
-      }
-    } catch {
-      return "Ingrese una URL válida (ej: https://ejemplo.com)";
-    }
-    return "";
-  };
-
-  const validateFixedIp = (value: string) => {
-    if (!value.trim()) {
-      return ""; // Optional field
-    }
-    const ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-    if (!ipPattern.test(value)) {
-      return "Ingrese una dirección IP válida (ej: 192.168.1.1)";
-    }
-    return "";
-  };
-
   const handleChange = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
 
@@ -140,8 +110,6 @@ export default function CompanyInfoForm({
       if (field === "email") error = validateEmail(value);
       if (field === "celular") error = validateCelular(value);
       if (field === "webhookUrl") error = validateWebhookUrl(value);
-      if (field === "websiteUrl") error = validateWebsiteUrl(value);
-      if (field === "fixedIp") error = validateFixedIp(value);
 
       setErrors({ ...errors, [field]: error });
     }
@@ -158,9 +126,8 @@ export default function CompanyInfoForm({
       error = validateRepresentante(formData.representanteLegal);
     if (field === "email") error = validateEmail(formData.email);
     if (field === "celular") error = validateCelular(formData.celular);
-    if (field === "webhookUrl") error = validateWebhookUrl(formData.webhookUrl || "");
-    if (field === "websiteUrl") error = validateWebsiteUrl(formData.websiteUrl || "");
-    if (field === "fixedIp") error = validateFixedIp(formData.fixedIp || "");
+    if (field === "webhookUrl")
+      error = validateWebhookUrl(formData.webhookUrl || "");
 
     setErrors({ ...errors, [field]: error });
   };
@@ -175,8 +142,6 @@ export default function CompanyInfoForm({
       email: validateEmail(formData.email),
       celular: validateCelular(formData.celular),
       webhookUrl: validateWebhookUrl(formData.webhookUrl || ""),
-      websiteUrl: validateWebsiteUrl(formData.websiteUrl || ""),
-      fixedIp: validateFixedIp(formData.fixedIp || ""),
     };
 
     setErrors(newErrors);
@@ -187,8 +152,6 @@ export default function CompanyInfoForm({
       email: true,
       celular: true,
       webhookUrl: true,
-      websiteUrl: true,
-      fixedIp: true,
     });
 
     if (Object.values(newErrors).every((error) => !error)) {
@@ -337,7 +300,9 @@ export default function CompanyInfoForm({
         <div className="border-t border-gray-200 pt-4">
           <h3 className="mb-4 text-lg font-semibold text-gray-900">
             Configuración Técnica{" "}
-            <span className="text-sm font-normal text-gray-500">(Opcional)</span>
+            <span className="text-sm font-normal text-gray-500">
+              (Opcional)
+            </span>
           </h3>
         </div>
 
@@ -366,65 +331,7 @@ export default function CompanyInfoForm({
             <p className="text-sm text-red-600">{errors.webhookUrl}</p>
           )}
           <p className="text-sm text-gray-500">
-            URL para recibir notificaciones de transacciones
-          </p>
-        </div>
-
-        {/* Website URL */}
-        <div className="space-y-2">
-          <label
-            htmlFor="websiteUrl"
-            className="block text-sm font-medium text-gray-700"
-          >
-            URL del Sitio Web
-          </label>
-          <input
-            id="websiteUrl"
-            type="url"
-            value={formData.websiteUrl || ""}
-            onChange={(e) => handleChange("websiteUrl", e.target.value)}
-            onBlur={() => handleBlur("websiteUrl")}
-            placeholder="https://ejemplo.com"
-            className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-              errors.websiteUrl && touched.websiteUrl
-                ? "border-red-500"
-                : "border-gray-300"
-            }`}
-          />
-          {errors.websiteUrl && touched.websiteUrl && (
-            <p className="text-sm text-red-600">{errors.websiteUrl}</p>
-          )}
-          <p className="text-sm text-gray-500">
-            Sitio web donde se utilizará la API
-          </p>
-        </div>
-
-        {/* Fixed IP */}
-        <div className="space-y-2">
-          <label
-            htmlFor="fixedIp"
-            className="block text-sm font-medium text-gray-700"
-          >
-            IP Fija del Servidor
-          </label>
-          <input
-            id="fixedIp"
-            type="text"
-            value={formData.fixedIp || ""}
-            onChange={(e) => handleChange("fixedIp", e.target.value)}
-            onBlur={() => handleBlur("fixedIp")}
-            placeholder="192.168.1.1"
-            className={`w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-              errors.fixedIp && touched.fixedIp
-                ? "border-red-500"
-                : "border-gray-300"
-            }`}
-          />
-          {errors.fixedIp && touched.fixedIp && (
-            <p className="text-sm text-red-600">{errors.fixedIp}</p>
-          )}
-          <p className="text-sm text-gray-500">
-            Dirección IP fija de su servidor
+            URL para recibir confirmación de transacciones
           </p>
         </div>
       </div>

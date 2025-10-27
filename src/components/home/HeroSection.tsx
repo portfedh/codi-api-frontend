@@ -68,7 +68,7 @@ export default function HeroSection() {
             to="/enrollment"
             className="px-8 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl"
           >
-            Comenzar Ahora
+            Registrarme
           </Link>
           <Link
             to="/docs"
