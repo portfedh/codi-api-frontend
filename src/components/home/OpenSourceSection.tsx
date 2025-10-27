@@ -82,18 +82,8 @@ export default function OpenSourceSection() {
           Ver en GitHub
         </a>
 
-        {/* Sponsor and Issues Links */}
+        {/* GitHub Issues Link */}
         <div className="flex flex-wrap justify-center items-center gap-4 mt-8">
-          {/* GitHub Sponsor Button */}
-          <iframe
-            src="https://github.com/sponsors/portfedh/button"
-            title="Sponsor portfedh"
-            height="32"
-            width="114"
-            style={{ border: 0, borderRadius: '6px' }}
-          />
-
-          {/* GitHub Issues Link */}
           <a
             href="https://github.com/portfedh/codi-api/issues"
             target="_blank"
