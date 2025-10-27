@@ -5,6 +5,7 @@ import { Resend } from "resend";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 // Load environment variables
 dotenv.config();
@@ -23,6 +24,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 app.use(cors());
 app.use(express.json());
 
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`📥 ${req.method} ${req.path}`);
+  next();
+});
+
 // Configure multer for file uploads (store in memory)
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -34,11 +41,24 @@ const upload = multer({
 
 // Serve static files from Vite build in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../dist")));
+  const distPath = path.join(__dirname, "../dist");
+  console.log(`📁 Serving static files from: ${distPath}`);
+
+  // Check if dist folder exists
+  if (fs.existsSync(distPath)) {
+    const files = fs.readdirSync(distPath);
+    console.log(`✅ dist folder exists with ${files.length} items`);
+    console.log(`📄 Contents: ${files.join(", ")}`);
+  } else {
+    console.error(`❌ dist folder does not exist at: ${distPath}`);
+  }
+
+  app.use(express.static(distPath));
 }
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
+  console.log("✅ Health check received");
   res.json({ status: "ok", service: "codi-api-frontend-server" });
 });
 
@@ -210,6 +230,14 @@ const server = app.listen(PORT, "0.0.0.0", () => {
     }`
   );
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`⏰ Server started at: ${new Date().toISOString()}`);
+  console.log("🔍 Waiting for health check from Railway...");
+});
+
+// Handle server errors
+server.on("error", (error) => {
+  console.error("❌ Server error:", error);
+  process.exit(1);
 });
 
 // Handle graceful shutdown
