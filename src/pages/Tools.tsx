@@ -4,12 +4,12 @@ import CodeGenerator from '../components/tools/CodeGenerator';
 import StatusIndicator from '../components/common/StatusIndicator';
 
 export default function Tools() {
-  const [activeTab, setActiveTab] = useState<'institutions' | 'code-generator' | 'uptime'>('institutions');
+  const [activeTab, setActiveTab] = useState<'institutions' | 'code-generator' | 'uptime'>('code-generator');
 
   const tabs = [
-    { id: 'institutions', name: 'Búsqueda de Instituciones', description: 'Códigos bancarios' },
     { id: 'code-generator', name: 'Generador de Código', description: 'Ejemplos listos para usar' },
     { id: 'uptime', name: 'Estado del Servicio', description: 'Monitoreo en tiempo real' },
+    { id: 'institutions', name: 'Búsqueda de Instituciones', description: 'Códigos bancarios' },
   ] as const;
 
   return (
