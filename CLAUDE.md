@@ -6,12 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Development server:**
 ```bash
-npm run dev          # Start both Vite client + Express enrollment server (concurrently)
-npm run dev:client   # Start only Vite dev server with HMR
-npm run dev:server   # Start only Express enrollment server (port 3001)
+npm run dev          # Start Vite dev server with HMR
 npm run build        # TypeScript compilation + production build
 npm run preview      # Preview production build locally
-npm start            # Production mode (serves built files + runs server)
 ```
 
 **Code Quality:**
@@ -36,10 +33,6 @@ This is the **frontend application** for the CoDi API project - a web interface 
 - **QR Codes:** qrcode.react
 - **Code Display:** react-syntax-highlighter
 - **Date Handling:** date-fns
-- **Server:** Express (enrollment backend)
-- **Email:** Resend API
-- **File Uploads:** Multer
-- **Process Management:** concurrently
 
 ## Project Architecture
 
@@ -60,16 +53,15 @@ The project follows a multi-stage roadmap (see `/docs/FRONTEND_ROADMAP.md`):
 
 **Key API Endpoints:**
 
-*CoDi API Backend* (`http://localhost:3000`):
+*CoDi Payment API* (`VITE_API_URL`):
 - `/v2/codi/qr` - Generate QR payment codes
 - `/v2/codi/push` - Send push payment notifications to mobile
 - `/v2/codi/consulta` - Query payment status by folio/reference
 - `/v2/health` - Backend health check
 
-*Enrollment Server* (`http://localhost:3001`):
+*Enrollment Backend API* (`VITE_BACKEND_URL` - Development: `http://0.0.0.0:3000` | Production: `https://codi-enrollment-backend.up.railway.app`):
 - `POST /api/enrollment` - Submit enrollment form + upload documents
 - `POST /api/contact` - Send contact form messages
-- See `/server/README.md` for detailed API documentation
 
 **Institution Data:**
 Financial institution codes are available in `/public/data/` for frontend use:
@@ -90,7 +82,6 @@ The original source file is in `/context/institutions.js`
 - `SECURITY.md` / `SECURITY.es.md` - Security policy
 - `LICENSE` / `LICENSE.es.md` - MIT License
 - `README.md` - Project overview and setup instructions
-- `/server/README.md` - Enrollment server API documentation
 
 ## Project Structure
 
@@ -164,9 +155,6 @@ The original source file is in `/context/institutions.js`
 │   │   └── institution.ts      # Institution data types
 │   ├── config/                 # Configuration (empty, reserved)
 │   └── assets/                 # Static assets (images, etc.)
-├── server/                     # Express enrollment server
-│   ├── index.js                # Server entry point
-│   └── README.md               # Server API documentation
 ├── public/                     # Static assets served by Vite
 │   ├── data/                   # JSON data files
 │   │   ├── institutions.json   # Institution list
@@ -197,16 +185,16 @@ The original source file is in `/context/institutions.js`
 3. Test that dev server still works
 
 **API Integration Pattern:**
-All API calls go through centralized API clients using Axios:
+All API calls go through a centralized API client using Axios (`src/services/api.ts`):
 
-*CoDi API Client* (`src/services/api.ts`):
+*CoDi Payment API Client:*
 - Base URL from `VITE_API_URL` environment variable
 - API key header management (`x-api-key`)
 - Request/response interceptors for logging
 - Typed error handling
-- Methods: `generateQR()`, `sendPush()`, `queryPayment()`, `checkHealth()`
+- Methods: `generateQR()`, `sendPush()`, `checkStatus()`, `healthCheck()`
 
-*Enrollment Server Client* (`src/services/api.ts`):
+*Enrollment Backend Client:*
 - Base URL from `VITE_BACKEND_URL` environment variable
 - FormData handling for file uploads
 - Methods: `submitEnrollment()`, `sendContact()`
@@ -247,20 +235,24 @@ The project uses Tailwind CSS 4 with utility-first approach:
 All frontend environment variables must be prefixed with `VITE_` to be accessible in the client:
 ```typescript
 const apiUrl = import.meta.env.VITE_API_URL;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 ```
 
 Available environment variables (see `.env.example`):
 ```bash
-# Frontend variables (prefixed with VITE_)
-VITE_API_URL=http://localhost:3000          # CoDi API backend
-VITE_BACKEND_URL=http://localhost:3001      # Enrollment server
+# CoDi Payment API (QR, Push, Consulta endpoints)
+VITE_API_URL=http://localhost:3000
+
+# Enrollment & Contact Backend
+# Development: http://0.0.0.0:3000
+# Production: https://codi-enrollment-backend.up.railway.app
+VITE_BACKEND_URL=http://0.0.0.0:3000
+
+# Application Information
 VITE_APP_NAME=CoDi API
 VITE_APP_VERSION=1.0.0
 VITE_GITHUB_REPO=https://github.com/...
 VITE_ENV=development
-
-# Server-only variables (not prefixed, not accessible in browser)
-RESEND_API_KEY=re_your_api_key_here         # Email service API key
 ```
 
 **TypeScript Configuration:**
@@ -270,42 +262,25 @@ RESEND_API_KEY=re_your_api_key_here         # Email service API key
 - Module: ESNext with bundler resolution
 - JSX: react-jsx (React 19 automatic runtime)
 
-**Enrollment Server Setup:**
-The `/server` directory contains an Express backend for handling:
-- Multi-part form submissions with file uploads (Multer)
-- Email notifications via Resend API
-- CORS configuration for frontend requests
-
-To configure the enrollment server:
-1. Set `RESEND_API_KEY` in `.env` file
-2. Update recipient email in `server/index.js` if needed
-3. The server runs on port 3001 by default
-4. See `/server/README.md` for detailed API documentation
-
 ## Common Development Tasks
 
 **Starting the Application:**
 ```bash
-# Development (both client + server)
+# Development
 npm run dev
-
-# Development (client only)
-npm run dev:client
-
-# Development (server only)
-npm run dev:server
 
 # Production build
 npm run build
-npm start
+
+# Preview production build
+npm run preview
 ```
 
-**Testing API Endpoints:**
-1. Start the CoDi API backend (separate repo) on port 3000
+**Testing Forms:**
+1. Ensure the backend API is running (Development: `http://0.0.0.0:3000` | Production: `https://codi-enrollment-backend.up.railway.app`)
 2. Start this frontend with `npm run dev`
-3. Navigate to `/playground` in the browser
-4. Enter your API key (or use test mode if available)
-5. Fill out forms and test QR generation, Push notifications, and payment queries
+3. Navigate to `/enrollment` to test the enrollment form
+4. Navigate to the contact section on the homepage to test the contact form
 
 **Working with Institution Data:**
 - Institution data is loaded from `/public/data/institutions.json`
@@ -314,10 +289,10 @@ npm start
 
 **Debugging Tips:**
 - Check browser console for client-side errors
-- Check terminal for server-side errors
 - Use React DevTools for component inspection
 - Network tab shows API requests/responses
 - Toast notifications show user-facing errors
+- Check backend logs for API errors (separate backend repository)
 
 ## Important Context
 
@@ -352,8 +327,7 @@ CoDi is Mexico's instant payment system operated by Banxico. This API provides:
 - ✅ Documentation pages (Getting Started, API Reference, Error Codes)
 - ✅ Developer tools (Institution Lookup, Code Generator)
 - ✅ Multi-step enrollment flow with document upload
-- ✅ Express server for enrollment backend (`/server`)
-- ✅ Email integration with Resend API
+- ✅ Backend API integration (separate repository)
 - ✅ Custom hooks (useApiKey, useHealthCheck, useToast)
 - ✅ Common components (QRCodeDisplay, JSONDisplay, Toast, etc.)
 - ✅ Form validation with Zod schemas
@@ -382,24 +356,24 @@ See `/docs/FRONTEND_ROADMAP.md` for complete Stage 2 features:
 
 ## Deployment
 
-**Railway Deployment:**
-The project is configured for Railway deployment with:
-- `Procfile` - Defines the web process (`npm start`)
-- `railway.json` - Build and deployment configuration
-- Build command: `npm install && npm run build`
-- Start command: `npm start` (runs Express server + serves built Vite app)
-- Restart policy: ON_FAILURE with max 10 retries
+**Static Site Deployment:**
+This is a static frontend application that can be deployed to any static hosting service (Vercel, Netlify, Railway, etc.):
+- Build command: `npm run build`
+- Output directory: `dist`
+- Build produces optimized static assets (HTML, CSS, JS)
 
 **Required Environment Variables for Production:**
-- `VITE_API_URL` - CoDi API backend URL
-- `VITE_BACKEND_URL` - Should be same as app URL for enrollment
-- `RESEND_API_KEY` - Email service API key
-- `NODE_ENV=production` (automatically set by Railway)
+- `VITE_API_URL` - CoDi Payment API URL
+- `VITE_BACKEND_URL` - Enrollment Backend URL (Production: `https://codi-enrollment-backend.up.railway.app`)
+- `VITE_APP_NAME` - Application name
+- `VITE_APP_VERSION` - Application version
+- `VITE_GITHUB_REPO` - GitHub repository URL
+- `VITE_ENV` - Environment (production)
 
 **Build Output:**
 - Vite builds to `/dist` directory
-- Express server serves static files from `/dist` in production
-- Client-side routing handled by Express wildcard route
+- Includes all static assets optimized for production
+- Client-side routing requires SPA fallback configuration (serve `index.html` for all routes)
 
 ## Resources
 

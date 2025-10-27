@@ -13,11 +13,11 @@ import type {
   EnrollmentResponse,
 } from '../types/api';
 
-// Get API base URL from environment variable
+// Get API base URL from environment variable (CoDi payment API)
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
-// Backend server URL for enrollment (Express server)
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+// Backend server URL for enrollment and contact forms
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://0.0.0.0:3000';
 
 // Create Axios instance
 const apiClient: AxiosInstance = axios.create({
@@ -217,7 +217,7 @@ export const codiApi = {
       formData.append('caratulaBancaria', data.documents.caratulaBancaria);
     }
 
-    // Call Express backend API
+    // Call enrollment backend API
     const response = await axios.post<EnrollmentResponse>(
       `${BACKEND_URL}/api/enrollment`,
       formData,
