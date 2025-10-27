@@ -184,18 +184,39 @@ app.post(
 
 // Serve index.html for all other routes (SPA support) in production
 if (process.env.NODE_ENV === "production") {
-  app.use((req, res) => {
-    res.sendFile(path.join(__dirname, "../dist/index.html"));
+  app.use((req, res, next) => {
+    // Skip API routes
+    if (req.path.startsWith("/api")) {
+      return next();
+    }
+
+    const indexPath = path.join(__dirname, "../dist/index.html");
+    res.sendFile(indexPath, (err) => {
+      if (err) {
+        console.error("Error serving index.html:", err);
+        res.status(500).send("Error loading application");
+      }
+    });
   });
 }
 
 // Start server
-app.listen(PORT, "0.0.0.0", () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🌐 Listening on http://0.0.0.0:${PORT}`);
   console.log(
     `📧 Email service: ${
       process.env.RESEND_API_KEY ? "Configured" : "NOT CONFIGURED"
     }`
   );
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
+});
+
+// Handle graceful shutdown
+process.on("SIGTERM", () => {
+  console.log("📥 SIGTERM received, closing server gracefully...");
+  server.close(() => {
+    console.log("✅ Server closed");
+    process.exit(0);
+  });
 });
