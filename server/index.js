@@ -184,7 +184,7 @@ app.post(
 
 // Serve index.html for all other routes (SPA support) in production
 if (process.env.NODE_ENV === "production") {
-  app.get("*", (req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(__dirname, "../dist/index.html"));
   });
 }
