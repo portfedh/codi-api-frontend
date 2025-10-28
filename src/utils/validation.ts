@@ -23,10 +23,13 @@ export const qrFormSchema = z.object({
 
   referenciaNumerica: z
     .string()
+    .min(1, 'Referencia Numérica es requerida')
     .regex(/^\d{1,7}$/, 'Referencia debe ser un número de 1-7 dígitos'),
 
   vigencia: z
-    .string(),
+    .string()
+    .min(1, 'Vigencia es requerida')
+    .regex(/^\d+$/, 'Vigencia debe ser un número'),
 });
 
 /**

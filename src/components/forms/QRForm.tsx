@@ -125,18 +125,19 @@ export default function QRForm() {
             id="concepto"
             maxLength={40}
             className="input-field"
-            placeholder="Descripción del pago (máx. 40 caracteres ASCII)"
+            placeholder="Descripcion del pago"
           />
           {errors.concepto && (
             <p className="mt-1 text-sm text-red-600">{errors.concepto.message}</p>
           )}
+          <p className="mt-1 text-xs text-gray-500">(máx. 40 caracteres). No usar acentos ni caracteres especiales</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {/* Referencia Numérica */}
           <div>
             <label htmlFor="referenciaNumerica" className="block text-sm font-medium text-gray-700 mb-1">
-              Referencia Numérica
+              Referencia Numérica <span className="text-red-500">*</span>
             </label>
             <input
               {...register('referenciaNumerica')}
@@ -149,13 +150,13 @@ export default function QRForm() {
             {errors.referenciaNumerica && (
               <p className="mt-1 text-sm text-red-600">{errors.referenciaNumerica.message}</p>
             )}
-            <p className="mt-1 text-xs text-gray-500">Opcional. Usa "0" si no aplica. 7 números máximo</p>
+            <p className="mt-1 text-xs text-gray-500">Opcional. Usa "0" si no aplica. 7 dígitos máximo</p>
           </div>
 
           {/* Vigencia */}
           <div>
             <label htmlFor="vigencia" className="block text-sm font-medium text-gray-700 mb-1">
-              Vigencia
+              Vigencia <span className="text-red-500">*</span>
             </label>
             <input
               {...register('vigencia')}
@@ -167,7 +168,7 @@ export default function QRForm() {
             {errors.vigencia && (
               <p className="mt-1 text-sm text-red-600">{errors.vigencia.message}</p>
             )}
-            <p className="mt-1 text-xs text-gray-500">Opcional. Usa "0" para sin expiración o el tiempo de expiración (Unix epoch)</p>
+            <p className="mt-1 text-xs text-gray-500">Usa "0" para sin expiración o el tiempo de expiración (Unix epoch)</p>
           </div>
         </div>
 

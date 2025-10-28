@@ -22,7 +22,7 @@ export default function QRCodeDisplay({ qrCode }: QRCodeDisplayProps) {
           <img
             src={qrCode}
             alt="Código QR de pago CoDi"
-            className="w-64 h-64 object-contain"
+            className="w-96 h-96 object-contain"
           />
         </div>
 
