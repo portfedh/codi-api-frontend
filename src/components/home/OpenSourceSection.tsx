@@ -1,6 +1,11 @@
+import { useState } from 'react';
+import { Heart } from 'lucide-react';
+import SponsorModal from '../common/SponsorModal';
+
 export default function OpenSourceSection() {
   const githubUrl =
     import.meta.env.VITE_GITHUB_REPO || "https://github.com/portfedh/codi-api";
+  const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
 
   return (
     <section className="py-16 bg-gradient-to-br from-primary-50 to-purple-50">
@@ -82,7 +87,7 @@ export default function OpenSourceSection() {
           Ver en GitHub
         </a>
 
-        {/* GitHub Issues Link */}
+        {/* GitHub Issues Link & Sponsor Button */}
         <div className="flex flex-wrap justify-center items-center gap-4 mt-8">
           <a
             href="https://github.com/portfedh/codi-api/issues"
@@ -103,12 +108,26 @@ export default function OpenSourceSection() {
             </svg>
             Reportar un Problema
           </a>
+
+          <button
+            onClick={() => setIsSponsorModalOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-sm font-medium rounded-md hover:from-pink-600 hover:to-rose-600 transition-all shadow-sm hover:shadow-md h-8"
+          >
+            <Heart className="w-4 h-4 fill-current" />
+            Apoyar el Proyecto
+          </button>
         </div>
 
         <p className="mt-6 text-sm text-gray-600">
           Únete a la comunidad y ayuda a mejorar este proyecto
         </p>
       </div>
+
+      {/* Sponsor Modal */}
+      <SponsorModal
+        isOpen={isSponsorModalOpen}
+        onClose={() => setIsSponsorModalOpen(false)}
+      />
     </section>
   );
 }
