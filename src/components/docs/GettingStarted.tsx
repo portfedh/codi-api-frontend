@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DocSection from "./DocSection";
 import CodeBlock from "./CodeBlock";
 
@@ -7,15 +8,42 @@ export default function GettingStarted() {
       <DocSection id="introduccion" title="Introducción" level={1}>
         <p className="text-lg text-gray-700 mb-4">
           La API CoDi te permite integrar pagos instantáneos del sistema CoDi de
-          Banxico en tu aplicación. Esta guía te ayudará a realizar tu primera
-          solicitud en minutos.
+          Banxico en tu aplicación. Esta guía de Primeros Pasos te ayudará a
+          realizar tu primera solicitud en minutos.
+        </p>
+        <p className="text-gray-700 mb-4">
+          Para información más detallada sobre todos los endpoints y parámetros,
+          consulta la{" "}
+          <a
+            href="#api-reference"
+            className="text-primary-600 hover:text-primary-700 underline font-medium"
+          >
+            Referencia de API
+          </a>
+          . La especificación completa de la API en formato Swagger está
+          disponible en:{" "}
+          <a
+            href="https://api.bite-size.mx/api-docs/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-600 hover:text-primary-700 underline font-medium"
+          >
+            https://api.bite-size.mx/api-docs/
+          </a>
         </p>
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
           <h4 className="text-sm font-semibold text-blue-900 mb-2">
             ¿Qué necesitas?
           </h4>
           <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-            <li>Una API Key válida (128 caracteres hexadecimales)</li>
+            <li>
+              <Link
+                to="/enrollment"
+                className="text-blue-600 hover:text-blue-800 underline font-medium"
+              >
+                Una API Key válida (128 caracteres hexadecimales)
+              </Link>
+            </li>
             <li>Conocimientos básicos de HTTP y JSON</li>
             <li>Un cliente HTTP (cURL, Postman, o tu lenguaje favorito)</li>
           </ul>
