@@ -420,6 +420,232 @@ export default function ApiReference() {
 }`}
         />
       </DocSection>
+
+      {/* Webhook Notifications */}
+      <DocSection id="webhook-notifications" title="Notificaciones Webhook">
+        <div className="mb-4">
+          <span className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-purple-100 text-purple-800 mr-2">
+            WEBHOOK
+          </span>
+          <span className="text-sm font-mono text-gray-700">
+            POST a tu URL de webhook
+          </span>
+        </div>
+
+        <p className="text-gray-700 mb-4">
+          Cuando un pago es completado o cancelado, el sistema CoDi enviará
+          automáticamente una notificación POST a la URL de webhook que
+          configuraste. Esta notificación incluye todos los detalles de la
+          transacción.
+        </p>
+
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+          <p className="text-sm text-gray-700">
+            <strong className="text-amber-900">
+              🔐 Autenticación del Webhook:
+            </strong>{" "}
+            La solicitud POST incluirá tu API Key en el header{" "}
+            <code className="bg-white px-1.5 py-0.5 rounded border border-amber-200 text-xs font-mono">
+              x-api-key
+            </code>{" "}
+            para que puedas verificar que la notificación es auténtica. El{" "}
+            <code className="bg-white px-1.5 py-0.5 rounded border border-amber-200 text-xs font-mono">
+              selloDigital
+            </code>{" "}
+            es verificado automáticamente por nuestro sistema.
+          </p>
+        </div>
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Estructura del Payload
+        </h4>
+        <CodeBlock
+          language="json"
+          title="Webhook Payload"
+          showLineNumbers={false}
+          code={`{
+  "cadenaInformacion": {
+    "certComercioProveedor": "00001000000511252793",
+    "celularCliente": "8916498571",
+    "digitoVerificadorCliente": 0,
+    "nombreCliente": "P**** R******* C*** L*****",
+    "claveInstitucionCliente": 40012,
+    "tipoCuentaCliente": 40,
+    "numeroCuentaCliente": "012180001597582168",
+    "idMensajeCobro": "338225a919338225a919",
+    "concepto": "Prueba Push Aceptado",
+    "monto": 1,
+    "claveRastreo": "0666072507",
+    "resultadoMensajeCobro": 1,
+    "horaSolicitudMensajeCobro": 1761698811708,
+    "horaProcMensajeCobro": 1761698872000,
+    "certBdeM": "00000200002000003582",
+    "horaEnvioMensaje": 1761698872653
+  },
+  "selloDigital": "p1IO0OjPJwjs/rnUaXxRpGu2GwrFGpYLKYeujDG5bjelh/DxqNM..."
+}`}
+        />
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">
+          Campos Importantes
+        </h4>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+          <dl className="space-y-4 text-sm">
+            <div>
+              <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-gray-300 inline-block mb-1">
+                resultadoMensajeCobro
+              </dt>
+              <dd className="text-gray-700 mt-1">
+                Estado final del pago:
+                <ul className="ml-4 mt-2 space-y-1">
+                  <li>
+                    <code className="font-semibold text-green-700">1</code> =
+                    Pago completado exitosamente
+                  </li>
+                  <li>
+                    <code className="font-semibold text-yellow-700">0</code> =
+                    Aceptado por el usuario pero aún no completado
+                  </li>
+                  <li>
+                    <code className="font-semibold text-red-700">2</code> =
+                    Pago rechazado
+                  </li>
+                </ul>
+              </dd>
+            </div>
+
+            <div>
+              <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-gray-300 inline-block mb-1">
+                claveInstitucionCliente
+              </dt>
+              <dd className="text-gray-700 mt-1">
+                Código de la institución bancaria del cliente (ej.{" "}
+                <code className="font-mono text-xs">40012</code> = BBVA
+                Bancomer). Consulta el código en la sección de{" "}
+                <a
+                  href="/tools"
+                  className="text-primary-600 hover:text-primary-700 underline font-medium"
+                >
+                  Herramientas
+                </a>
+                .
+              </dd>
+            </div>
+
+            <div>
+              <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-gray-300 inline-block mb-1">
+                idMensajeCobro
+              </dt>
+              <dd className="text-gray-700 mt-1">
+                Folio único de la transacción CoDi. Úsalo para consultar el
+                estado del pago con el endpoint{" "}
+                <code className="font-mono text-xs">POST /v2/codi/consulta</code>
+                .
+              </dd>
+            </div>
+
+            <div>
+              <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-gray-300 inline-block mb-1">
+                monto
+              </dt>
+              <dd className="text-gray-700 mt-1">
+                Monto del pago en MXN (pesos mexicanos).
+              </dd>
+            </div>
+
+            <div>
+              <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-gray-300 inline-block mb-1">
+                claveRastreo
+              </dt>
+              <dd className="text-gray-700 mt-1">
+                Clave de rastreo única de la transacción asignada por el sistema
+                bancario.
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">
+          Mejores Prácticas de Integración
+        </h4>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <ul className="space-y-2 text-sm text-gray-700">
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 flex-shrink-0">•</span>
+              <span>
+                Tu endpoint debe responder con código HTTP{" "}
+                <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200 text-xs font-mono">
+                  200 OK
+                </code>{" "}
+                para confirmar la recepción de la notificación.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 flex-shrink-0">•</span>
+              <span>
+                Procesa la notificación de forma asíncrona para responder
+                rápidamente y evitar timeouts.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 flex-shrink-0">•</span>
+              <span>
+                Implementa deduplicación usando el{" "}
+                <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200 text-xs font-mono">
+                  idMensajeCobro
+                </code>{" "}
+                para evitar procesar la misma notificación múltiples veces.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 flex-shrink-0">•</span>
+              <span>
+                Verifica el header{" "}
+                <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200 text-xs font-mono">
+                  x-api-key
+                </code>{" "}
+                para confirmar que la notificación proviene de nuestro sistema.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 flex-shrink-0">•</span>
+              <span>
+                Si tu webhook no responde o falla, el API CoDi puede reintentar
+                el envío automáticamente.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-2 mt-6">
+          Ejemplo de Implementación (Node.js)
+        </h4>
+        <CodeBlock
+          language="javascript"
+          title="Express Webhook Handler"
+          code={`app.post('/webhook/codi', (req, res) => {
+  // Verificar API Key
+  const apiKey = req.headers['x-api-key'];
+  if (apiKey !== process.env.CODI_API_KEY) {
+    return res.status(401).json({ error: 'Invalid API Key' });
+  }
+
+  const { cadenaInformacion, selloDigital } = req.body;
+  const { idMensajeCobro, resultadoMensajeCobro, monto } = cadenaInformacion;
+
+  // Responder inmediatamente
+  res.status(200).json({ received: true });
+
+  // Procesar de forma asíncrona
+  processPaymentNotification({
+    folio: idMensajeCobro,
+    status: resultadoMensajeCobro,
+    amount: monto,
+    // ... otros campos
+  }).catch(err => console.error('Error processing webhook:', err));
+});`}
+        />
+      </DocSection>
     </div>
   );
 }

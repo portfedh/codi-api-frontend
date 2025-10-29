@@ -39,6 +39,7 @@ export default function Docs() {
         { id: 'endpoint-push', name: 'POST /v2/codi/push' },
         { id: 'endpoint-consulta', name: 'POST /v2/codi/consulta' },
         { id: 'endpoint-health', name: 'GET /v2/health' },
+        { id: 'webhook-notifications', name: 'Notificaciones Webhook' },
       ]
     },
     {

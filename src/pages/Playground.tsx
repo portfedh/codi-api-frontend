@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Check, TestTube2 } from "lucide-react";
+import { Check, TestTube2, Webhook } from "lucide-react";
 import QRForm from "../components/forms/QRForm";
 import PushForm from "../components/forms/PushForm";
 import ConsultaForm from "../components/forms/ConsultaForm";
+import JSONDisplay from "../components/common/JSONDisplay";
 import { useApiKey } from "../hooks/useApiKey";
 
 // Real API key for testing and donations (Bite Size S.A. de C.V.)
@@ -10,7 +11,9 @@ const BITE_SIZE_API_KEY =
   "ee9b8605ffaa6682d8f6b8077d0ec485f433a06345409a99f6b99335af44fb9cedddec8ff9cef8edc5417cf8f9a691e976fab7a44fc23f63ec659a31daacc8b6";
 
 export default function Playground() {
-  const [activeTab, setActiveTab] = useState<"qr" | "push" | "consulta">("qr");
+  const [activeTab, setActiveTab] = useState<
+    "qr" | "push" | "consulta" | "webhook"
+  >("qr");
   const { apiKey, saveApiKey } = useApiKey();
   const isUsingBiteSizeKey = apiKey === BITE_SIZE_API_KEY;
 
@@ -22,6 +25,7 @@ export default function Playground() {
       description: "Enviar solicitud al celular",
     },
     { id: "consulta", name: "Consultar Estado", description: "Verificar pago" },
+    { id: "webhook", name: "Webhook", description: "Notificaciones de pago" },
   ] as const;
 
   const handleLoadBiteSizeKey = () => {
@@ -212,6 +216,196 @@ export default function Playground() {
               </span>
             </p>
             <ConsultaForm />
+          </div>
+        )}
+
+        {activeTab === "webhook" && (
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <Webhook className="w-6 h-6 text-gray-700" />
+              <h2 className="text-xl font-bold text-gray-900">
+                Notificaciones Webhook
+              </h2>
+            </div>
+            <p className="text-gray-600 mb-6">
+              Cuando un pago es completado o cancelado, el sistema CoDi enviará
+              una notificación POST a la URL de webhook que configuraste. Esta
+              es la estructura del cuerpo de la solicitud que recibirás:
+            </p>
+
+            {/* Example Webhook Payload */}
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                Ejemplo de Payload
+              </h3>
+              <JSONDisplay
+                data={{
+                  cadenaInformacion: {
+                    certComercioProveedor: "00001000000511252793",
+                    celularCliente: "8916498571",
+                    digitoVerificadorCliente: 0,
+                    nombreCliente: "P**** R******* C*** L*****",
+                    claveInstitucionCliente: 40012,
+                    tipoCuentaCliente: 40,
+                    numeroCuentaCliente: "012180001597582168",
+                    idMensajeCobro: "338225a919338225a919",
+                    concepto: "Prueba Push Aceptado",
+                    monto: 1,
+                    claveRastreo: "0666072507",
+                    resultadoMensajeCobro: 1,
+                    horaSolicitudMensajeCobro: 1761698811708,
+                    horaProcMensajeCobro: 1761698872000,
+                    certBdeM: "00000200002000003582",
+                    horaEnvioMensaje: 1761698872653,
+                  },
+                  selloDigital:
+                    "p1IO0OjPJwjs/rnUaXxRpGu2GwrFGpYLKYeujDG5bjelh/DxqNM...",
+                }}
+              />
+            </div>
+
+            {/* Key Fields Explanation */}
+            <div className="space-y-6">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                <h4 className="text-sm font-semibold text-blue-900 mb-3">
+                  📊 Campos Importantes
+                </h4>
+                <dl className="space-y-3 text-sm">
+                  <div>
+                    <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-blue-200 inline-block mb-1">
+                      resultadoMensajeCobro
+                    </dt>
+                    <dd className="text-gray-700 mt-1">
+                      Indica el estado final del pago:
+                      <ul className="ml-4 mt-2 space-y-1">
+                        <li>
+                          <span className="font-semibold text-green-700">
+                            1
+                          </span>{" "}
+                          = Pago completado exitosamente
+                        </li>
+                        <li>
+                          <span className="font-semibold text-yellow-700">
+                            0
+                          </span>{" "}
+                          = Aceptado por el usuario pero aún no completado
+                        </li>
+                        <li>
+                          <span className="font-semibold text-red-700">2</span>{" "}
+                          = Pago rechazado
+                        </li>
+                      </ul>
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-blue-200 inline-block mb-1">
+                      claveInstitucionCliente
+                    </dt>
+                    <dd className="text-gray-700 mt-1">
+                      Código de la institución bancaria del cliente (ej.{" "}
+                      <code className="font-mono text-xs">40012</code> = BBVA
+                      Bancomer). Puedes consultar qué banco corresponde a cada
+                      código en la sección de{" "}
+                      <a
+                        href="/tools"
+                        className="text-primary-600 hover:text-primary-700 underline font-medium"
+                      >
+                        Herramientas
+                      </a>
+                      .
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-blue-200 inline-block mb-1">
+                      idMensajeCobro
+                    </dt>
+                    <dd className="text-gray-700 mt-1">
+                      Folio único de la transacción CoDi. Úsalo para consultar
+                      el estado del pago con el endpoint de Consulta.
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-blue-200 inline-block mb-1">
+                      selloDigital
+                    </dt>
+                    <dd className="text-gray-700 mt-1">
+                      Firma digital que garantiza la autenticidad de la
+                      notificación (verificada automáticamente por nuestro
+                      sistema).
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt className="font-mono text-xs bg-white px-2 py-1 rounded border border-blue-200 inline-block mb-1">
+                      x-api-key
+                    </dt>
+                    <dd className="text-gray-700 mt-1">
+                      La solicitud POST incluye tu API Key en el header{" "}
+                      <code className="font-mono text-xs">x-api-key</code> para
+                      que puedas verificar que la notificación es auténtica.
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+
+              {/* Integration Tips */}
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-5">
+                <h4 className="text-sm font-semibold text-amber-900 mb-3">
+                  💡 Consejos de Integración
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 flex-shrink-0">•</span>
+                    <span>
+                      Tu endpoint webhook debe responder con un código HTTP{" "}
+                      <code className="font-mono text-xs bg-white px-1.5 py-0.5 rounded border border-amber-200">
+                        200 OK
+                      </code>{" "}
+                      para confirmar la recepción.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 flex-shrink-0">•</span>
+                    <span>
+                      Procesa la notificación de forma asíncrona para responder
+                      rápidamente.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 flex-shrink-0">•</span>
+                    <span>
+                      Implementa un mecanismo de deduplicación usando el{" "}
+                      <code className="font-mono text-xs bg-white px-1.5 py-0.5 rounded border border-amber-200">
+                        idMensajeCobro
+                      </code>{" "}
+                      para evitar procesar la misma notificación múltiples
+                      veces.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 flex-shrink-0">•</span>
+                    <span>
+                      Verifica el header{" "}
+                      <code className="font-mono text-xs bg-white px-1.5 py-0.5 rounded border border-amber-200">
+                        x-api-key
+                      </code>{" "}
+                      para confirmar que la notificación proviene de nuestro
+                      sistema.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 flex-shrink-0">•</span>
+                    <span>
+                      Si tu webhook no responde o falla, el API CoDi puede
+                      reintentar el envío.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         )}
       </div>
