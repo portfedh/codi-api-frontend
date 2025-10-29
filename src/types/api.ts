@@ -94,9 +94,12 @@ export interface ConsultaResponse {
         tProc: number;
         tSolicitud: number; // Unix timestamp in milliseconds
         edoMC: number; // Transaction status
+        cveRastreo?: string; // Tracking code (present when payment is completed)
         c: {
           tipoCta: number;
+          ctaBancaria?: string; // Masked account number
           cveInstit: number;
+          nombre?: string; // Masked name
         };
       }>;
     };

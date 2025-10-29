@@ -6,12 +6,13 @@ interface PaymentStatusDisplayProps {
 
 export default function PaymentStatusDisplay({ data }: PaymentStatusDisplayProps) {
   const getStatusInfo = (edoMC: number) => {
-    // Transaction status codes
+    // Transaction status codes based on CoDi API
+    // Reference: edoMC values from Banxico CoDi specification
     const statuses: Record<number, { label: string; color: string; bgColor: string }> = {
-      0: { label: 'Completado', color: 'text-green-800', bgColor: 'bg-green-100' },
+      1: { label: 'Completado', color: 'text-green-800', bgColor: 'bg-green-100' },
+      0: { label: 'Aceptado - Procesando', color: 'text-blue-800', bgColor: 'bg-blue-100' },
       [-1]: { label: 'Pendiente', color: 'text-yellow-800', bgColor: 'bg-yellow-100' },
-      [-2]: { label: 'Error', color: 'text-red-800', bgColor: 'bg-red-100' },
-      [-3]: { label: 'Rechazado', color: 'text-red-800', bgColor: 'bg-red-100' },
+      2: { label: 'Cancelado por Usuario', color: 'text-orange-800', bgColor: 'bg-orange-100' },
     };
     return statuses[edoMC] || { label: 'Desconocido', color: 'text-gray-800', bgColor: 'bg-gray-100' };
   };
@@ -97,10 +98,12 @@ export default function PaymentStatusDisplay({ data }: PaymentStatusDisplayProps
                       <dt className="text-xs text-gray-600 mb-1">Referencia Numérica</dt>
                       <dd className="font-mono text-sm text-gray-900">{transaction.refNum}</dd>
                     </div>
-                    <div>
-                      <dt className="text-xs text-gray-600 mb-1">Tipo de Proceso</dt>
-                      <dd className="text-sm text-gray-900">{transaction.tProc}</dd>
-                    </div>
+                    {transaction.cveRastreo && (
+                      <div>
+                        <dt className="text-xs text-gray-600 mb-1">Clave de Rastreo</dt>
+                        <dd className="font-mono text-sm text-gray-900">{transaction.cveRastreo}</dd>
+                      </div>
+                    )}
                   </dl>
                 </div>
               );

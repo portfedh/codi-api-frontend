@@ -1,17 +1,18 @@
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useEffect } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { qrFormSchema, type QRFormData } from '../../utils/validation';
-import { codiApi, getErrorMessage } from '../../services/api';
-import { useApiKey } from '../../hooks/useApiKey';
-import type { QRResponse } from '../../types/api';
-import QRCodeDisplay from '../common/QRCodeDisplay';
-import JSONDisplay from '../common/JSONDisplay';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { qrFormSchema, type QRFormData } from "../../utils/validation";
+import { codiApi, getErrorMessage } from "../../services/api";
+import { useApiKey } from "../../hooks/useApiKey";
+import type { QRResponse } from "../../types/api";
+import QRCodeDisplay from "../common/QRCodeDisplay";
+import JSONDisplay from "../common/JSONDisplay";
 
 export default function QRForm() {
   const { apiKey, saveApiKey, clearApiKey } = useApiKey();
   const [response, setResponse] = useState<QRResponse | null>(null);
+  const [idc, setIdc] = useState<string | undefined>(undefined);
 
   const {
     register,
@@ -21,18 +22,18 @@ export default function QRForm() {
   } = useForm<QRFormData>({
     resolver: zodResolver(qrFormSchema),
     defaultValues: {
-      apiKey: apiKey || '',
+      apiKey: apiKey || "",
       monto: 0,
-      concepto: '',
-      referenciaNumerica: '0',
-      vigencia: '0',
+      concepto: "",
+      referenciaNumerica: "0",
+      vigencia: "0",
     },
   });
 
   // Update form when apiKey changes from hook
   useEffect(() => {
     if (apiKey) {
-      setValue('apiKey', apiKey);
+      setValue("apiKey", apiKey);
     }
   }, [apiKey, setValue]);
 
@@ -42,26 +43,43 @@ export default function QRForm() {
       saveApiKey(data.apiKey);
 
       // Call API
-      return codiApi.generateQR({
-        monto: data.monto,
-        concepto: data.concepto,
-        referenciaNumerica: data.referenciaNumerica,
-        vigencia: data.vigencia,
-      }, data.apiKey);
+      return codiApi.generateQR(
+        {
+          monto: data.monto,
+          concepto: data.concepto,
+          referenciaNumerica: data.referenciaNumerica,
+          vigencia: data.vigencia,
+        },
+        data.apiKey
+      );
     },
     onSuccess: (data) => {
       setResponse(data);
+
+      // Extract IDC from cadenaMC
+      try {
+        if (data.data?.cadenaMC) {
+          const cadenaMC = JSON.parse(data.data.cadenaMC);
+          const idcValue = cadenaMC?.ic?.IDC;
+          if (idcValue) {
+            setIdc(idcValue);
+          }
+        }
+      } catch (error) {
+        console.error("Error parsing cadenaMC for IDC:", error);
+      }
     },
   });
 
   const onSubmit = (data: QRFormData) => {
     setResponse(null); // Clear previous response
+    setIdc(undefined); // Clear previous IDC
     mutation.mutate(data);
   };
 
   const handleClearApiKey = () => {
     clearApiKey();
-    setValue('apiKey', '');
+    setValue("apiKey", "");
   };
 
   return (
@@ -69,12 +87,15 @@ export default function QRForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* API Key */}
         <div>
-          <label htmlFor="apiKey" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="apiKey"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             API Key <span className="text-red-500">*</span>
           </label>
           <div className="flex gap-2">
             <input
-              {...register('apiKey')}
+              {...register("apiKey")}
               type="password"
               id="apiKey"
               className="input-field flex-1"
@@ -97,11 +118,14 @@ export default function QRForm() {
 
         {/* Monto */}
         <div>
-          <label htmlFor="monto" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="monto"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Monto <span className="text-red-500">*</span>
           </label>
           <input
-            {...register('monto', { valueAsNumber: true })}
+            {...register("monto", { valueAsNumber: true })}
             type="number"
             id="monto"
             step="0.01"
@@ -111,16 +135,21 @@ export default function QRForm() {
           {errors.monto && (
             <p className="mt-1 text-sm text-red-600">{errors.monto.message}</p>
           )}
-          <p className="mt-1 text-xs text-gray-500">Máximo: 999,999,999,999.99. Máximo 2 decimales</p>
+          <p className="mt-1 text-xs text-gray-500">
+            Máximo: $12,500 MXN por operación. Máximo 2 decimales
+          </p>
         </div>
 
         {/* Concepto */}
         <div>
-          <label htmlFor="concepto" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="concepto"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Concepto <span className="text-red-500">*</span>
           </label>
           <input
-            {...register('concepto')}
+            {...register("concepto")}
             type="text"
             id="concepto"
             maxLength={40}
@@ -128,19 +157,26 @@ export default function QRForm() {
             placeholder="Descripcion del pago"
           />
           {errors.concepto && (
-            <p className="mt-1 text-sm text-red-600">{errors.concepto.message}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.concepto.message}
+            </p>
           )}
-          <p className="mt-1 text-xs text-gray-500">(máx. 40 caracteres). No usar acentos ni caracteres especiales</p>
+          <p className="mt-1 text-xs text-gray-500">
+            Máx. 40 caracteres. No uses acentos ni caracteres especiales
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {/* Referencia Numérica */}
           <div>
-            <label htmlFor="referenciaNumerica" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="referenciaNumerica"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Referencia Numérica <span className="text-red-500">*</span>
             </label>
             <input
-              {...register('referenciaNumerica')}
+              {...register("referenciaNumerica")}
               type="text"
               id="referenciaNumerica"
               maxLength={7}
@@ -148,27 +184,38 @@ export default function QRForm() {
               placeholder="1234567"
             />
             {errors.referenciaNumerica && (
-              <p className="mt-1 text-sm text-red-600">{errors.referenciaNumerica.message}</p>
+              <p className="mt-1 text-sm text-red-600">
+                {errors.referenciaNumerica.message}
+              </p>
             )}
-            <p className="mt-1 text-xs text-gray-500">Opcional. Usa "0" si no aplica. 7 dígitos máximo</p>
+            <p className="mt-1 text-xs text-gray-500">
+              Usa 0 si no aplica. 7 dígitos máximo
+            </p>
           </div>
 
           {/* Vigencia */}
           <div>
-            <label htmlFor="vigencia" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="vigencia"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Vigencia <span className="text-red-500">*</span>
             </label>
             <input
-              {...register('vigencia')}
+              {...register("vigencia")}
               type="text"
               id="vigencia"
               className="input-field"
               placeholder="0"
             />
             {errors.vigencia && (
-              <p className="mt-1 text-sm text-red-600">{errors.vigencia.message}</p>
+              <p className="mt-1 text-sm text-red-600">
+                {errors.vigencia.message}
+              </p>
             )}
-            <p className="mt-1 text-xs text-gray-500">Usa "0" para sin expiración o el tiempo de expiración (Unix epoch)</p>
+            <p className="mt-1 text-xs text-gray-500">
+              Usa 0 para sin expiración, o el tiempo de expiración (Unix epoch)
+            </p>
           </div>
         </div>
 
@@ -179,14 +226,29 @@ export default function QRForm() {
             disabled={mutation.isPending}
             className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {mutation.isPending ? 'Generando...' : 'Generar Código QR'}
+            {mutation.isPending ? "Generando..." : "Generar Código QR"}
           </button>
 
           {mutation.isPending && (
             <div className="flex items-center gap-2 text-sm text-gray-600">
-              <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              <svg
+                className="animate-spin h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
               </svg>
               <span>Conectando con Banxico...</span>
             </div>
@@ -210,7 +272,7 @@ export default function QRForm() {
             <h3 className="text-lg font-bold text-gray-900 mb-4">Resultado</h3>
 
             {/* QR Code */}
-            <QRCodeDisplay qrCode={response.qrCode} />
+            <QRCodeDisplay qrCode={response.qrCode} idc={idc} />
 
             {/* JSON Response */}
             <JSONDisplay data={response} title="Respuesta Completa" />

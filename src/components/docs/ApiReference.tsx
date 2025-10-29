@@ -9,7 +9,7 @@ export default function ApiReference() {
       type: "number",
       required: true,
       description:
-        "Monto a cobrar en MXN (máximo 12 dígitos antes del punto decimal, 2 después)",
+        "Monto a cobrar en MXN. Máximo $12,500 MXN por operación (12 dígitos antes del punto decimal, 2 después)",
       example: "99.99",
     },
     {
@@ -44,7 +44,7 @@ export default function ApiReference() {
       type: "number",
       required: true,
       description:
-        "Monto a cobrar en MXN (máximo 12 dígitos antes del punto decimal, 2 después)",
+        "Monto a cobrar en MXN. Máximo $12,500 MXN por operación (12 dígitos antes del punto decimal, 2 después)",
       example: "99.99",
     },
     {
@@ -169,6 +169,15 @@ export default function ApiReference() {
           con su app bancaria para realizar el pago.
         </p>
 
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <p className="text-sm text-gray-700">
+            <strong className="text-blue-900">💡 Nota importante:</strong> Un mismo código QR puede recibir múltiples pagos.
+            Cada pago genera su propio <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200 text-xs font-mono">folioCodi</code>,
+            pero todos quedan asociados al mismo <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200 text-xs font-mono">IDC</code> (Identificador de Cobro).
+            Usa el IDC para consultar todos los pagos recibidos en un QR específico.
+          </p>
+        </div>
+
         <ParamTable
           parameters={qrRequestParams}
           title="Parámetros del Request"
@@ -286,6 +295,29 @@ export default function ApiReference() {
           Consulta el estado de transacciones CoDi. Puedes buscar por folio
           específico o listar transacciones por rango de fechas con paginación.
         </p>
+
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <p className="text-sm text-gray-700 mb-3">
+            <strong className="text-blue-900">💡 Tipos de búsqueda:</strong>
+          </p>
+          <ul className="text-sm text-gray-700 space-y-2 ml-4">
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 flex-shrink-0">•</span>
+              <div>
+                <strong>Por IDC (Identificador de Cobro):</strong> Usa el <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200 text-xs font-mono">folioCodi</code> que
+                termina sin sufijo (ej: <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200 text-xs font-mono">333413b9d7</code>) para consultar
+                <strong> todos los pagos</strong> asociados a un código QR específico.
+              </div>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 flex-shrink-0">•</span>
+              <div>
+                <strong>Por Folio CoDi:</strong> Usa el folio completo de 20 caracteres (ej: <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200 text-xs font-mono">338225a919338225a919</code>)
+                para consultar <strong>un pago específico</strong>.
+              </div>
+            </li>
+          </ul>
+        </div>
 
         <ParamTable
           parameters={consultaRequestParams}
