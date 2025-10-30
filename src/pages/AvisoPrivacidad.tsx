@@ -1,30 +1,28 @@
-import Layout from '../components/layout/Layout';
 import Container from '../components/layout/Container';
 import { FileText, Shield, Database, UserCheck, AlertCircle, ExternalLink } from 'lucide-react';
 
 export function AvisoPrivacidad() {
   return (
-    <Layout>
-      <Container className="py-12">
-        <div className="max-w-4xl mx-auto">
+    <Container className="py-8 sm:py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-10 h-10 text-blue-600" />
-              <h1 className="text-4xl font-bold text-gray-900">Aviso de Privacidad</h1>
+          <div className="mb-6 sm:mb-8">
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600 flex-shrink-0" />
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Aviso de Privacidad</h1>
             </div>
-            <p className="text-lg text-gray-600">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600">
               Última actualización: {new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
           </div>
 
           {/* Introduction */}
-          <section className="mb-8 p-6 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
+          <section className="mb-6 sm:mb-8 p-4 sm:p-6 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg">
+            <div className="flex items-start gap-2 sm:gap-3">
+              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mt-1 flex-shrink-0" />
               <div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Información Importante</h2>
-                <p className="text-gray-700">
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">Información Importante</h2>
+                <p className="text-sm sm:text-base text-gray-700">
                   Este sitio web facilita el acceso a la API de CoDi® (Cobro Digital) para desarrolladores.
                   Todos los datos personales recopilados están sujetos a las regulaciones de privacidad de
                   México y son procesados con fines de KYC (Know Your Customer) conforme a las normativas
@@ -35,14 +33,14 @@ export function AvisoPrivacidad() {
           </section>
 
           {/* Content Sections */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Section 1: Responsable */}
-            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <UserCheck className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold text-gray-900">1. Responsable del Tratamiento</h2>
+            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <UserCheck className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">1. Responsable del Tratamiento</h2>
               </div>
-              <div className="space-y-3 text-gray-700">
+              <div className="space-y-2 sm:space-y-3 text-sm sm:text-base text-gray-700">
                 <p>
                   <strong>Nombre del Proyecto:</strong> CoDi API - Plataforma de Desarrollo
                 </p>
@@ -58,19 +56,19 @@ export function AvisoPrivacidad() {
             </section>
 
             {/* Section 2: Datos Recopilados */}
-            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Database className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold text-gray-900">2. Datos Personales Recopilados</h2>
+            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <Database className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">2. Datos Personales Recopilados</h2>
               </div>
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-4">
                 Recopilamos la siguiente información a través del formulario de inscripción:
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Datos de Identificación:</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700 ml-4">
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">Datos de Identificación:</h3>
+                  <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                     <li>Nombre completo (persona física o razón social)</li>
                     <li>RFC (Registro Federal de Contribuyentes)</li>
                     <li>CURP (Clave Única de Registro de Población) - personas físicas</li>
@@ -79,8 +77,8 @@ export function AvisoPrivacidad() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Datos de Contacto:</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700 ml-4">
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">Datos de Contacto:</h3>
+                  <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                     <li>Correo electrónico</li>
                     <li>Número de teléfono</li>
                     <li>Dirección fiscal</li>
@@ -88,8 +86,8 @@ export function AvisoPrivacidad() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Datos Bancarios:</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700 ml-4">
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">Datos Bancarios:</h3>
+                  <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                     <li>Institución financiera</li>
                     <li>CLABE interbancaria</li>
                     <li>Número de cuenta</li>
@@ -97,8 +95,8 @@ export function AvisoPrivacidad() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Documentación KYC:</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700 ml-4">
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">Documentación KYC:</h3>
+                  <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                     <li>Identificación oficial vigente</li>
                     <li>Comprobante de domicilio</li>
                     <li>Constancia de situación fiscal</li>
@@ -109,20 +107,20 @@ export function AvisoPrivacidad() {
             </section>
 
             {/* Section 3: Finalidades */}
-            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <FileText className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold text-gray-900">3. Finalidades del Tratamiento</h2>
+            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">3. Finalidades del Tratamiento</h2>
               </div>
 
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-4">
                 Sus datos personales serán utilizados para las siguientes finalidades:
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Finalidades Primarias (no requieren consentimiento):</h3>
-                  <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">Finalidades Primarias (no requieren consentimiento):</h3>
+                  <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                     <li>Verificación de identidad y validación de datos (KYC - Know Your Customer)</li>
                     <li>Procesamiento de solicitudes de acceso a la API de CoDi®</li>
                     <li>Cumplimiento de obligaciones regulatorias del Banco de México</li>
@@ -135,8 +133,8 @@ export function AvisoPrivacidad() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Finalidades Secundarias:</h3>
-                  <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">Finalidades Secundarias:</h3>
+                  <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                     <li>Envío de notificaciones sobre el estado de su solicitud</li>
                     <li>Comunicación de actualizaciones de la plataforma y documentación</li>
                     <li>Soporte técnico y atención a consultas</li>
@@ -146,18 +144,18 @@ export function AvisoPrivacidad() {
             </section>
 
             {/* Section 4: Compartir Datos */}
-            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <ExternalLink className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold text-gray-900">4. Transferencia de Datos</h2>
+            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">4. Transferencia de Datos</h2>
               </div>
 
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-4">
                 Sus datos personales pueden ser compartidos con las siguientes entidades,
                 sin requerir su consentimiento adicional:
               </p>
 
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                 <li><strong>Banco de México (BANXICO):</strong> Para operación y supervisión del sistema CoDi®</li>
                 <li><strong>Instituciones Financieras:</strong> Su banco para validación de cuentas y procesamiento de pagos</li>
                 <li><strong>Autoridades Financieras:</strong> SHCP, CNBV, CONDUSEF, según sea requerido por ley</li>
@@ -165,8 +163,8 @@ export function AvisoPrivacidad() {
                 <li><strong>Entidades de Prevención de Lavado de Dinero:</strong> Conforme a obligaciones legales</li>
               </ul>
 
-              <div className="mt-4 p-4 bg-gray-50 rounded">
-                <p className="text-sm text-gray-700">
+              <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gray-50 rounded">
+                <p className="text-xs sm:text-sm text-gray-700">
                   Estas transferencias están fundamentadas en el Artículo 70 de la Ley General de Protección
                   de Datos Personales en Posesión de Sujetos Obligados (LGPDPPSO).
                 </p>
@@ -174,28 +172,28 @@ export function AvisoPrivacidad() {
             </section>
 
             {/* Section 5: Derechos ARCO */}
-            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Shield className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold text-gray-900">5. Derechos ARCO</h2>
+            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">5. Derechos ARCO</h2>
               </div>
 
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-4">
                 Usted tiene derecho a:
               </p>
 
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                 <li><strong>Acceso:</strong> Conocer qué datos personales tenemos sobre usted</li>
                 <li><strong>Rectificación:</strong> Solicitar la corrección de datos inexactos o incompletos</li>
                 <li><strong>Cancelación:</strong> Solicitar la eliminación de sus datos cuando considere que no se están usando adecuadamente</li>
                 <li><strong>Oposición:</strong> Oponerse al tratamiento de sus datos para fines específicos</li>
               </ul>
 
-              <div className="mt-4 p-4 bg-blue-50 rounded">
-                <p className="text-gray-700 mb-2">
+              <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-blue-50 rounded">
+                <p className="text-sm sm:text-base text-gray-700 mb-2">
                   <strong>Para ejercer sus derechos ARCO:</strong>
                 </p>
-                <p className="text-gray-700">
+                <p className="text-sm sm:text-base text-gray-700">
                   Envíe una solicitud a través de nuestro formulario de contacto en la página principal,
                   incluyendo:
                 </p>
@@ -212,18 +210,18 @@ export function AvisoPrivacidad() {
             </section>
 
             {/* Section 6: Seguridad */}
-            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Shield className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold text-gray-900">6. Medidas de Seguridad</h2>
+            <section className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">6. Medidas de Seguridad</h2>
               </div>
 
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-4">
                 Implementamos medidas de seguridad administrativas, técnicas y físicas para proteger
                 sus datos personales contra daño, pérdida, alteración, destrucción o uso no autorizado:
               </p>
 
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                 <li>Cifrado de datos en tránsito y en reposo</li>
                 <li>Acceso restringido solo a personal autorizado</li>
                 <li>Monitoreo continuo de seguridad</li>
@@ -239,11 +237,11 @@ export function AvisoPrivacidad() {
                 <h2 className="text-2xl font-bold text-gray-900">7. Uso de Cookies y Tecnologías Similares</h2>
               </div>
 
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-4">
                 Este sitio web utiliza cookies y tecnologías similares para mejorar su experiencia de usuario:
               </p>
 
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                 <li><strong>Cookies esenciales:</strong> Necesarias para el funcionamiento del sitio</li>
                 <li><strong>Cookies de sesión:</strong> Para mantener su sesión activa</li>
                 <li><strong>Almacenamiento local:</strong> Para guardar preferencias de usuario (como su API key)</li>
@@ -262,7 +260,7 @@ export function AvisoPrivacidad() {
                 <h2 className="text-2xl font-bold text-gray-900">8. Avisos de Privacidad del Banco de México</h2>
               </div>
 
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-4">
                 Para información detallada sobre el tratamiento de datos personales en el sistema CoDi®,
                 consulte los avisos de privacidad oficiales del Banco de México:
               </p>
@@ -317,7 +315,7 @@ export function AvisoPrivacidad() {
                 <h2 className="text-2xl font-bold text-gray-900">9. Cambios al Aviso de Privacidad</h2>
               </div>
 
-              <p className="text-gray-700">
+              <p className="text-sm sm:text-base text-gray-700">
                 Este aviso de privacidad puede ser modificado para reflejar cambios en nuestras prácticas
                 de información o cambios en la legislación aplicable. Las modificaciones se publicarán en
                 esta página con la fecha de última actualización. Le recomendamos revisar periódicamente
@@ -332,11 +330,11 @@ export function AvisoPrivacidad() {
                 <h2 className="text-2xl font-bold text-gray-900">10. Fundamento Legal</h2>
               </div>
 
-              <p className="text-gray-700 mb-4">
+              <p className="text-sm sm:text-base text-gray-700 mb-4">
                 El tratamiento de sus datos personales se fundamenta en:
               </p>
 
-              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-700 ml-3 sm:ml-4">
                 <li>Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados (LGPDPPSO)</li>
                 <li>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</li>
                 <li>Ley del Banco de México</li>
@@ -347,23 +345,22 @@ export function AvisoPrivacidad() {
             </section>
 
             {/* Contact Section */}
-            <section className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg p-8 text-white">
-              <h2 className="text-2xl font-bold mb-4">¿Tienes dudas sobre privacidad?</h2>
-              <p className="mb-6">
+            <section className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg p-6 sm:p-8 text-white">
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">¿Tienes dudas sobre privacidad?</h2>
+              <p className="text-sm sm:text-base mb-4 sm:mb-6">
                 Si tienes preguntas sobre este aviso de privacidad o sobre el manejo de tus datos personales,
                 no dudes en contactarnos.
               </p>
               <a
                 href="/#contact"
-                className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-100 transition-colors w-full sm:w-auto"
               >
                 Ir a Contacto
-                <ExternalLink className="w-5 h-5" />
+                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
             </section>
           </div>
         </div>
-      </Container>
-    </Layout>
+    </Container>
   );
 }
