@@ -27,7 +27,7 @@ export default function Tools() {
       {/* Tabs */}
       <div className="mb-6">
         <div className="border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+          <nav className="-mb-px flex space-x-4 md:space-x-8 overflow-x-auto" aria-label="Tabs">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -36,11 +36,11 @@ export default function Tools() {
                   activeTab === tab.id
                     ? 'border-primary-500 text-primary-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors`}
+                } whitespace-nowrap py-4 px-2 md:px-1 border-b-2 font-medium text-sm transition-colors flex-shrink-0`}
               >
                 <div className="flex flex-col items-start">
                   <span className="font-semibold">{tab.name}</span>
-                  <span className="text-xs text-gray-500">{tab.description}</span>
+                  <span className="text-xs text-gray-500 hidden sm:inline">{tab.description}</span>
                 </div>
               </button>
             ))}

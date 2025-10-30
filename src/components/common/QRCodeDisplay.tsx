@@ -26,28 +26,28 @@ export default function QRCodeDisplay({ qrCode, idc }: QRCodeDisplayProps) {
   };
 
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h4 className="text-md font-semibold text-gray-900 mb-4">
+    <div className="bg-white border-2 border-gray-200 rounded-lg p-4 sm:p-6">
+      <h4 className="text-base sm:text-md font-semibold text-gray-900 mb-4">
         Código QR Generado
       </h4>
 
       <div className="flex flex-col items-center">
         {/* QR Code Image */}
-        <div className="bg-white p-4 rounded-lg border border-gray-300 shadow-sm">
+        <div className="bg-white p-3 sm:p-4 rounded-lg border border-gray-300 shadow-sm">
           <img
             src={qrCode}
             alt="Código QR de pago CoDi"
-            className="w-96 h-96 object-contain"
+            className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-contain"
           />
         </div>
 
         {/* Download Button */}
         <button
           onClick={handleDownload}
-          className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+          className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white text-sm sm:text-base rounded-lg hover:bg-primary-700 transition-colors w-full sm:w-auto justify-center"
         >
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 sm:w-5 sm:h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -62,7 +62,7 @@ export default function QRCodeDisplay({ qrCode, idc }: QRCodeDisplayProps) {
           Descargar QR
         </button>
 
-        <p className="mt-3 text-sm text-gray-500 text-center">
+        <p className="mt-3 text-xs sm:text-sm text-gray-500 text-center px-2">
           El cliente puede escanear este código desde su app bancaria
         </p>
 

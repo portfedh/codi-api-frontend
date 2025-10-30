@@ -125,21 +125,21 @@ export default function ApiReference() {
           La API CoDi<sup className="text-[0.5em] ml-0.5">®</sup> proporciona tres endpoints principales para generar pagos,
           enviar notificaciones push y consultar el estado de transacciones.
         </p>
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <p className="text-sm text-gray-700">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-gray-700">
             <strong>Base URL:</strong>{" "}
-            <code className="bg-white px-2 py-1 rounded">
+            <code className="bg-white px-2 py-1 rounded text-xs sm:text-sm break-all">
               http://localhost:3000
             </code>
           </p>
-          <p className="text-sm text-gray-700 mt-2">
+          <p className="text-xs sm:text-sm text-gray-700 mt-2">
             <strong>Autenticación:</strong> Todas las solicitudes requieren el
-            header <code className="bg-white px-2 py-1 rounded">x-api-key</code>
+            header <code className="bg-white px-2 py-1 rounded text-xs sm:text-sm">x-api-key</code>
           </p>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
-          <p className="text-sm text-gray-700">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 mt-4">
+          <p className="text-xs sm:text-sm text-gray-700">
             <strong>📖 Documentación OpenAPI:</strong>
             <br /> La especificación completa de la API en formato Swagger está
             disponible en:{" "}
@@ -147,7 +147,7 @@ export default function ApiReference() {
               href="https://api.bite-size.mx/api-docs/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 underline font-medium"
+              className="text-blue-600 hover:text-blue-800 underline font-medium break-all"
             >
               https://api.bite-size.mx/api-docs/
             </a>
@@ -157,11 +157,11 @@ export default function ApiReference() {
 
       {/* QR Endpoint */}
       <DocSection id="endpoint-qr" title="POST /v2/codi/qr">
-        <div className="mb-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-green-100 text-green-800 mr-2">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-green-100 text-green-800">
             POST
           </span>
-          <code className="text-sm font-mono text-gray-700">/v2/codi/qr</code>
+          <code className="text-xs sm:text-sm font-mono text-gray-700 break-all">/v2/codi/qr</code>
         </div>
 
         <p className="text-gray-700 mb-4">
@@ -222,11 +222,11 @@ export default function ApiReference() {
 
       {/* Push Endpoint */}
       <DocSection id="endpoint-push" title="POST /v2/codi/push">
-        <div className="mb-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-green-100 text-green-800 mr-2">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-green-100 text-green-800">
             POST
           </span>
-          <code className="text-sm font-mono text-gray-700">/v2/codi/push</code>
+          <code className="text-xs sm:text-sm font-mono text-gray-700 break-all">/v2/codi/push</code>
         </div>
 
         <p className="text-gray-700 mb-4">
@@ -282,11 +282,11 @@ export default function ApiReference() {
 
       {/* Consulta Endpoint */}
       <DocSection id="endpoint-consulta" title="POST /v2/codi/consulta">
-        <div className="mb-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-green-100 text-green-800 mr-2">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-green-100 text-green-800">
             POST
           </span>
-          <code className="text-sm font-mono text-gray-700">
+          <code className="text-xs sm:text-sm font-mono text-gray-700 break-all">
             /v2/codi/consulta
           </code>
         </div>
@@ -382,11 +382,11 @@ export default function ApiReference() {
 
       {/* Health Check Endpoint */}
       <DocSection id="endpoint-health" title="GET /v2/health">
-        <div className="mb-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-blue-100 text-blue-800 mr-2">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-blue-100 text-blue-800">
             GET
           </span>
-          <code className="text-sm font-mono text-gray-700">/v2/health</code>
+          <code className="text-xs sm:text-sm font-mono text-gray-700 break-all">/v2/health</code>
         </div>
 
         <p className="text-gray-700 mb-4">
@@ -423,11 +423,11 @@ export default function ApiReference() {
 
       {/* Webhook Notifications */}
       <DocSection id="webhook-notifications" title="Notificaciones Webhook">
-        <div className="mb-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-purple-100 text-purple-800 mr-2">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-purple-100 text-purple-800">
             WEBHOOK
           </span>
-          <span className="text-sm font-mono text-gray-700">
+          <span className="text-xs sm:text-sm font-mono text-gray-700">
             POST a tu URL de webhook
           </span>
         </div>

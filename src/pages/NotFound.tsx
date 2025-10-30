@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom';
 
 export default function NotFound() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[60vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8">
       <div className="max-w-md w-full text-center">
-        <div className="mb-8">
-          <h1 className="text-9xl font-bold text-primary-600">404</h1>
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-7xl sm:text-8xl md:text-9xl font-bold text-primary-600">404</h1>
           <div className="mt-4">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               Página no encontrada
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-base sm:text-lg text-gray-600 px-2">
               Lo sentimos, la página que buscas no existe o ha sido movida.
             </p>
           </div>

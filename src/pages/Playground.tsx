@@ -46,16 +46,16 @@ export default function Playground() {
 
       {/* Bite Size Testing Banner */}
       {!isUsingBiteSizeKey ? (
-        <div className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-5 shadow-sm">
-          <div className="flex items-start gap-4">
+        <div className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4 sm:p-5 shadow-sm">
+          <div className="flex items-start gap-3 sm:gap-4">
             <div className="flex-shrink-0">
-              <TestTube2 className="w-6 h-6 text-blue-600" />
+              <TestTube2 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
             </div>
-            <div className="flex-1">
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">
                 ¿No tienes API Key? ¡Prueba con la nuestra!
               </h3>
-              <p className="text-sm text-gray-700 mb-3">
+              <p className="text-xs sm:text-sm text-gray-700 mb-3">
                 Usa la clave API real de <strong>Bite Size S.A. de C.V.</strong>{" "}
                 para probar el API con pagos reales. Puedes hacer pruebas desde{" "}
                 <strong>$1 MXN</strong> hasta{" "}
@@ -64,7 +64,7 @@ export default function Playground() {
               </p>
               <button
                 onClick={handleLoadBiteSizeKey}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors shadow-sm"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white text-xs sm:text-sm font-medium rounded-md hover:bg-blue-700 transition-colors shadow-sm w-full sm:w-auto"
               >
                 Cargar Clave Bite Size
               </button>
@@ -72,53 +72,53 @@ export default function Playground() {
           </div>
         </div>
       ) : (
-        <div className="mb-6 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4 shadow-sm">
-          <div className="flex items-start gap-3">
+        <div className="mb-6 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-3 sm:p-4 shadow-sm">
+          <div className="flex items-start gap-2 sm:gap-3">
             <div className="flex-shrink-0">
-              <Check className="w-5 h-5 text-green-600" />
+              <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mt-0.5" />
             </div>
-            <div className="flex-1">
-              <p className="text-sm text-gray-700 mb-3">
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm text-gray-700 mb-3">
                 <strong className="text-green-900">
                   Usando clave Bite Size
                 </strong>{" "}
                 — Puedes hacer pruebas desde $1 MXN o donar al proyecto con el
                 monto que desees.
               </p>
-              <div className="text-sm text-gray-700">
+              <div className="text-xs sm:text-sm text-gray-700">
                 <p className="font-medium text-gray-800 mb-2">
                   Ejemplos para consultar estado:
                 </p>
-                <ul className="space-y-1.5 ml-4">
+                <ul className="space-y-2 ml-2 sm:ml-4">
                   <li className="flex items-start gap-2">
                     <span className="text-gray-500 flex-shrink-0">•</span>
-                    <div>
-                      <span className="font-mono text-xs bg-white px-2 py-0.5 rounded border border-green-200">
+                    <div className="min-w-0">
+                      <span className="font-mono text-xs bg-white px-1.5 sm:px-2 py-0.5 rounded border border-green-200 break-all">
                         333413b9d7
                       </span>
-                      <span className="text-gray-600 ml-2">
+                      <span className="text-gray-600 ml-1 sm:ml-2 text-xs">
                         — IDC (2 folios pagados)
                       </span>
                     </div>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-gray-500 flex-shrink-0">•</span>
-                    <div>
-                      <span className="font-mono text-xs bg-white px-2 py-0.5 rounded border border-green-200">
+                    <div className="min-w-0">
+                      <span className="font-mono text-xs bg-white px-1.5 sm:px-2 py-0.5 rounded border border-green-200 break-all">
                         338225a919338225a919
                       </span>
-                      <span className="text-gray-600 ml-2">
+                      <span className="text-gray-600 ml-1 sm:ml-2 text-xs">
                         — Folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup> (Aceptado)
                       </span>
                     </div>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-gray-500 flex-shrink-0">•</span>
-                    <div>
-                      <span className="font-mono text-xs bg-white px-2 py-0.5 rounded border border-green-200">
+                    <div className="min-w-0">
+                      <span className="font-mono text-xs bg-white px-1.5 sm:px-2 py-0.5 rounded border border-green-200 break-all">
                         337e1588e9337e1588e9
                       </span>
-                      <span className="text-gray-600 ml-2">
+                      <span className="text-gray-600 ml-1 sm:ml-2 text-xs">
                         — Folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup> (Rechazado)
                       </span>
                     </div>
@@ -160,18 +160,18 @@ export default function Playground() {
       </div>
 
       {/* Tab Content */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
         {activeTab === "qr" && (
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
               Generar Código QR
             </h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-sm sm:text-base text-gray-600 mb-4">
               Crea un código QR para solicitar un pago. El cliente podrá
               escanearlo desde su app bancaria.
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-700">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 mb-6">
+              <p className="text-xs sm:text-sm text-gray-700">
                 <strong className="text-blue-900">💡 Nota importante:</strong>{" "}
                 Un mismo código QR puede recibir múltiples pagos. Cada pago
                 genera su propio{" "}
@@ -192,10 +192,10 @@ export default function Playground() {
 
         {activeTab === "push" && (
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
               Enviar Push Notification
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-sm sm:text-base text-gray-600 mb-6">
               Envía una solicitud de pago directamente al celular del cliente.
               Recibirá una notificación en su app bancaria.
             </p>
@@ -205,13 +205,13 @@ export default function Playground() {
 
         {activeTab === "consulta" && (
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
               Consultar Estado de Pago
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-sm sm:text-base text-gray-600 mb-6">
               Verifica el estado de una operación CoDi<sup className="text-[0.5em] ml-0.5">®</sup> usando el folio. Obtén
               detalles completos de la transacción.
-              <span className="block mt-2">
+              <span className="block mt-2 text-xs sm:text-sm">
                 Nota: Solo puedes consultar folios asociados a tu API Key.
               </span>
             </p>
@@ -221,13 +221,13 @@ export default function Playground() {
 
         {activeTab === "webhook" && (
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Webhook className="w-6 h-6 text-gray-700" />
-              <h2 className="text-xl font-bold text-gray-900">
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <Webhook className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                 Notificaciones Webhook
               </h2>
             </div>
-            <p className="text-gray-600 mb-6">
+            <p className="text-sm sm:text-base text-gray-600 mb-6">
               Cuando un pago es completado o cancelado, el sistema CoDi<sup className="text-[0.5em] ml-0.5">®</sup> enviará
               una notificación POST a la URL de webhook que configuraste. Esta
               es la estructura del cuerpo de la solicitud que recibirás:

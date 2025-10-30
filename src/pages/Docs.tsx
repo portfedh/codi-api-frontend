@@ -189,13 +189,13 @@ export default function Docs() {
 
         {/* Sidebar - Mobile */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50" onClick={() => setMobileMenuOpen(false)}>
-            <div className="bg-white h-full w-64 p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50 transition-opacity" onClick={() => setMobileMenuOpen(false)}>
+            <div className="bg-white h-full w-64 sm:w-72 p-6 overflow-y-auto shadow-xl" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-semibold text-gray-900">Navegación</h3>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -238,19 +238,58 @@ export default function Docs() {
                   </div>
                 ))}
               </nav>
+
+              {/* Quick Links - Mobile */}
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                  Enlaces Rápidos
+                </h4>
+                <div className="space-y-2">
+                  <a
+                    href="/playground"
+                    className="block text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    → API Playground
+                  </a>
+                  <a
+                    href="/tools"
+                    className="block text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    → Herramientas
+                  </a>
+                  <a
+                    href="https://api.bite-size.mx/api-docs/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                  >
+                    → Especificación Swagger ↗
+                  </a>
+                  <a
+                    href={import.meta.env.VITE_GITHUB_REPO}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                  >
+                    → GitHub ↗
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
         {/* Main Content */}
         <main className="flex-1 min-w-0">
-          <div className="bg-white rounded-lg border border-gray-200 p-6 md:p-8">
+          <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 md:p-8">
             {renderContent()}
           </div>
 
           {/* Footer Navigation */}
-          <div className="mt-8 flex items-center justify-between pt-8 border-t border-gray-200">
-            <div>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-8 border-t border-gray-200">
+            <div className="flex-1">
               {activeSection !== 'getting-started' && (
                 <button
                   onClick={() => {
@@ -260,16 +299,17 @@ export default function Docs() {
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                   }}
-                  className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors w-full sm:w-auto"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
-                  Anterior
+                  <span className="hidden sm:inline">Anterior</span>
+                  <span className="sm:hidden">Página Anterior</span>
                 </button>
               )}
             </div>
-            <div>
+            <div className="flex-1 flex justify-end">
               {activeSection !== 'error-codes' && (
                 <button
                   onClick={() => {
@@ -279,10 +319,11 @@ export default function Docs() {
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                   }}
-                  className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-lg transition-colors w-full sm:w-auto"
                 >
-                  Siguiente
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span className="hidden sm:inline">Siguiente</span>
+                  <span className="sm:hidden">Página Siguiente</span>
+                  <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>

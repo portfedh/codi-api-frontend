@@ -31,24 +31,24 @@ export default function PaymentStatusDisplay({ data }: PaymentStatusDisplayProps
     <div className="space-y-6">
       {/* Account Information */}
       {data.data.resultado.v && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h4 className="font-semibold text-blue-900 mb-3">Información de la Cuenta</h4>
-          <dl className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
+          <h4 className="text-sm sm:text-base font-semibold text-blue-900 mb-3">Información de la Cuenta</h4>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <dt className="text-xs text-blue-700 mb-1">Cuenta Bancaria</dt>
-              <dd className="font-mono text-sm text-blue-900">{data.data.resultado.v.ctaBancaria}</dd>
+              <dd className="font-mono text-xs sm:text-sm text-blue-900 break-all">{data.data.resultado.v.ctaBancaria}</dd>
             </div>
             <div>
               <dt className="text-xs text-blue-700 mb-1">Institución</dt>
-              <dd className="font-mono text-sm text-blue-900">{data.data.resultado.v.cveInstit}</dd>
+              <dd className="font-mono text-xs sm:text-sm text-blue-900">{data.data.resultado.v.cveInstit}</dd>
             </div>
-            <div>
+            <div className="sm:col-span-2">
               <dt className="text-xs text-blue-700 mb-1">Titular</dt>
-              <dd className="font-mono text-sm text-blue-900">{data.data.resultado.v.nombre}</dd>
+              <dd className="font-mono text-xs sm:text-sm text-blue-900">{data.data.resultado.v.nombre}</dd>
             </div>
             <div>
               <dt className="text-xs text-blue-700 mb-1">Tipo de Cuenta</dt>
-              <dd className="font-mono text-sm text-blue-900">{data.data.resultado.v.tipoCta}</dd>
+              <dd className="font-mono text-xs sm:text-sm text-blue-900">{data.data.resultado.v.tipoCta}</dd>
             </div>
           </dl>
         </div>
@@ -57,7 +57,7 @@ export default function PaymentStatusDisplay({ data }: PaymentStatusDisplayProps
       {/* Transactions List */}
       {data.data.resultado.lstDetalleMC && data.data.resultado.lstDetalleMC.length > 0 ? (
         <div>
-          <h4 className="font-semibold text-gray-900 mb-3">
+          <h4 className="text-sm sm:text-base font-semibold text-gray-900 mb-3">
             Transacciones ({data.data.resultado.lstDetalleMC.length})
           </h4>
           <div className="space-y-3">
@@ -66,11 +66,11 @@ export default function PaymentStatusDisplay({ data }: PaymentStatusDisplayProps
               return (
                 <div
                   key={index}
-                  className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-primary-300 transition-colors"
+                  className="bg-white border-2 border-gray-200 rounded-lg p-3 sm:p-4 hover:border-primary-300 transition-colors"
                 >
                   {/* Status Badge */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${status.bgColor} ${status.color}`}>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                    <span className={`inline-flex items-center px-2.5 sm:px-3 py-1 rounded-full text-xs font-semibold ${status.bgColor} ${status.color} w-fit`}>
                       {status.label}
                     </span>
                     <span className="text-xs text-gray-500">
@@ -79,29 +79,29 @@ export default function PaymentStatusDisplay({ data }: PaymentStatusDisplayProps
                   </div>
 
                   {/* Transaction Details */}
-                  <dl className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div>
+                  <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="sm:col-span-2">
                       <dt className="text-xs text-gray-600 mb-1">Folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup></dt>
-                      <dd className="font-mono text-sm text-gray-900">{transaction.folioCodi}</dd>
+                      <dd className="font-mono text-xs sm:text-sm text-gray-900 break-all">{transaction.folioCodi}</dd>
                     </div>
                     <div>
                       <dt className="text-xs text-gray-600 mb-1">Monto</dt>
-                      <dd className="font-semibold text-lg text-gray-900">
+                      <dd className="font-semibold text-base sm:text-lg text-gray-900">
                         ${parseFloat(transaction.monto).toFixed(2)} MXN
                       </dd>
                     </div>
-                    <div className="md:col-span-2">
-                      <dt className="text-xs text-gray-600 mb-1">Concepto</dt>
-                      <dd className="text-sm text-gray-900">{transaction.concepto}</dd>
-                    </div>
                     <div>
                       <dt className="text-xs text-gray-600 mb-1">Referencia Numérica</dt>
-                      <dd className="font-mono text-sm text-gray-900">{transaction.refNum}</dd>
+                      <dd className="font-mono text-xs sm:text-sm text-gray-900">{transaction.refNum}</dd>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <dt className="text-xs text-gray-600 mb-1">Concepto</dt>
+                      <dd className="text-xs sm:text-sm text-gray-900">{transaction.concepto}</dd>
                     </div>
                     {transaction.cveRastreo && (
-                      <div>
+                      <div className="sm:col-span-2">
                         <dt className="text-xs text-gray-600 mb-1">Clave de Rastreo</dt>
-                        <dd className="font-mono text-sm text-gray-900">{transaction.cveRastreo}</dd>
+                        <dd className="font-mono text-xs sm:text-sm text-gray-900 break-all">{transaction.cveRastreo}</dd>
                       </div>
                     )}
                   </dl>
