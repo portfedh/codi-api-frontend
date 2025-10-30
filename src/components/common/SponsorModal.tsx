@@ -155,7 +155,7 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
             <div className="space-y-4">
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-sm text-blue-900">
-                  <strong>¡Dona usando CoDi y prueba el API!</strong> Esta es
+                  <strong>¡Dona usando CoDi<sup className="text-[0.5em] ml-0.5">®</sup> y prueba el API!</strong> Esta es
                   una clave API real de <strong>Bite Size S.A. de C.V.</strong>,
                   patrocinador de este proyecto. Úsala en el playground para
                   generar un QR de donación real y probar el API al mismo

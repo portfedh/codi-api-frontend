@@ -59,7 +59,7 @@ export default function UseCasesSection() {
     <section className="py-16">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          ¿Quién Usa CoDi API?
+          ¿Quién Usa CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API?
         </h2>
       </div>
 

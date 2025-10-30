@@ -88,7 +88,7 @@ export default function Docs() {
           Documentación
         </h1>
         <p className="text-lg text-gray-600">
-          Todo lo que necesitas para integrar la API CoDi en tu aplicación
+          Todo lo que necesitas para integrar la API CoDi<sup className="text-[0.5em] ml-0.5">®</sup> en tu aplicación
         </p>
       </div>
 

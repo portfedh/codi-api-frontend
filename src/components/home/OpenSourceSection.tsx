@@ -15,7 +15,7 @@ export default function OpenSourceSection() {
         </h2>
 
         <p className="text-xl text-gray-700 mb-8">
-          CoDi API es un proyecto de código abierto bajo licencia Apache 2.0.
+          CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API es un proyecto de código abierto bajo licencia Apache 2.0.
           <br />
           Revisable, auditable y extensible por la comunidad.
         </p>

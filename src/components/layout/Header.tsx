@@ -27,7 +27,7 @@ export default function Header() {
                 alt="CoDi API Logo"
                 className="h-8 w-8"
               />
-              <span className="text-2xl font-bold text-primary-600">CoDi API</span>
+              <span className="text-2xl font-bold text-primary-600">CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API</span>
             </Link>
           </div>
 

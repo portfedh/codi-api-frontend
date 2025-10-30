@@ -20,7 +20,7 @@ export default function Tools() {
           Herramientas de Desarrollo
         </h1>
         <p className="text-lg text-gray-600">
-          Recursos útiles para facilitar tu integración con la API CoDi
+          Recursos útiles para facilitar tu integración con la API CoDi<sup className="text-[0.5em] ml-0.5">®</sup>
         </p>
       </div>
 

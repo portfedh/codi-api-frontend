@@ -7,7 +7,7 @@ export default function GettingStarted() {
     <div>
       <DocSection id="introduccion" title="Introducción" level={1}>
         <p className="text-lg text-gray-700 mb-4">
-          La API CoDi te permite integrar pagos instantáneos del sistema CoDi de
+          La API CoDi<sup className="text-[0.5em] ml-0.5">®</sup> te permite integrar pagos instantáneos del sistema CoDi<sup className="text-[0.5em] ml-0.5">®</sup> de
           Banxico en tu aplicación. Esta guía de Primeros Pasos te ayudará a
           realizar tu primera solicitud en minutos.
         </p>

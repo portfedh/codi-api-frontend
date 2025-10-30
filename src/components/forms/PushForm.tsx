@@ -73,7 +73,7 @@ export default function PushForm() {
   const handleCopyFolio = async (folio: string) => {
     const success = await copyToClipboard(folio);
     if (success) {
-      showSuccess("Folio CoDi copiado al portapapeles");
+      showSuccess("Folio CoDi® copiado al portapapeles");
     }
   };
 
@@ -133,7 +133,7 @@ export default function PushForm() {
             </p>
           )}
           <p className="mt-1 text-xs text-gray-500">
-            10 dígitos. El número debe estar registrado en CoDi usando el banco
+            10 dígitos. El número debe estar registrado en CoDi<sup className="text-[0.5em] ml-0.5">®</sup> usando el banco
             del cliente
           </p>
         </div>
@@ -320,7 +320,7 @@ export default function PushForm() {
                     <div className="mt-3 space-y-2">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-sm font-semibold text-green-900">
-                          Folio CoDi:
+                          Folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup>:
                         </span>
                         <code className="bg-green-100 px-2 py-1 rounded text-sm font-mono">
                           {response.data.folioCodi}

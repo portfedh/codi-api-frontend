@@ -151,11 +151,11 @@ export default function Enrollment() {
           {/* Header */}
           <div className="mb-8 text-center">
             <h1 className="mb-2 text-3xl font-bold text-gray-900 md:text-4xl">
-              Registro CoDi API
+              Registro CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API
             </h1>
             <p className="text-gray-600">
               Complete el formulario para registrarse en nuestro servicio de API
-              CoDi gratuito.
+              CoDi<sup className="text-[0.5em] ml-0.5">®</sup> gratuito.
             </p>
             <p className="text-gray-600 mt-2">
               Con esto podrá cobrar a sus clientes y todos los pagos se

@@ -40,7 +40,7 @@ export default function Playground() {
           API Playground
         </h1>
         <p className="text-lg text-gray-600">
-          Prueba los endpoints de la API CoDi en tiempo real
+          Prueba los endpoints de la API CoDi<sup className="text-[0.5em] ml-0.5">®</sup> en tiempo real
         </p>
       </div>
 
@@ -108,7 +108,7 @@ export default function Playground() {
                         338225a919338225a919
                       </span>
                       <span className="text-gray-600 ml-2">
-                        — Folio CoDi (Aceptado)
+                        — Folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup> (Aceptado)
                       </span>
                     </div>
                   </li>
@@ -119,7 +119,7 @@ export default function Playground() {
                         337e1588e9337e1588e9
                       </span>
                       <span className="text-gray-600 ml-2">
-                        — Folio CoDi (Rechazado)
+                        — Folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup> (Rechazado)
                       </span>
                     </div>
                   </li>
@@ -209,7 +209,7 @@ export default function Playground() {
               Consultar Estado de Pago
             </h2>
             <p className="text-gray-600 mb-6">
-              Verifica el estado de una operación CoDi usando el folio. Obtén
+              Verifica el estado de una operación CoDi<sup className="text-[0.5em] ml-0.5">®</sup> usando el folio. Obtén
               detalles completos de la transacción.
               <span className="block mt-2">
                 Nota: Solo puedes consultar folios asociados a tu API Key.
@@ -228,7 +228,7 @@ export default function Playground() {
               </h2>
             </div>
             <p className="text-gray-600 mb-6">
-              Cuando un pago es completado o cancelado, el sistema CoDi enviará
+              Cuando un pago es completado o cancelado, el sistema CoDi<sup className="text-[0.5em] ml-0.5">®</sup> enviará
               una notificación POST a la URL de webhook que configuraste. Esta
               es la estructura del cuerpo de la solicitud que recibirás:
             </p>
@@ -322,7 +322,7 @@ export default function Playground() {
                       idMensajeCobro
                     </dt>
                     <dd className="text-gray-700 mt-1">
-                      Folio único de la transacción CoDi. Úsalo para consultar
+                      Folio único de la transacción CoDi<sup className="text-[0.5em] ml-0.5">®</sup>. Úsalo para consultar
                       el estado del pago con el endpoint de Consulta.
                     </dd>
                   </div>
@@ -399,7 +399,7 @@ export default function Playground() {
                   <li className="flex items-start gap-2">
                     <span className="text-amber-600 flex-shrink-0">•</span>
                     <span>
-                      Si tu webhook no responde o falla, el API CoDi puede
+                      Si tu webhook no responde o falla, el API CoDi<sup className="text-[0.5em] ml-0.5">®</sup> puede
                       reintentar el envío.
                     </span>
                   </li>

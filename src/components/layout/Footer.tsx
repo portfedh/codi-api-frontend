@@ -14,9 +14,9 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Brand */}
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">CoDi API</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API</h3>
               <p className="text-sm text-gray-600">
-                API para pagos digitales CoDi.
+                API para pagos digitales CoDi<sup className="text-[0.5em] ml-0.5">®</sup>.
               </p>
               <p className="text-sm text-gray-600 mt-2">
                 Integrado con Banco de Mexico.
@@ -117,7 +117,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="mt-8 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-500 text-center">
-              © {currentYear} CoDi API. Licencia Apache 2.0.
+              © {currentYear} CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API. Licencia Apache 2.0.
             </p>
           </div>
         </div>

@@ -122,7 +122,7 @@ export default function ApiReference() {
     <div>
       <DocSection id="api-reference" title="Referencia de API" level={1}>
         <p className="text-lg text-gray-700 mb-4">
-          La API CoDi proporciona tres endpoints principales para generar pagos,
+          La API CoDi<sup className="text-[0.5em] ml-0.5">®</sup> proporciona tres endpoints principales para generar pagos,
           enviar notificaciones push y consultar el estado de transacciones.
         </p>
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
@@ -165,7 +165,7 @@ export default function ApiReference() {
         </div>
 
         <p className="text-gray-700 mb-4">
-          Genera un código QR para cobro CoDi. El cliente puede escanear el QR
+          Genera un código QR para cobro CoDi<sup className="text-[0.5em] ml-0.5">®</sup>. El cliente puede escanear el QR
           con su app bancaria para realizar el pago.
         </p>
 
@@ -292,7 +292,7 @@ export default function ApiReference() {
         </div>
 
         <p className="text-gray-700 mb-4">
-          Consulta el estado de transacciones CoDi. Puedes buscar por folio
+          Consulta el estado de transacciones CoDi<sup className="text-[0.5em] ml-0.5">®</sup>. Puedes buscar por folio
           específico o listar transacciones por rango de fechas con paginación.
         </p>
 
@@ -433,7 +433,7 @@ export default function ApiReference() {
         </div>
 
         <p className="text-gray-700 mb-4">
-          Cuando un pago es completado o cancelado, el sistema CoDi enviará
+          Cuando un pago es completado o cancelado, el sistema CoDi<sup className="text-[0.5em] ml-0.5">®</sup> enviará
           automáticamente una notificación POST a la URL de webhook que
           configuraste. Esta notificación incluye todos los detalles de la
           transacción.
@@ -537,7 +537,7 @@ export default function ApiReference() {
                 idMensajeCobro
               </dt>
               <dd className="text-gray-700 mt-1">
-                Folio único de la transacción CoDi. Úsalo para consultar el
+                Folio único de la transacción CoDi<sup className="text-[0.5em] ml-0.5">®</sup>. Úsalo para consultar el
                 estado del pago con el endpoint{" "}
                 <code className="font-mono text-xs">POST /v2/codi/consulta</code>
                 .
@@ -610,7 +610,7 @@ export default function ApiReference() {
             <li className="flex items-start gap-2">
               <span className="text-blue-600 flex-shrink-0">•</span>
               <span>
-                Si tu webhook no responde o falla, el API CoDi puede reintentar
+                Si tu webhook no responde o falla, el API CoDi<sup className="text-[0.5em] ml-0.5">®</sup> puede reintentar
                 el envío automáticamente.
               </span>
             </li>

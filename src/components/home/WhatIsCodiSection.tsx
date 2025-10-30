@@ -4,18 +4,18 @@ export default function WhatIsCodiSection() {
       <div className="max-w-4xl mx-auto">
         {/* Title */}
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8">
-          ¿Qué es CoDi?
+          ¿Qué es CoDi<sup className="text-[0.5em] ml-0.5">®</sup>?
         </h2>
 
         {/* Description */}
         <div className="prose prose-lg max-w-none text-gray-600 mb-12">
           <p className="text-center mb-6">
-            CoDi (Cobro Digital) es el sistema de pagos digitales del Banco de México que permite
+            CoDi<sup className="text-[0.5em] ml-0.5">®</sup> (Cobro Digital) es el sistema de pagos digitales del Banco de México que permite
             realizar transferencias electrónicas de forma inmediata mediante códigos QR o notificaciones
             push, directamente desde la aplicación bancaria del cliente.
           </p>
           <p className="text-center">
-            Esta API facilita la integración de CoDi en tu negocio o aplicación, permitiéndote generar
+            Esta API facilita la integración de CoDi<sup className="text-[0.5em] ml-0.5">®</sup> en tu negocio o aplicación, permitiéndote generar
             solicitudes de pago y recibir confirmaciones en tiempo real.
           </p>
         </div>
@@ -32,7 +32,7 @@ export default function WhatIsCodiSection() {
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Sin Comisiones</h3>
             <p className="text-gray-600">
-              A diferencia de otros métodos de pago, CoDi no cobra comisiones por transacción.
+              A diferencia de otros métodos de pago, CoDi<sup className="text-[0.5em] ml-0.5">®</sup> no cobra comisiones por transacción.
               Tu cliente paga lo que indiques y tú recibes el 100% del monto.
             </p>
           </div>

@@ -113,7 +113,7 @@ export default function ConsultaForm() {
             htmlFor="folioCodi"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Folio CoDi / Folio IDC <span className="text-red-500">*</span>
+            Folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup> / Folio IDC <span className="text-red-500">*</span>
           </label>
           <input
             {...register("folioCodi")}
@@ -128,7 +128,7 @@ export default function ConsultaForm() {
             </p>
           )}
           <p className="mt-1 text-xs text-gray-500">
-            El folio CoDi se obtiene de la respuesta del endpoint Push
+            El folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup> se obtiene de la respuesta del endpoint Push
           </p>
           <p className="mt-1 text-xs text-gray-500">
             El Folio IDC se obtiene de la respuesta del endpoint QR

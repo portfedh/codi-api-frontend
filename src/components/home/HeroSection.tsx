@@ -12,14 +12,14 @@ export default function HeroSection() {
 
         {/* Main Title */}
         <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-          API CoDi para Pagos Digitales
+          API CoDi<sup className="text-[0.5em] ml-0.5">®</sup> para Pagos Digitales
           <br />
           <span className="text-primary-600">en México</span>
         </h1>
 
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
-          Genera códigos QR y notificaciones push para cobros CoDi integrados
+          Genera códigos QR y notificaciones push para cobros CoDi<sup className="text-[0.5em] ml-0.5">®</sup> integrados
           con Banxico.
           <br />
           API RESTful simple, seguro y de código abierto.

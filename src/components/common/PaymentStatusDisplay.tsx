@@ -81,7 +81,7 @@ export default function PaymentStatusDisplay({ data }: PaymentStatusDisplayProps
                   {/* Transaction Details */}
                   <dl className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                      <dt className="text-xs text-gray-600 mb-1">Folio CoDi</dt>
+                      <dt className="text-xs text-gray-600 mb-1">Folio CoDi<sup className="text-[0.5em] ml-0.5">®</sup></dt>
                       <dd className="font-mono text-sm text-gray-900">{transaction.folioCodi}</dd>
                     </div>
                     <div>
