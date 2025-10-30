@@ -33,10 +33,10 @@ export default function ContactSection() {
                 </p>
                 <a
                   href="mailto:contacto@bite-size.mx"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center px-4 md:px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors text-sm md:text-base"
                 >
-                  <Mail className="w-5 h-5 mr-2" />
-                  contacto@bite-size.mx
+                  <Mail className="w-4 h-4 md:w-5 md:h-5 mr-2 flex-shrink-0" />
+                  <span className="whitespace-nowrap">contacto@bite-size.mx</span>
                 </a>
               </div>
             </div>

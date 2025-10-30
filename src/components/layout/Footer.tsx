@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Brand */}
-            <div>
+            <div className="text-center md:text-left">
               <h3 className="text-lg font-bold text-gray-900 mb-2">CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API</h3>
               <p className="text-sm text-gray-600">
                 API para pagos digitales CoDi<sup className="text-[0.5em] ml-0.5">®</sup>.
@@ -25,7 +25,7 @@ export default function Footer() {
             </div>
 
             {/* Links */}
-            <div>
+            <div className="text-center md:text-left">
               <h4 className="text-sm font-semibold text-gray-900 mb-3">
                 Enlaces
               </h4>
@@ -76,7 +76,7 @@ export default function Footer() {
             </div>
 
             {/* Contact & Resources */}
-            <div>
+            <div className="text-center md:text-left">
               <h4 className="text-sm font-semibold text-gray-900 mb-3">
                 Recursos
               </h4>
