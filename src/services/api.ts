@@ -11,6 +11,8 @@ import type {
   ErrorResponse,
   EnrollmentSubmission,
   EnrollmentResponse,
+  StripeCheckoutRequest,
+  StripeCheckoutResponse,
 } from '../types/api';
 
 // Get API base URL from environment variable (CoDi payment API)
@@ -224,6 +226,24 @@ export const codiApi = {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  },
+
+  /**
+   * Create Stripe Checkout Session for donation payment
+   * @param data - Stripe checkout request data
+   * @returns Stripe checkout session with redirect URL
+   */
+  createStripeCheckout: async (data: StripeCheckoutRequest): Promise<StripeCheckoutResponse> => {
+    const response = await axios.post<StripeCheckoutResponse>(
+      `${BACKEND_URL}/api/stripe/create-checkout-session`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
         },
       }
     );

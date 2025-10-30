@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { X, Copy, Check, QrCode, Building2, CreditCard } from "lucide-react";
 import { useApiKey } from "../../hooks/useApiKey";
 import { copyToClipboard } from "../../utils/clipboard";
+import { useToast } from "../../hooks/useToast";
+import codiApi from "../../services/api";
 
 interface SponsorModalProps {
   isOpen: boolean;
@@ -28,8 +30,10 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
   const [activeTab, setActiveTab] = useState<PaymentTab>("codi");
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [donationAmount, setDonationAmount] = useState<string>("100");
+  const [isLoadingStripe, setIsLoadingStripe] = useState<boolean>(false);
   const navigate = useNavigate();
   const { saveApiKey } = useApiKey();
+  const { showToast } = useToast();
 
   if (!isOpen) return null;
 
@@ -47,15 +51,36 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
     navigate("/playground");
   };
 
-  const handleStripeCheckout = () => {
-    // TODO: Implement Stripe checkout
-    // This will call your backend API to create a Stripe checkout session
+  const handleStripeCheckout = async () => {
     const amount = parseFloat(donationAmount);
+
+    // Validate amount
     if (isNaN(amount) || amount < 10) {
-      alert("El monto mínimo es $10 MXN");
+      showToast("El monto mínimo es $10 MXN", "error");
       return;
     }
-    alert(`Stripe integration pending. Amount: $${amount} MXN`);
+
+    setIsLoadingStripe(true);
+
+    try {
+      // Call backend to create Stripe checkout session
+      const response = await codiApi.createStripeCheckout({
+        amount,
+        currency: "mxn",
+        description: "Donación para CoDi API Project",
+      });
+
+      // Redirect to Stripe checkout page
+      if (response.success && response.url) {
+        window.location.href = response.url;
+      } else {
+        throw new Error("No se recibió URL de checkout");
+      }
+    } catch (error) {
+      console.error("Stripe checkout error:", error);
+      showToast("Error al procesar el pago. Intenta nuevamente.", "error");
+      setIsLoadingStripe(false);
+    }
   };
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -315,10 +340,20 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
 
               <button
                 onClick={handleStripeCheckout}
-                className="w-full px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center gap-2"
+                disabled={isLoadingStripe}
+                className="w-full px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 disabled:bg-purple-400 disabled:cursor-not-allowed"
               >
-                <CreditCard className="w-5 h-5" />
-                Continuar al Pago
+                {isLoadingStripe ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Procesando...
+                  </>
+                ) : (
+                  <>
+                    <CreditCard className="w-5 h-5" />
+                    Continuar al Pago
+                  </>
+                )}
               </button>
 
               <div className="flex items-center justify-center gap-2 text-xs text-gray-500">

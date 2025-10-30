@@ -171,6 +171,22 @@ export interface EnrollmentResponse {
 }
 
 // ============================================================================
+// Stripe Payment Types
+// ============================================================================
+
+export interface StripeCheckoutRequest {
+  amount: number; // Amount in MXN (minimum 10)
+  currency: string; // Always "mxn" for Mexican pesos
+  description?: string; // Optional description
+}
+
+export interface StripeCheckoutResponse {
+  success: boolean;
+  sessionId: string; // Stripe Checkout Session ID
+  url: string; // URL to redirect user for payment
+}
+
+// ============================================================================
 // Common Types
 // ============================================================================
 

@@ -5,6 +5,8 @@ import Playground from './pages/Playground';
 import Docs from './pages/Docs';
 import Tools from './pages/Tools';
 import Enrollment from './pages/Enrollment';
+import DonationSuccess from './pages/DonationSuccess';
+import DonationCancel from './pages/DonationCancel';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path="/docs" element={<Docs />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/enrollment" element={<Enrollment />} />
+        <Route path="/donation/success" element={<DonationSuccess />} />
+        <Route path="/donation/cancel" element={<DonationCancel />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
