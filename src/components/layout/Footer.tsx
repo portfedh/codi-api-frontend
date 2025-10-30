@@ -55,6 +55,14 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link
+                    to="/aviso-privacidad"
+                    className="text-sm text-gray-600 hover:text-primary-600"
+                  >
+                    Aviso de Privacidad
+                  </Link>
+                </li>
+                <li>
                   <a
                     href={githubUrl}
                     target="_blank"
@@ -67,12 +75,32 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Contact */}
+            {/* Contact & Resources */}
             <div>
               <h4 className="text-sm font-semibold text-gray-900 mb-3">
-                Contacto
+                Recursos
               </h4>
               <ul className="space-y-2">
+                <li>
+                  <a
+                    href="https://www.codi.org.mx/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-gray-600 hover:text-primary-600"
+                  >
+                    Sitio Oficial CoDi®
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.banxico.org.mx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-gray-600 hover:text-primary-600"
+                  >
+                    Banco de México
+                  </a>
+                </li>
                 <li>
                   <a
                     href="mailto:contacto@bite-size.mx"

@@ -7,6 +7,7 @@ import Tools from './pages/Tools';
 import Enrollment from './pages/Enrollment';
 import DonationSuccess from './pages/DonationSuccess';
 import DonationCancel from './pages/DonationCancel';
+import { AvisoPrivacidad } from './pages/AvisoPrivacidad';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/enrollment" element={<Enrollment />} />
         <Route path="/donation/success" element={<DonationSuccess />} />
         <Route path="/donation/cancel" element={<DonationCancel />} />
+        <Route path="/aviso-privacidad" element={<AvisoPrivacidad />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>

@@ -83,6 +83,11 @@ The original source file is in `/context/institutions.js`
 - `LICENSE` / `LICENSE.es.md` - MIT License
 - `README.md` - Project overview and setup instructions
 
+**External Resources (linked in footer):**
+- CoDi® Official Site: https://www.codi.org.mx/
+- Banco de México: https://www.banxico.org.mx
+- GitHub Repository: Configured via `VITE_GITHUB_REPO` environment variable
+
 ## Project Structure
 
 ```
@@ -138,6 +143,9 @@ The original source file is in `/context/institutions.js`
 │   │   ├── Docs.tsx            # Documentation page
 │   │   ├── Tools.tsx           # Developer tools page
 │   │   ├── Enrollment.tsx      # Multi-step enrollment form
+│   │   ├── AvisoPrivacidad.tsx # Privacy notice page
+│   │   ├── DonationSuccess.tsx # Donation success page
+│   │   ├── DonationCancel.tsx  # Donation cancel page
 │   │   └── NotFound.tsx        # 404 page
 │   ├── services/               # API clients
 │   │   └── api.ts              # Axios client + API methods
@@ -159,6 +167,10 @@ The original source file is in `/context/institutions.js`
 │   ├── data/                   # JSON data files
 │   │   ├── institutions.json   # Institution list
 │   │   └── institutions-map.json # Code lookup map
+│   ├── aviso-privacidad/       # Privacy notice PDFs
+│   │   ├── AvisoPrivacidadBanxico.pdf
+│   │   ├── AvisoPrivacidadPlataformaCodi.pdf
+│   │   └── AvisoPrivacidadSimplificadoBanxico.pdf
 │   └── favicon/                # Favicon files
 ├── docs/                       # Planning & roadmap documents
 │   ├── FRONTEND_ROADMAP.md     # Complete development roadmap
@@ -276,6 +288,16 @@ npm run build
 npm run preview
 ```
 
+**Application Routes:**
+- `/` - Homepage with hero section and information
+- `/playground` - API testing interface with QR, Push, and Consulta forms
+- `/docs` - API documentation and integration guides
+- `/tools` - Developer tools (institution lookup, code generator)
+- `/enrollment` - Multi-step enrollment form
+- `/aviso-privacidad` - Privacy notice page
+- `/donation/success` - Donation success page (Stripe integration)
+- `/donation/cancel` - Donation cancel page (Stripe integration)
+
 **Testing Forms:**
 1. Ensure the backend API is running (Development: `http://0.0.0.0:3000` | Production: `https://codi-enrollment-backend.up.railway.app`)
 2. Start this frontend with `npm run dev`
@@ -313,6 +335,13 @@ CoDi is Mexico's instant payment system operated by Banxico. This API provides:
 - Never commit .env files with real credentials
 - CORS is handled by the backend
 
+**Privacy & Compliance:**
+- Comprehensive privacy notice page at `/aviso-privacidad`
+- References to Banxico privacy documents (PDFs in `/public/aviso-privacidad/`)
+- Privacy notice linked in footer and enrollment form
+- All data collection compliant with Mexican privacy laws (LGPDPPSO)
+- Data collected for KYC purposes may be shared with Banco de México
+
 ## Current Development Status
 
 **Stage 1 - Foundation & MVP (COMPLETE):**
@@ -333,6 +362,9 @@ CoDi is Mexico's instant payment system operated by Banxico. This API provides:
 - ✅ Form validation with Zod schemas
 - ✅ TypeScript types for API and forms
 - ✅ Institution data converted to JSON in `/public/data/`
+- ✅ Privacy notice page (Aviso de Privacidad) with Banxico references
+- ✅ Donation pages (Success/Cancel) for Stripe integration
+- ✅ Footer links to CoDi official site and Banco de México
 
 **Current Stage: Stage 2 - Enhanced Developer Experience**
 

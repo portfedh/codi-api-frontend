@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Container from "../components/layout/Container";
 import UserTypeSelector from "../components/enrollment/UserTypeSelector";
 import PersonalInfoForm from "../components/enrollment/PersonalInfoForm";
@@ -7,6 +7,7 @@ import CompanyInfoForm from "../components/enrollment/CompanyInfoForm";
 import DocumentUploadForm from "../components/enrollment/DocumentUploadForm";
 import { useToast } from "../hooks/useToast";
 import { codiApi, getErrorMessage } from "../services/api";
+import { Shield } from "lucide-react";
 
 type UserType = "fisica" | "moral" | null;
 
@@ -163,6 +164,26 @@ export default function Enrollment() {
             <p className="text-gray-600 mt-2">
               El tiempo de respuesta de Banxico es de aproximadamente 7 días.
             </p>
+
+            {/* Privacy Notice Alert */}
+            <div className="mt-6 mx-auto max-w-2xl">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="flex items-center justify-center gap-2 text-sm text-blue-900">
+                  <Shield className="w-5 h-5 flex-shrink-0" />
+                  <p>
+                    Al registrarse, acepta nuestro{" "}
+                    <Link
+                      to="/aviso-privacidad"
+                      className="font-semibold underline hover:text-blue-700"
+                    >
+                      Aviso de Privacidad
+                    </Link>
+                    . Sus datos serán utilizados exclusivamente para fines de KYC y
+                    podrán ser compartidos con el Banco de México.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Form Card */}
