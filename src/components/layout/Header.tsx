@@ -21,7 +21,12 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center gap-3">
+              <img
+                src="/favicon/favicon.svg"
+                alt="CoDi API Logo"
+                className="h-8 w-8"
+              />
               <span className="text-2xl font-bold text-primary-600">CoDi API</span>
             </Link>
           </div>
