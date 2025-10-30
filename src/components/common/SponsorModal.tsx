@@ -33,7 +33,7 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
   const [isLoadingStripe, setIsLoadingStripe] = useState<boolean>(false);
   const navigate = useNavigate();
   const { saveApiKey } = useApiKey();
-  const { showToast } = useToast();
+  const { error: showError } = useToast();
 
   if (!isOpen) return null;
 
@@ -56,7 +56,7 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
 
     // Validate amount
     if (isNaN(amount) || amount < 10) {
-      showToast("El monto mínimo es $10 MXN", "error");
+      showError("El monto mínimo es $10 MXN");
       return;
     }
 
@@ -78,7 +78,7 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
       }
     } catch (error) {
       console.error("Stripe checkout error:", error);
-      showToast("Error al procesar el pago. Intenta nuevamente.", "error");
+      showError("Error al procesar el pago. Intenta nuevamente.");
       setIsLoadingStripe(false);
     }
   };
