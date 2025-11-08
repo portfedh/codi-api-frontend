@@ -272,20 +272,29 @@ export default function ConsultaForm() {
 
         {/* Error Display */}
         {mutation.isError && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-sm text-red-800">
-              <strong>Error:</strong> {getErrorMessage(mutation.error)}
-            </p>
-            {/* Special message for 10-digit folio with 400 error */}
-            {submittedFolio.length === 10 &&
-              mutation.error instanceof AxiosError &&
-              mutation.error.response?.status === 400 && (
-                <p className="text-sm text-amber-700 mt-3 bg-amber-50 border border-amber-200 p-3 rounded">
-                  <strong>💡 Nota:</strong> Este folio de 10 dígitos (IDC) aún
-                  no ha sido validado. Los folios IDC solo retornan información
-                  una vez que el pago ha sido completado por el cliente.
-                </p>
-              )}
+          <div className="space-y-4">
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-800">
+                <strong>Error:</strong> {getErrorMessage(mutation.error)}
+              </p>
+              {/* Special message for 10-digit folio with 400 error */}
+              {submittedFolio.length === 10 &&
+                mutation.error instanceof AxiosError &&
+                mutation.error.response?.status === 400 && (
+                  <p className="text-sm text-amber-700 mt-3 bg-amber-50 border border-amber-200 p-3 rounded">
+                    <strong>💡 Nota:</strong> Este folio de 10 dígitos (IDC) aún
+                    no ha sido validado. Los folios IDC solo retornan información
+                    una vez que el pago ha sido completado por el cliente.
+                  </p>
+                )}
+            </div>
+            {/* Display full error response for debugging */}
+            {mutation.error && (
+              <JSONDisplay
+                data={mutation.error}
+                title="Detalles del Error (para debugging)"
+              />
+            )}
           </div>
         )}
       </form>

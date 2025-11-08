@@ -279,10 +279,19 @@ export default function PushForm() {
 
         {/* Error Display */}
         {mutation.isError && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-sm text-red-800">
-              <strong>Error:</strong> {getErrorMessage(mutation.error)}
-            </p>
+          <div className="space-y-4">
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-800">
+                <strong>Error:</strong> {getErrorMessage(mutation.error)}
+              </p>
+            </div>
+            {/* Display full error response for debugging */}
+            {mutation.error && (
+              <JSONDisplay
+                data={mutation.error}
+                title="Detalles del Error (para debugging)"
+              />
+            )}
           </div>
         )}
       </form>
