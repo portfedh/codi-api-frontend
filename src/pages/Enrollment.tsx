@@ -7,7 +7,7 @@ import CompanyInfoForm from "../components/enrollment/CompanyInfoForm";
 import DocumentUploadForm from "../components/enrollment/DocumentUploadForm";
 import { useToast } from "../hooks/useToast";
 import { codiApi, getErrorMessage } from "../services/api";
-import { Shield } from "lucide-react";
+import { Shield, UserPlus, Clock, ShoppingCart, CheckCircle2 } from "lucide-react";
 
 type UserType = "fisica" | "moral" | null;
 
@@ -150,38 +150,38 @@ export default function Enrollment() {
         <div className="mx-auto max-w-3xl">
           {/* Header */}
           <div className="mb-8 text-center">
-            <h1 className="mb-2 text-3xl font-bold text-gray-900 md:text-4xl">
-              Registro CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API
+            <h1 className="mb-6 text-3xl font-bold text-gray-900 md:text-4xl">
+              Registro en CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API
             </h1>
-            <p className="text-gray-600">
-              Complete el formulario para registrarse en nuestro servicio de API
-              CoDi<sup className="text-[0.5em] ml-0.5">®</sup> gratuito.
-            </p>
-            <p className="text-gray-600 mt-2">
-              Con esto podrá cobrar a sus clientes y todos los pagos se
-              depositarán en la cuenta bancaria que registró.
-            </p>
-            <p className="text-gray-600 mt-2">
-              El tiempo de respuesta de Banxico es de aproximadamente 7 días.
-            </p>
 
-            {/* Privacy Notice Alert */}
-            <div className="mt-6 mx-auto max-w-2xl">
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <div className="flex items-center justify-center gap-2 text-sm text-blue-900">
-                  <Shield className="w-5 h-5 flex-shrink-0" />
-                  <p>
-                    Al registrarse, acepta nuestro{" "}
-                    <Link
-                      to="/aviso-privacidad"
-                      className="font-semibold underline hover:text-blue-700"
-                    >
-                      Aviso de Privacidad
-                    </Link>
-                    . Sus datos serán utilizados exclusivamente para fines de KYC y
-                    podrán ser compartidos con el Banco de México.
-                  </p>
-                </div>
+            {/* Steps List */}
+            <div className="max-w-2xl mx-auto space-y-4 text-left">
+              <div className="flex items-start gap-3">
+                <UserPlus className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+                <p className="text-gray-700">
+                  <span className="font-semibold">1. Regístrese</span> completando el formulario con sus datos
+                </p>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Clock className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
+                <p className="text-gray-700">
+                  <span className="font-semibold">2. Obtenga la aprobación de Banxico</span> (aproximadamente 7 días)
+                </p>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <ShoppingCart className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                <p className="text-gray-700">
+                  <span className="font-semibold">3. Compre folios</span> para comenzar a cobrar
+                </p>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+                <p className="text-gray-700">
+                  <span className="font-semibold">¡Listo!</span> Ya puede cobrar a sus clientes
+                </p>
               </div>
             </div>
           </div>
@@ -251,6 +251,23 @@ export default function Enrollment() {
                   onBack={handleBack}
                 />
               )}
+            </div>
+          </div>
+
+          {/* Privacy Notice */}
+          <div className="mt-6 text-center">
+            <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
+              <Shield className="w-4 h-4 flex-shrink-0" />
+              <p>
+                Al registrarse, acepta nuestro{" "}
+                <Link
+                  to="/aviso-privacidad"
+                  className="text-gray-900 underline hover:text-gray-700"
+                >
+                  Aviso de Privacidad
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </div>

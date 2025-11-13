@@ -1,24 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function HowItWorksSection() {
   const steps = [
     {
-      number: '1',
-      title: 'Obtén tu API Key',
-      description: 'Regístrate con Banxico y obtén tus credenciales de acceso. Configura tus certificados digitales.',
+      number: "1",
+      title: "Obtén tu API Key",
+      description:
+        "Regístrate con Banxico y obtén tus credenciales de acceso. Compra tus folios de pago y estarás list@ para comenzar.",
       isClickable: true,
-      link: '/enrollment',
+      link: "/enrollment",
     },
     {
-      number: '2',
-      title: 'Genera Solicitud de Pago',
-      description: 'Usa nuestra API para crear un código QR o enviar una notificación push con el monto y concepto del pago.',
+      number: "2",
+      title: "Genera Solicitud de Pago",
+      description:
+        "Usa nuestra API para crear un código QR o enviar una notificación push con el monto y concepto del pago.",
       isClickable: false,
     },
     {
-      number: '3',
-      title: 'Recibe Confirmación',
-      description: 'Cuando el cliente paga, recibes una notificación en tu webhook con los detalles de la transacción.',
+      number: "3",
+      title: "Recibe Confirmación",
+      description:
+        "Cuando el cliente paga, recibes una notificación en tu webhook con los detalles de la transacción.",
       isClickable: false,
     },
   ];
@@ -44,9 +47,7 @@ export default function HowItWorksSection() {
               <h3 className="text-xl font-bold text-gray-900 mb-3">
                 {step.title}
               </h3>
-              <p className="text-gray-600">
-                {step.description}
-              </p>
+              <p className="text-gray-600">{step.description}</p>
             </div>
           );
 

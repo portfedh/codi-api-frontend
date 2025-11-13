@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import StatusIndicator from "../common/StatusIndicator";
+import codiLogo from "../../assets/codi-logo.png";
 
 export default function HeroSection() {
   return (
     <section className="py-16 md:py-24">
       <div className="text-center">
+        {/* CoDi Logo */}
+        <div className="flex justify-center mb-6">
+          <img
+            src={codiLogo}
+            alt="CoDi Logo"
+            className="h-16 md:h-24 w-auto"
+          />
+        </div>
+
         {/* Status Badge - Hidden on mobile */}
         <div className="hidden md:flex justify-center mb-6">
           <StatusIndicator />
@@ -66,6 +76,7 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
           <Link
             to="/enrollment"
+            onClick={() => window.scrollTo(0, 0)}
             className="px-6 md:px-8 py-3 md:py-3.5 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl text-center"
           >
             Registrarme

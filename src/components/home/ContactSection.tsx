@@ -8,9 +8,10 @@ export default function ContactSection() {
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             ¿Necesitas Ayuda?
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Estamos aquí para ayudarte. Si tienes alguna pregunta, sugerencia o
-            problema, contáctanos.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
+            ¿Quieres ayuda para implementar la API en tu sitio web o negocio?
+            También podemos ayudarte a configurar todo. Estaremos encantados de
+            asistirte.
           </p>
         </div>
 
@@ -27,16 +28,17 @@ export default function ContactSection() {
                   Contacto por Email
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Si encuentras algún problema técnico, tienes preguntas sobre
-                  la integración, o necesitas asistencia, no dudes en
-                  escribirnos:
+                  Si necesitas ayuda, tienes alguna pregunta, sugerencia o
+                  problema, contáctanos.
                 </p>
                 <a
                   href="mailto:contacto@bite-size.mx"
                   className="inline-flex items-center px-4 md:px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors text-sm md:text-base"
                 >
                   <Mail className="w-4 h-4 md:w-5 md:h-5 mr-2 flex-shrink-0" />
-                  <span className="whitespace-nowrap">contacto@bite-size.mx</span>
+                  <span className="whitespace-nowrap">
+                    contacto@bite-size.mx
+                  </span>
                 </a>
               </div>
             </div>
