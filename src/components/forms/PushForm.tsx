@@ -248,7 +248,7 @@ export default function PushForm() {
             disabled={mutation.isPending}
             className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {mutation.isPending ? "Enviando..." : "Enviar Push Notification"}
+            {mutation.isPending ? "Enviando..." : "Enviar Notificación Push"}
           </button>
 
           {mutation.isPending && (
@@ -318,7 +318,7 @@ export default function PushForm() {
                 </svg>
                 <div className="flex-1">
                   <h4 className="font-semibold text-green-900 mb-1">
-                    Push Notification Enviada
+                    Notificación Push Enviada
                   </h4>
                   <p className="text-sm text-green-800">
                     La solicitud de pago se envió exitosamente al celular del

@@ -21,7 +21,7 @@ export default function Playground() {
     { id: "qr", name: "Generar QR", description: "Código QR para pagos" },
     {
       id: "push",
-      name: "Push Notification",
+      name: "Notificación Push",
       description: "Enviar solicitud al celular",
     },
     { id: "consulta", name: "Consultar Estado", description: "Verificar pago" },
@@ -193,7 +193,7 @@ export default function Playground() {
         {activeTab === "push" && (
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
-              Enviar Push Notification
+              Enviar Notificación Push
             </h2>
             <p className="text-sm sm:text-base text-gray-600 mb-6">
               Envía una solicitud de pago directamente al celular del cliente.
