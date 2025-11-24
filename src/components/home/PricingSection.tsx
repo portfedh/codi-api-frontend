@@ -17,7 +17,7 @@ const pricingTiers: PricingTier[] = [
     name: 'Gratis',
     icon: <Zap className="w-12 h-12 text-white" />,
     price: 0,
-    sales: 15,
+    sales: 10,
     pricePerUnit: null,
     featured: false,
     isFree: true,
@@ -120,7 +120,7 @@ export default function PricingSection() {
                   )}
                   {tier.isFree && (
                     <div className="text-sm mt-1 opacity-90">
-                      Para probar y desarrollar
+                      por mes
                     </div>
                   )}
                 </div>
