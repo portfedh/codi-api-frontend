@@ -15,8 +15,8 @@ export default function Home() {
       <FeaturesSection />
       <HowItWorksSection />
       <UseCasesSection />
-      <PricingSection />
       <OpenSourceSection />
+      <PricingSection />
       <ContactSection />
     </div>
   );

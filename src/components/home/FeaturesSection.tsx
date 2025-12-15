@@ -1,5 +1,53 @@
+import { useState, useEffect } from 'react';
+import { Play, X } from 'lucide-react';
+
+interface Feature {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  color: string;
+  videoUrl?: string;
+  videoLabel?: string;
+}
+
 export default function FeaturesSection() {
-  const features = [
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState('');
+
+  const openVideo = (videoUrl: string) => {
+    // Convert YouTube watch URL to embed URL
+    const videoId = videoUrl.split('v=')[1]?.split('&')[0];
+    if (videoId) {
+      setCurrentVideoUrl(`https://www.youtube.com/embed/${videoId}`);
+      setIsVideoOpen(true);
+    }
+  };
+
+  const closeVideo = () => {
+    setIsVideoOpen(false);
+    setCurrentVideoUrl('');
+  };
+
+  // Close modal on Escape key press and prevent body scroll
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isVideoOpen) {
+        closeVideo();
+      }
+    };
+
+    if (isVideoOpen) {
+      window.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isVideoOpen]);
+
+  const features: Feature[] = [
     {
       icon: (
         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
@@ -25,6 +73,8 @@ export default function FeaturesSection() {
       description:
         "Envía solicitudes de pago directamente al celular del cliente usando su número telefónico.",
       color: "purple",
+      videoUrl: "https://www.youtube.com/watch?v=I1aL_rbNIvI",
+      videoLabel: "Ver ejemplo",
     },
     {
       icon: (
@@ -110,10 +160,53 @@ export default function FeaturesSection() {
                 {feature.title}
               </h3>
               <p className="text-gray-600">{feature.description}</p>
+              {feature.videoUrl && (
+                <button
+                  onClick={() => openVideo(feature.videoUrl!)}
+                  className={`inline-flex items-center gap-2 mt-4 ${colors.text} hover:underline font-medium`}
+                >
+                  <Play className="w-4 h-4" />
+                  {feature.videoLabel || "Ver video"}
+                </button>
+              )}
             </div>
           );
         })}
       </div>
+
+      {/* Video Modal */}
+      {isVideoOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+          onClick={closeVideo}
+        >
+          <div
+            className="relative w-full max-w-4xl bg-white rounded-lg overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeVideo}
+              className="absolute top-4 right-4 z-10 bg-gray-900 bg-opacity-75 hover:bg-opacity-100 text-white rounded-full p-2 transition-all"
+              aria-label="Cerrar video"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Video Container with 16:9 aspect ratio */}
+            <div className="relative pt-[56.25%]">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src={currentVideoUrl}
+                title="Video de ejemplo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
