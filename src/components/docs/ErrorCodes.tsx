@@ -87,22 +87,25 @@ export default function ErrorCodes() {
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
           <h4 className="text-sm font-semibold text-blue-900 mb-2">Formato de Respuesta de Error</h4>
           <p className="text-sm text-blue-800 mb-3">
-            Todas las respuestas de error siguen este formato consistente:
+            Las respuestas de error de validación (400) siguen este formato:
           </p>
           <CodeBlock
             language="json"
             showLineNumbers={false}
             code={`{
-  "success": false,
-  "message": "Descripción legible del error",
+  "message": "Validation Error: Invalid input data.",
   "errors": [
     {
       "field": "campo_con_error",
-      "message": "Descripción específica del problema"
+      "message": "Descripción específica del problema (en inglés)"
     }
   ]
 }`}
           />
+          <p className="text-xs text-blue-700 mt-2">
+            <strong>Nota:</strong> Los mensajes de error de validación son retornados en inglés por la API.
+            Consulta la tabla de mensajes más abajo para ver las traducciones.
+          </p>
         </div>
       </DocSection>
 
@@ -145,68 +148,277 @@ export default function ErrorCodes() {
           language="json"
           showLineNumbers={false}
           code={`{
-  "success": false,
-  "message": "Errores de validación en la solicitud",
+  "message": "Validation Error: Invalid input data.",
   "errors": [
     {
       "field": "monto",
-      "message": "El monto debe ser un número positivo"
+      "message": "Monto must be a number between 0 and 999,999,999,999.99 with at most two decimal places"
     },
     {
       "field": "concepto",
-      "message": "El concepto no puede exceder 40 caracteres"
+      "message": "Concepto must be a string with a minimum length of 1 and maximum length of 40 allowed ascii characters"
     }
   ]
 }`}
         />
+        <p className="text-xs text-gray-500 mt-2 italic">
+          Traducción: "Monto debe ser un número entre 0 y 999,999,999,999.99 con máximo dos decimales" /
+          "Concepto debe ser una cadena de mínimo 1 y máximo 40 caracteres ASCII permitidos"
+        </p>
 
         <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Error 401: API Key Inválida</h4>
         <CodeBlock
           language="json"
           showLineNumbers={false}
           code={`{
-  "success": false,
-  "message": "API Key inválida o faltante",
-  "errors": [
-    {
-      "field": "x-api-key",
-      "message": "La API Key debe tener exactamente 128 caracteres hexadecimales"
-    }
-  ]
+  "message": "API Key missing"
 }`}
         />
-
-        <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Error 422: Datos No Procesables</h4>
+        <p className="text-xs text-gray-500 mt-2 italic">
+          Traducción: "Falta la API Key"
+        </p>
         <CodeBlock
           language="json"
           showLineNumbers={false}
           code={`{
-  "success": false,
-  "message": "No se pudo procesar la solicitud",
+  "message": "Invalid API Key"
+}`}
+        />
+        <p className="text-xs text-gray-500 mt-2 italic">
+          Traducción: "API Key inválida"
+        </p>
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Error 400: Vigencia en Segundos</h4>
+        <CodeBlock
+          language="json"
+          showLineNumbers={false}
+          code={`{
+  "message": "Validation Error: Invalid input data.",
   "errors": [
     {
-      "field": "celularCliente",
-      "message": "El número celular debe tener exactamente 10 dígitos"
+      "field": "vigencia",
+      "message": "Vigencia must be a millisecond timestamp (not seconds). Multiply by 1000 if needed"
     }
   ]
 }`}
         />
+        <p className="text-xs text-gray-500 mt-2 italic">
+          Traducción: "Vigencia debe ser un timestamp en milisegundos (no segundos). Multiplica por 1000 si es necesario"
+        </p>
 
         <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Error 500: Error Interno</h4>
         <CodeBlock
           language="json"
           showLineNumbers={false}
           code={`{
-  "success": false,
-  "message": "Error interno del servidor",
-  "errors": [
-    {
-      "field": "system",
-      "message": "Por favor intenta nuevamente más tarde"
-    }
-  ]
+  "message": "Internal server error"
 }`}
         />
+        <p className="text-xs text-gray-500 mt-2 italic">
+          Traducción: "Error interno del servidor"
+        </p>
+      </DocSection>
+
+      <DocSection id="mensajes-validacion" title="Mensajes de Validación de la API">
+        <p className="text-gray-700 mb-4">
+          Referencia completa de los mensajes de error que retorna la API para cada campo.
+          Los mensajes son retornados en inglés. Se incluye la traducción para referencia.
+        </p>
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-3">Endpoints QR y Push</h4>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-50">
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Campo</th>
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Mensaje de la API (inglés)</th>
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Traducción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">monto</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Monto cannot be empty</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Monto no puede estar vacío</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">monto</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Monto must be a numeric value</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Monto debe ser un valor numérico</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">monto</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Monto must be a number between 0 and 999,999,999,999.99 with at most two decimal places</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Monto debe ser un número entre 0 y 999,999,999,999.99 con máximo dos decimales</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">referenciaNumerica</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">ReferenciaNumerica must contain only digits (0-9) with a maximum length of 7</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">ReferenciaNumerica debe contener solo dígitos (0-9) con un máximo de 7</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">concepto</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Concepto must be a string with a minimum length of 1 and maximum length of 40 allowed ascii characters</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Concepto debe ser una cadena de mínimo 1 y máximo 40 caracteres ASCII permitidos</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">concepto</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Concepto contains invalid characters</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Concepto contiene caracteres inválidos</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">vigencia</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Vigencia cannot be empty</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Vigencia no puede estar vacía</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">vigencia</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Vigencia must be '0' or a numeric value without any letters or special characters</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Vigencia debe ser '0' o un valor numérico sin letras ni caracteres especiales</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">vigencia</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Vigencia numeric value cannot exceed 15 digits</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">El valor numérico de vigencia no puede exceder 15 dígitos</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">vigencia</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Vigencia must be a millisecond timestamp (not seconds). Multiply by 1000 if needed</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Vigencia debe ser un timestamp en milisegundos (no segundos). Multiplica por 1000 si es necesario</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">vigencia</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Vigencia timestamp must be in the future</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">El timestamp de vigencia debe ser en el futuro</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">vigencia</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Vigencia timestamp cannot exceed one year from now</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">El timestamp de vigencia no puede exceder un año desde ahora</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Endpoint Push (adicional)</h4>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-50">
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Campo</th>
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Mensaje de la API (inglés)</th>
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Traducción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">celularCliente</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">celularCliente cannot be empty</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">celularCliente no puede estar vacío</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">celularCliente</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">CelularCliente must contain exactly 10 numeric digits</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">CelularCliente debe contener exactamente 10 dígitos numéricos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Endpoint Consulta</h4>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-50">
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Campo</th>
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Mensaje de la API (inglés)</th>
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Traducción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">folioCodi</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">FolioCodi is required</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">FolioCodi es requerido</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">folioCodi</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">FolioCodi must be 10 or 20 characters long</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">FolioCodi debe tener 10 o 20 caracteres</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">tpg</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">tpg is required</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">tpg es requerido</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">tpg</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">tpg must be a number between 1 and 100</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">tpg debe ser un número entre 1 y 100</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">npg</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">npg is required</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">npg es requerido</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">npg</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">npg must be a number between 1 and 2147483647</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">npg debe ser un número entre 1 y 2,147,483,647</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">fechaInicial</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">fechaInicial is required</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">fechaInicial es requerido</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">fechaInicial</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">fechaInicial must be '0' or a valid date in YYYYMMDD format</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">fechaInicial debe ser '0' o una fecha válida en formato YYYYMMDD</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">fechaFinal</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">fechaFinal is required</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">fechaFinal es requerido</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">fechaFinal</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">fechaFinal must be '0' or a valid date in YYYYMMDD format</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">fechaFinal debe ser '0' o una fecha válida en formato YYYYMMDD</td>
+              </tr>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">fechaFinal</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">fechaFinal must be after fechaInicial and not in the future</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">fechaFinal debe ser posterior a fechaInicial y no puede ser una fecha futura</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 className="text-lg font-semibold text-gray-900 mb-3 mt-6">Autenticación</h4>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-50">
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">HTTP</th>
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Mensaje de la API (inglés)</th>
+                <th className="text-left p-3 border border-gray-200 font-semibold text-gray-700">Traducción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-3 border border-gray-200 font-mono text-xs">401</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">API Key missing</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">Falta la API Key</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border border-gray-200 font-mono text-xs">401</td>
+                <td className="p-3 border border-gray-200 text-xs"><code className="bg-gray-100 px-1 rounded">Invalid API Key</code></td>
+                <td className="p-3 border border-gray-200 text-xs text-gray-600">API Key inválida</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </DocSection>
 
       <DocSection id="manejo-errores" title="Buenas Prácticas para Manejo de Errores">

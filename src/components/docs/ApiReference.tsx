@@ -6,10 +6,10 @@ export default function ApiReference() {
   const qrRequestParams = [
     {
       name: "monto",
-      type: "number",
+      type: "number | string",
       required: true,
       description:
-        "Monto a cobrar en MXN. Máximo $12,500 MXN por operación (12 dígitos antes del punto decimal, 2 después)",
+        "Monto a cobrar en MXN. Máximo $12,500 MXN por operación. Máximo 2 decimales.",
       example: "99.99",
     },
     {
@@ -22,7 +22,7 @@ export default function ApiReference() {
     },
     {
       name: "referenciaNumerica",
-      type: "number",
+      type: "number | string",
       required: true,
       description:
         'Referencia numérica de 1-7 dígitos. Usa "0" si no requieres referencia.',
@@ -30,10 +30,10 @@ export default function ApiReference() {
     },
     {
       name: "vigencia",
-      type: "number",
+      type: "number | string",
       required: true,
       description:
-        'Timestamp Unix (epoch) para la fecha de expiración del QR. "0" significa sin límite de tiempo.',
+        'Timestamp Unix en milisegundos (no segundos). Usa "0" para vigencia ilimitada (recomendado). Valores menores a 10,000,000,000 son rechazados.',
       example: "0",
     },
   ];
@@ -41,10 +41,10 @@ export default function ApiReference() {
   const pushRequestParams = [
     {
       name: "monto",
-      type: "number",
+      type: "number | string",
       required: true,
       description:
-        "Monto a cobrar en MXN. Máximo $12,500 MXN por operación (12 dígitos antes del punto decimal, 2 después)",
+        "Monto a cobrar en MXN. Máximo $12,500 MXN por operación. Máximo 2 decimales.",
       example: "99.99",
     },
     {
@@ -57,7 +57,7 @@ export default function ApiReference() {
     },
     {
       name: "referenciaNumerica",
-      type: "number",
+      type: "number | string",
       required: true,
       description:
         'Referencia numérica de 1-7 dígitos. Usa "0" si no requieres referencia.',
@@ -65,10 +65,10 @@ export default function ApiReference() {
     },
     {
       name: "vigencia",
-      type: "number",
+      type: "number | string",
       required: true,
       description:
-        'Timestamp Unix (epoch) para la fecha de expiración. "0" significa sin límite de tiempo.',
+        'Timestamp Unix en milisegundos (no segundos). Usa "0" para vigencia ilimitada (recomendado). Valores menores a 10,000,000,000 son rechazados.',
       example: "0",
     },
     {
@@ -84,37 +84,37 @@ export default function ApiReference() {
     {
       name: "folioCodi",
       type: "string",
-      required: false,
-      description: "Folio CoDi de una transacción específica (20 caracteres)",
+      required: true,
+      description: "Folio CoDi de una transacción. Exactamente 10 caracteres (IDC/QR) o 20 caracteres (folio Push).",
       example: "321e210838321e210838",
     },
     {
       name: "tpg",
-      type: "number",
+      type: "number | string",
       required: true,
-      description: "Transacciones por página (máximo 10)",
+      description: "Transacciones por página (mínimo 1, máximo 100)",
       example: "10",
     },
     {
       name: "npg",
-      type: "number",
+      type: "number | string",
       required: true,
       description: "Número de página (empezando en 1)",
       example: "1",
     },
     {
       name: "fechaInicial",
-      type: "string",
-      required: false,
-      description: 'Fecha inicial en formato YYYY-MM-DD. "0" para omitir.',
-      example: "2024-01-01",
+      type: "number | string",
+      required: true,
+      description: 'Fecha inicial en formato YYYYMMDD (sin guiones). "0" para consultar todo el historial.',
+      example: "20240101",
     },
     {
       name: "fechaFinal",
-      type: "string",
-      required: false,
-      description: 'Fecha final en formato YYYY-MM-DD. "0" para omitir.',
-      example: "2024-01-31",
+      type: "number | string",
+      required: true,
+      description: 'Fecha final en formato YYYYMMDD (sin guiones). "0" para consultar todo el historial. No puede ser una fecha futura.',
+      example: "20240131",
     },
   ];
 

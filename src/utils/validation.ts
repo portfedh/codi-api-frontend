@@ -52,8 +52,11 @@ export const consultaFormSchema = z.object({
 
   folioCodi: z
     .string()
-    .min(10, 'Folio debe tener al menos 10 caracteres')
-    .max(20, 'Folio debe tener máximo 20 caracteres'),
+    .min(1, 'Folio es requerido')
+    .refine(
+      (val) => val.length === 10 || val.length === 20,
+      'Folio debe tener exactamente 10 caracteres (IDC) o 20 caracteres (folio Push)'
+    ),
 
   tpg: z
     .number({ message: 'Debe ser un número' })

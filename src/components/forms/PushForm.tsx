@@ -236,7 +236,7 @@ export default function PushForm() {
               </p>
             )}
             <p className="mt-1 text-xs text-gray-500">
-              Usa 0 para sin expiración o el tiempo de expiración (Unix epoch)
+              Usa 0 para vigencia ilimitada (recomendado), o timestamp en milisegundos
             </p>
           </div>
         </div>
