@@ -11,6 +11,7 @@ export default function Header() {
     { name: 'Playground', href: '/playground' },
     { name: 'Documentación', href: '/docs' },
     { name: 'Herramientas', href: '/tools' },
+    { name: 'Registro', href: '/enrollment' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
