@@ -2,8 +2,9 @@ import { useState } from 'react';
 import GettingStarted from '../components/docs/GettingStarted';
 import ApiReference from '../components/docs/ApiReference';
 import ErrorCodes from '../components/docs/ErrorCodes';
+import McpServer from '../components/docs/McpServer';
 
-type DocSection = 'getting-started' | 'api-reference' | 'error-codes';
+type DocSection = 'getting-started' | 'api-reference' | 'error-codes' | 'mcp-server';
 
 export default function Docs() {
   const [activeSection, setActiveSection] = useState<DocSection>('getting-started');
@@ -57,6 +58,23 @@ export default function Docs() {
         { id: 'manejo-errores', name: 'Buenas Prácticas' },
       ]
     },
+    {
+      id: 'mcp-server' as const,
+      name: 'Servidor MCP',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+        </svg>
+      ),
+      subsections: [
+        { id: 'mcp-server',      name: 'Introducción' },
+        { id: 'mcp-instalacion', name: 'Instalación Rápida' },
+        { id: 'mcp-claude-code', name: 'Opciones de Alcance' },
+        { id: 'mcp-recursos',   name: 'Recursos Disponibles' },
+        { id: 'mcp-prompts',    name: 'Prompts Disponibles' },
+        { id: 'mcp-ejemplos',   name: 'Qué Puedes Preguntar' },
+      ]
+    },
   ];
 
   const handleSubsectionClick = (subsectionId: string) => {
@@ -75,6 +93,8 @@ export default function Docs() {
         return <ApiReference />;
       case 'error-codes':
         return <ErrorCodes />;
+      case 'mcp-server':
+        return <McpServer />;
       default:
         return <GettingStarted />;
     }
@@ -310,7 +330,7 @@ export default function Docs() {
               )}
             </div>
             <div className="flex-1 flex justify-end">
-              {activeSection !== 'error-codes' && (
+              {activeSection !== sections[sections.length - 1].id && (
                 <button
                   onClick={() => {
                     const currentIndex = sections.findIndex(s => s.id === activeSection);

@@ -343,6 +343,23 @@ print(response.json())`}
               Generar Código →
             </a>
           </div>
+
+          <div className="bg-white border border-gray-200 rounded-lg p-5">
+            <h4 className="text-lg font-semibold text-gray-900 mb-2">
+              Servidor MCP para IA
+            </h4>
+            <p className="text-gray-600 text-sm mb-3">
+              Instala el servidor MCP para que Claude, Copilot, Cursor o
+              Windsurf conozcan el API de CoDi y generen código correcto
+              automáticamente.
+            </p>
+            <a
+              href="#mcp-server"
+              className="text-primary-600 hover:text-primary-700 text-sm font-medium"
+            >
+              Ver instrucciones →
+            </a>
+          </div>
         </div>
       </DocSection>
     </div>

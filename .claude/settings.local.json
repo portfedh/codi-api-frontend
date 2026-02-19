@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/portfedh/**)",
+      "Bash(tree:*)",
+      "Bash(npm run build:*)",
+      "Bash(cat:*)",
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(rm:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:railpack.com)",
+      "Bash(npx playwright:*)",
+      "Bash(npm run lint)",
+      "Bash(node -e:*)",
+      "WebFetch(domain:pablocruz.io)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "Bash(npm run dev:*)",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_resize",
+      "Bash(npx tsc:*)",
+      "WebSearch",
+      "WebFetch(domain:developers.openai.com)",
+      "WebFetch(domain:google-gemini.github.io)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
