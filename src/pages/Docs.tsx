@@ -9,6 +9,15 @@ type DocSection = 'getting-started' | 'api-reference' | 'error-codes' | 'mcp-ser
 export default function Docs() {
   const [activeSection, setActiveSection] = useState<DocSection>('getting-started');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(() =>
+    localStorage.getItem('mcp-banner-dismissed') === 'true'
+  );
+
+  const dismissBanner = () => {
+    setBannerDismissed(true);
+    localStorage.setItem('mcp-banner-dismissed', 'true');
+  };
+
 
   const sections = [
     {
@@ -112,6 +121,39 @@ export default function Docs() {
         </p>
       </div>
 
+      {/* MCP Server banner */}
+      {!bannerDismissed && activeSection !== 'mcp-server' && (
+        <div className="mb-6 flex items-start gap-4 p-4 bg-purple-50 border border-purple-200 rounded-xl">
+          <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-purple-100 rounded-lg text-purple-600">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+            </svg>
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-xs font-semibold bg-purple-600 text-white px-2 py-0.5 rounded-full uppercase tracking-wide">
+                Nuevo
+              </span>
+              <p className="text-sm font-semibold text-purple-900">
+                Servidor MCP para IA
+              </p>
+            </div>
+            <p className="text-sm text-purple-700">
+              Integra la API CoDi<sup className="text-[0.6em]">®</sup> directamente en Claude Code, Cursor, Windsurf y más — sin credenciales, sin conexión extra.
+            </p>
+          </div>
+          <button
+            onClick={dismissBanner}
+            className="flex-shrink-0 text-purple-400 hover:text-purple-600 transition-colors"
+            aria-label="Cerrar"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
+
       {/* Mobile menu button */}
       <div className="lg:hidden mb-4">
         <button
@@ -138,34 +180,51 @@ export default function Docs() {
         <aside className="hidden lg:block w-64 flex-shrink-0">
           <div className="sticky top-8">
             <nav className="space-y-1">
-              {sections.map((section) => (
-                <div key={section.id}>
-                  <button
-                    onClick={() => setActiveSection(section.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      activeSection === section.id
-                        ? 'bg-primary-50 text-primary-700'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
-                  >
-                    {section.icon}
-                    {section.name}
-                  </button>
-                  {activeSection === section.id && (
-                    <div className="mt-1 ml-8 space-y-1">
-                      {section.subsections.map((subsection) => (
-                        <button
-                          key={subsection.id}
-                          onClick={() => handleSubsectionClick(subsection.id)}
-                          className="block w-full text-left px-3 py-1.5 text-sm text-gray-600 hover:text-primary-600 transition-colors"
-                        >
-                          {subsection.name}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+              {sections.map((section) => {
+                const isMcp = section.id === 'mcp-server';
+                const isActive = activeSection === section.id;
+                return (
+                  <div key={section.id}>
+                    <button
+                      onClick={() => setActiveSection(section.id)}
+                      className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                        isActive && isMcp
+                          ? 'bg-purple-50 text-purple-700'
+                          : isActive
+                          ? 'bg-primary-50 text-primary-700'
+                          : isMcp
+                          ? 'text-purple-700 hover:bg-purple-50'
+                          : 'text-gray-700 hover:bg-gray-100'
+                      }`}
+                    >
+                      {section.icon}
+                      <span className="flex-1 text-left">{section.name}</span>
+                      {isMcp && (
+                        <span className="text-[10px] font-semibold bg-purple-600 text-white px-1.5 py-0.5 rounded-full uppercase tracking-wide leading-none">
+                          Nuevo
+                        </span>
+                      )}
+                    </button>
+                    {isActive && (
+                      <div className="mt-1 ml-8 space-y-1">
+                        {section.subsections.map((subsection) => (
+                          <button
+                            key={subsection.id}
+                            onClick={() => handleSubsectionClick(subsection.id)}
+                            className={`block w-full text-left px-3 py-1.5 text-sm transition-colors ${
+                              isMcp
+                                ? 'text-gray-600 hover:text-purple-600'
+                                : 'text-gray-600 hover:text-primary-600'
+                            }`}
+                          >
+                            {subsection.name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
 
             {/* Quick Links */}
@@ -224,39 +283,56 @@ export default function Docs() {
               </div>
 
               <nav className="space-y-1">
-                {sections.map((section) => (
-                  <div key={section.id}>
-                    <button
-                      onClick={() => {
-                        setActiveSection(section.id);
-                        if (section.subsections.length > 0) {
-                          handleSubsectionClick(section.subsections[0].id);
-                        }
-                      }}
-                      className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        activeSection === section.id
-                          ? 'bg-primary-50 text-primary-700'
-                          : 'text-gray-700 hover:bg-gray-100'
-                      }`}
-                    >
-                      {section.icon}
-                      {section.name}
-                    </button>
-                    {activeSection === section.id && (
-                      <div className="mt-1 ml-8 space-y-1">
-                        {section.subsections.map((subsection) => (
-                          <button
-                            key={subsection.id}
-                            onClick={() => handleSubsectionClick(subsection.id)}
-                            className="block w-full text-left px-3 py-1.5 text-sm text-gray-600 hover:text-primary-600 transition-colors"
-                          >
-                            {subsection.name}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
+                {sections.map((section) => {
+                  const isMcp = section.id === 'mcp-server';
+                  const isActive = activeSection === section.id;
+                  return (
+                    <div key={section.id}>
+                      <button
+                        onClick={() => {
+                          setActiveSection(section.id);
+                          if (section.subsections.length > 0) {
+                            handleSubsectionClick(section.subsections[0].id);
+                          }
+                        }}
+                        className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                          isActive && isMcp
+                            ? 'bg-purple-50 text-purple-700'
+                            : isActive
+                            ? 'bg-primary-50 text-primary-700'
+                            : isMcp
+                            ? 'text-purple-700 hover:bg-purple-50'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        {section.icon}
+                        <span className="flex-1 text-left">{section.name}</span>
+                        {isMcp && (
+                          <span className="text-[10px] font-semibold bg-purple-600 text-white px-1.5 py-0.5 rounded-full uppercase tracking-wide leading-none">
+                            Nuevo
+                          </span>
+                        )}
+                      </button>
+                      {isActive && (
+                        <div className="mt-1 ml-8 space-y-1">
+                          {section.subsections.map((subsection) => (
+                            <button
+                              key={subsection.id}
+                              onClick={() => handleSubsectionClick(subsection.id)}
+                              className={`block w-full text-left px-3 py-1.5 text-sm transition-colors ${
+                                isMcp
+                                  ? 'text-gray-600 hover:text-purple-600'
+                                  : 'text-gray-600 hover:text-primary-600'
+                              }`}
+                            >
+                              {subsection.name}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </nav>
 
               {/* Quick Links - Mobile */}
