@@ -3,7 +3,7 @@ import WhatIsCodiSection from '../components/home/WhatIsCodiSection';
 import FeaturesSection from '../components/home/FeaturesSection';
 import HowItWorksSection from '../components/home/HowItWorksSection';
 import UseCasesSection from '../components/home/UseCasesSection';
-import PricingSection from '../components/home/PricingSection';
+// import PricingSection from '../components/home/PricingSection';
 import OpenSourceSection from '../components/home/OpenSourceSection';
 import ContactSection from '../components/home/ContactSection';
 
@@ -16,7 +16,7 @@ export default function Home() {
       <HowItWorksSection />
       <UseCasesSection />
       <OpenSourceSection />
-      <PricingSection />
+      {/* <PricingSection /> */}
       <ContactSection />
     </div>
   );

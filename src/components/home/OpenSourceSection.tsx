@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Heart } from 'lucide-react';
 import SponsorModal from '../common/SponsorModal';
 
@@ -18,6 +19,12 @@ export default function OpenSourceSection() {
           CoDi<sup className="text-[0.5em] ml-0.5">®</sup> API es un proyecto de código abierto bajo licencia Apache 2.0.
           <br />
           Revisable, auditable y extensible por la comunidad.
+          <br />
+          Además, contamos con un servidor que puedes usar de forma gratuita, sujeto a la capacidad de nuestro servidor y a nuestra{' '}
+          <Link to="/politica-uso-justo" className="text-blue-600 hover:text-blue-800 underline">
+            política de uso justo
+          </Link>
+          .
         </p>
 
         {/* Badges */}

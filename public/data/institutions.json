@@ -1,7 +1,5 @@
 {
   "production": [
-    { "code": 40995, "name": "Banco Wgo Push", "type": "production" },
-    { "code": 40993, "name": "Banco Wgo Qr", "type": "production" },
     { "code": 37019, "name": "BANJERCITO", "type": "production" },
     { "code": 37166, "name": "BaBien", "type": "production" },
     { "code": 40002, "name": "BANAMEX", "type": "production" },
@@ -42,6 +40,8 @@
     { "code": 90684, "name": "TRANSFER", "type": "production" }
   ],
   "beta": [
+    { "code": 40995, "name": "Banco Wgo Push", "type": "beta" },
+    { "code": 40993, "name": "Banco Wgo Qr", "type": "beta" },
     { "code": 301, "name": "MEMBER_A", "type": "beta" },
     { "code": 302, "name": "GEM-BANAMEX2", "type": "beta" },
     { "code": 314, "name": "GEM-SANTANDES", "type": "beta" },
@@ -89,8 +89,8 @@
     { "code": 881, "name": "GEM-PRESTAMO", "type": "beta" }
   ],
   "all": [
-    { "code": 40995, "name": "Banco Wgo Push", "type": "production" },
-    { "code": 40993, "name": "Banco Wgo Qr", "type": "production" },
+    { "code": 40995, "name": "Banco Wgo Push", "type": "beta" },
+    { "code": 40993, "name": "Banco Wgo Qr", "type": "beta" },
     { "code": 37019, "name": "BANJERCITO", "type": "production" },
     { "code": 37166, "name": "BaBien", "type": "production" },
     { "code": 40002, "name": "BANAMEX", "type": "production" },

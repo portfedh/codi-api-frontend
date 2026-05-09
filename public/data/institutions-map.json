@@ -1,6 +1,6 @@
 {
-  "40995": { "code": 40995, "name": "Banco Wgo Push", "type": "production" },
-  "40993": { "code": 40993, "name": "Banco Wgo Qr", "type": "production" },
+  "40995": { "code": 40995, "name": "Banco Wgo Push", "type": "beta" },
+  "40993": { "code": 40993, "name": "Banco Wgo Qr", "type": "beta" },
   "37019": { "code": 37019, "name": "BANJERCITO", "type": "production" },
   "37166": { "code": 37166, "name": "BaBien", "type": "production" },
   "40002": { "code": 40002, "name": "BANAMEX", "type": "production" },
