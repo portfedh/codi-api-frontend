@@ -21,7 +21,11 @@ export default function OpenSourceSection() {
           Revisable, auditable y extensible por la comunidad.
           <br />
           Además, contamos con un servidor que puedes usar de forma gratuita, sujeto a nuestra{' '}
-          <Link to="/politica-uso-justo" className="text-blue-600 hover:text-blue-800 underline">
+          <Link
+            to="/politica-uso-justo"
+            onClick={() => window.scrollTo(0, 0)}
+            className="text-blue-600 hover:text-blue-800 underline"
+          >
             política de uso justo
           </Link>
           .
