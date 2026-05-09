@@ -6,7 +6,7 @@ export default function HowItWorksSection() {
       number: "1",
       title: "Obtén tu API Key",
       description:
-        "Regístrate con Banxico y obtén tus credenciales de acceso. Compra tus folios de pago y estarás list@ para comenzar.",
+        "Regístrate con Banxico y obtén tus credenciales de acceso.",
       isClickable: true,
       link: "/enrollment",
     },

@@ -7,7 +7,7 @@ import CompanyInfoForm from "../components/enrollment/CompanyInfoForm";
 import DocumentUploadForm from "../components/enrollment/DocumentUploadForm";
 import { useToast } from "../hooks/useToast";
 import { codiApi, getErrorMessage } from "../services/api";
-import { Shield, UserPlus, Clock, ShoppingCart, CheckCircle2 } from "lucide-react";
+import { Shield, UserPlus, Clock, CheckCircle2 } from "lucide-react";
 
 type UserType = "fisica" | "moral" | null;
 
@@ -171,16 +171,9 @@ export default function Enrollment() {
               </div>
 
               <div className="flex items-start gap-3">
-                <ShoppingCart className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
-                <p className="text-gray-700">
-                  <span className="font-semibold">3. Compre folios</span> para comenzar a cobrar
-                </p>
-              </div>
-
-              <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
                 <p className="text-gray-700">
-                  <span className="font-semibold">¡Listo!</span> Ya puede cobrar a sus clientes
+                  <span className="font-semibold">3. ¡Listo!</span> Ya puede cobrar a sus clientes
                 </p>
               </div>
             </div>

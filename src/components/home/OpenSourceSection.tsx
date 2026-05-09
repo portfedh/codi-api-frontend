@@ -20,7 +20,7 @@ export default function OpenSourceSection() {
           <br />
           Revisable, auditable y extensible por la comunidad.
           <br />
-          Además, contamos con un servidor que puedes usar de forma gratuita, sujeto a la capacidad de nuestro servidor y a nuestra{' '}
+          Además, contamos con un servidor que puedes usar de forma gratuita, sujeto a nuestra{' '}
           <Link to="/politica-uso-justo" className="text-blue-600 hover:text-blue-800 underline">
             política de uso justo
           </Link>
